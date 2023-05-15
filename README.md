@@ -1,6 +1,6 @@
 # ArchiWebos
-Créer une page web dynamique avec JS
-Missions :
+Créer une page web dynamique avec JS.
+ Mes missions sont les suivantes  :
 
     Réaliser la page de présentation des travaux de l'architecte (à partir du HTML fourni) ;
     Créer la page de connexion de l'administrateur du site (le client) (code à créer de zéro) ;
