@@ -1,6 +1,6 @@
 const myImage = document.getElementById('img');
 
-fetch("http://localhost:5678/images/abajour-tahina1651286843956.png")
+fetch("http://localhost:5678/api/works")
 .then(function(response) {
   return response.blob();
 })
