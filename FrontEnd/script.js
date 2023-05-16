@@ -1,14 +1,9 @@
-const gallery 
+//javascript asyncrome => fetch => Get request
+const images = document.getElementById("gallery")
 
 fetch("http://localhost:5678/api/works/")
-  .then(res => {
-    if (res.ok) {
-      console.log("It is working")
-    } else {
-      console.log("It is NOT working")
-    }
-  })
-  .then(data => console.log(data))
+  .then(res => res.json())
+  .then(data => imgages.src = data[0].url)
 
 
   
