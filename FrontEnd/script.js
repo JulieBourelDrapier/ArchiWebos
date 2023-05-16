@@ -1,10 +1,7 @@
-const myImage = document.getElementById('img');
+console.log("Hello")
 
 fetch("http://localhost:5678/api/works")
-.then(function(response) {
-  return response.blob();
-})
-.then(function(myBlob) {
-  const objectURL = URL.createObjectURL(myBlob);
-  myImage.src = objectURL;
-});
+  .then(res => res.json())
+  .then(data => console.log(data))
+
+  //help from https://www.youtube.com/watch?v=cuEtnrL9-H0 
