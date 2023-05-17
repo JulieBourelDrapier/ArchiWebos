@@ -35,11 +35,6 @@ fetch("http://localhost:5678/api/works/")
 
   // création des boutons filtres + fonction filter 
 
-fetch("http://localhost:5678/api/categories")
-  console.log("c'est ok")
-  .then((response) => {
-    if(response.ok) return response.json()
-  })
  // faire le filter en comparant l'id du filtre selectionné avec le categorieId des data
   
       
