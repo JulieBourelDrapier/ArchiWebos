@@ -1,43 +1,67 @@
 //javascript asyncrome => fetch => Get request
-const galleryDiv = document.getElementsByClassName("gallery")[0]
+let result
 
 // récupérer dynamiquement la galerie via fetch
 fetch("http://localhost:5678/api/works/")
   .then(res => {
     if(res.ok){
       res.json().then(data => {
-        for (let i = 0; i < data.length; i++) {
-          //générer les élements 
-          const figure = document.createElement('figure')
-          const img = document.createElement('img')
-          const figcaption = document.createElement('figcaption')
-
-          //configurer
-          img.setAttribute('src', data[i].imageUrl)
-          img.setAttribute('alt', data[i].title)
-          figcaption.innerText = data[i].title
-  
-          // placer les éléments générés
-          figure.append(img)
-          figure.append(figcaption)
-
-          // ajouter les éléments dans le DOM
-          galleryDiv.append(figure)
-        }
+        result = data
+        generateAndCreateGallery()
         
       })
     } else {
       console.error('No data received')
     }
   })
-  .catch(e => {
-    console.error(e)
+  .catch(error => {
+    console.error(error)
     console.error('Penser à fr npm start')
   })
 
+function generateAndCreateGallery(categoryId = null) {
+  const galleryDiv = document.getElementsByClassName("gallery")[0]
+  galleryDiv.innerHTML = ''
+  let data
+console.log(categoryId)
+  if(categoryId !== null) {
+    data = result.filter((img) => {
+      console.log(img)
+      console.log(typeof img.categoryId)
+      console.log(categoryId)
+      return Number.parseInt(categoryId) === img.categoryId
+    })
+  }
+  else {
+    data = result
+  }
+  console.log(data)
+  for (let i = 0; i < data.length; i++) {
+    //générer les élements 
+    const figure = document.createElement('figure')
+    const img = document.createElement('img')
+    const figcaption = document.createElement('figcaption')
+
+    //configurer
+    img.setAttribute('src', data[i].imageUrl)
+    img.setAttribute('alt', data[i].title)
+    figcaption.innerText = data[i].title
+
+    // placer les éléments générés
+    figure.append(img)
+    figure.append(figcaption)
+
+    // ajouter les éléments dans le DOM
+    galleryDiv.append(figure)
+  }
+}
 
   // création des boutons filtres + fonction filter 
-  
+  function filterImgEvent(event)
+  {
+    console.log(event.target.getAttribute('filterCategoryId'))
+    generateAndCreateGallery(event.target.getAttribute('filterCategoryId'))
+  }
  
 fetch("http://localhost:5678/api/categories/")
   .then(res => {
@@ -48,20 +72,23 @@ fetch("http://localhost:5678/api/categories/")
       
       //configuer 
       liAll.innerText = 'Tous'
+      liAll.addEventListener('click', filterImgEvent)
       
       //placer
       ulFilters.append(liAll)
       
       //ajouter dans le DOM
       filters.append(ulFilters)
+      ulFilters.classList.add("filterParent")
+      liAll.classList.add("filter", "selected") //attribution de la class à l'élément liAll FAIRE LE LIEN EN TRAVAILLANT SUR STYLE.CSS
 
       res.json().then(data => {
         for (let i = 0; i < data.length; i++) {
           const li = document.createElement('li')
           li.innerText = data[i].name
+          li.setAttribute('filterCategoryId', data[i].id)
+          li.addEventListener('click', filterImgEvent)
           ulFilters.append(li)
-          ulFilters.classList.add("filterParent")
-          liAll.classList.add("filterParent") //attribution de la class à l'élément liAll FAIRE LE LIEN EN TRAVAILLANT SUR STYLE.CSS
           li.classList.add("filter") //attribution de la class à l'élément filter
         }
       })

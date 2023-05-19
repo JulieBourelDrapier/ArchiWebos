@@ -201,9 +201,14 @@ footer nav ul {
 	font-weight: 700;
 	width: 180px;
 	text-align: center;
-	border-color:#1D6154;
+	border: 1px solid #1D6154;
 	color: #1D6154;
 	background-color: white;
 	padding: 30px;
 	border-radius: 60px ;
+}
+
+.filter.selected {
+	background-color: #1D6154;
+	color: white;
 }
