@@ -197,15 +197,13 @@ footer nav ul {
 }
 
 .filter {
+	font-family: 'Syne';
+	font-weight: 700;
+	width: 180px;
+	text-align: center;
+	border-color:#1D6154;
 	color: #1D6154;
-	background-color: pink;
-	box-sizing: border-box;
-	padding: 20px;
-	border: none;
+	background-color: white;
+	padding: 30px;
 	border-radius: 60px ;
-
-	
-
-
-	
 }
