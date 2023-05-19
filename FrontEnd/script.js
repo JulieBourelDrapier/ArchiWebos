@@ -1,4 +1,4 @@
-//javascript asyncrome => fetch => Get request
+//javascript asynchrone => fetch => Get request
 let result
 
 // récupérer dynamiquement la galerie via fetch
@@ -23,19 +23,14 @@ function generateAndCreateGallery(categoryId = null) {
   const galleryDiv = document.getElementsByClassName("gallery")[0]
   galleryDiv.innerHTML = ''
   let data
-console.log(categoryId)
   if(categoryId !== null) {
     data = result.filter((img) => {
-      console.log(img)
-      console.log(typeof img.categoryId)
-      console.log(categoryId)
       return Number.parseInt(categoryId) === img.categoryId
     })
   }
   else {
     data = result
   }
-  console.log(data)
   for (let i = 0; i < data.length; i++) {
     //générer les élements 
     const figure = document.createElement('figure')
@@ -59,8 +54,10 @@ console.log(categoryId)
   // création des boutons filtres + fonction filter 
   function filterImgEvent(event)
   {
-    console.log(event.target.getAttribute('filterCategoryId'))
     generateAndCreateGallery(event.target.getAttribute('filterCategoryId'))
+    document.querySelector("#filters .filterParent .filter.selected").classList.remove('selected')
+    event.target.classList.add("selected")
+
   }
  
 fetch("http://localhost:5678/api/categories/")
@@ -73,14 +70,15 @@ fetch("http://localhost:5678/api/categories/")
       //configuer 
       liAll.innerText = 'Tous'
       liAll.addEventListener('click', filterImgEvent)
+      liAll.classList.add("filter", "selected") //attribution de la class à l'élément liAll FAIRE LE LIEN EN TRAVAILLANT SUR STYLE.CSS
       
+      ulFilters.classList.add("filterParent")
+
       //placer
       ulFilters.append(liAll)
       
       //ajouter dans le DOM
       filters.append(ulFilters)
-      ulFilters.classList.add("filterParent")
-      liAll.classList.add("filter", "selected") //attribution de la class à l'élément liAll FAIRE LE LIEN EN TRAVAILLANT SUR STYLE.CSS
 
       res.json().then(data => {
         for (let i = 0; i < data.length; i++) {
@@ -100,7 +98,5 @@ fetch("http://localhost:5678/api/categories/")
   .catch(error => {
     console.error(error)
   })
-  // faire le filter en comparant l'id du filtre selectionné avec le categorieId des data
-  //Au clic sur un élément du menu de catégories, filtrer les travaux selon le filtre sélectionné./
 
-
+  
