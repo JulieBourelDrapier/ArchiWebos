@@ -60,7 +60,9 @@ fetch("http://localhost:5678/api/categories/")
           const li = document.createElement('li')
           li.innerText = data[i].name
           ulFilters.append(li)
-          li.classList.add("filter")//lien fait ac les élémts de style. Pr que ça colle ac la maqtte, revoir le style de ma class filter
+          ulFilters.classList.add("filterParent")
+          liAll.classList.add("filterParent") //attribution de la class à l'élément liAll FAIRE LE LIEN EN TRAVAILLANT SUR STYLE.CSS
+          li.classList.add("filter") //attribution de la class à l'élément filter
         }
       })
 
@@ -74,5 +76,4 @@ fetch("http://localhost:5678/api/categories/")
   // faire le filter en comparant l'id du filtre selectionné avec le categorieId des data
   //Au clic sur un élément du menu de catégories, filtrer les travaux selon le filtre sélectionné./
 
-  // ajout des caractéristiques de mes filtres with JS DOM methods
-document.getElementById("filters").style.color = "pink";
+

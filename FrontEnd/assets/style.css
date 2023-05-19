@@ -95,7 +95,7 @@ nav li {
 	font-size: 1.2em;
 }
 
-li:hover {
+.footer-li:hover {
 	color: #B1663C;
 }
 #introduction {
@@ -186,3 +186,26 @@ footer nav ul {
 	margin: 2em
 }
 
+/* caractéristiques des éléments filterParent et filter crées en JS*/
+.filterParent {
+	display: flex;
+	flex-direction: raw;
+	justify-content: center;
+	gap: 10px;
+	margin-bottom: 20px;
+	
+}
+
+.filter {
+	color: #1D6154;
+	background-color: pink;
+	box-sizing: border-box;
+	padding: 20px;
+	border: none;
+	border-radius: 60px ;
+
+	
+
+
+	
+}
