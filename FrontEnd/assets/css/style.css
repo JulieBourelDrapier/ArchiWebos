@@ -8,14 +8,12 @@ h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+b, u, i, center, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,table, caption, 
+tbody, tfoot, thead, tr, th, td, article, aside, 
+canvas, details, embed, figure, figcaption, footer, 
+header, hgroup, menu, nav, output, ruby, section, 
+summary, time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -23,29 +21,48 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article, 
+aside, 
+details, 
+figcaption, 
+figure,
+footer, 
+header, 
+hgroup, 
+menu, 
+nav, 
+section {
 	display: block;
 }
+
 body {
 	line-height: 1;
+	background-color: #E5E5E5;
 }
+
 ol, ul {
 	list-style: none;
 }
+
 blockquote, q {
 	quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+
+blockquote:before, 
+blockquote:after,
+q:before, 
+q:after {
 	content: '';
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
 /** end reset css**/
 body {
 	max-width: 1140px;
@@ -53,11 +70,13 @@ body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
+
 header {
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0
 }
+
 section {
 	margin: 50px 0
 }
@@ -75,7 +94,6 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
 }
 
 h2{
@@ -84,6 +102,7 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
+
 nav ul {
 	display: flex;
 	align-items: center;
@@ -98,13 +117,16 @@ nav li {
 .footer-li:hover {
 	color: #B1663C;
 }
+
 #introduction {
 	display: flex;
 	align-items: center;
 }
+
 #introduction figure {
 	flex: 1
 }
+
 #introduction img {
 	display: block;
 	margin: auto;
@@ -114,6 +136,7 @@ nav li {
 #introduction article {
 	flex: 1
 }
+
 #introduction h2 {
 	margin-bottom: 1em;
 }
@@ -121,10 +144,13 @@ nav li {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	margin-top: 3em;
+	margin-bottom: 2em;
 }
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -199,10 +225,16 @@ display: block;
 margin: auto;
 }
 
-/* ++ élément présent dans login.html*/
+/* modifications apportées concernant les éléments présent dans login.html*/
 .footer-li-space {
 	margin-top: 100px;
 }
+
+a {
+	text-decoration: none;
+}
+
+
 
 input[type="submit"] {
 	font-family: 'Syne';
@@ -228,7 +260,7 @@ footer nav ul {
 	flex-direction: raw;
 	justify-content: center;
 	gap: 10px;
-	margin-bottom: 20px;	
+	margin-bottom: 50px;	
 }
 
 
