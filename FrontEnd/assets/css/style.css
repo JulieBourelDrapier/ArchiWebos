@@ -235,12 +235,12 @@ footer nav ul {
 .filter {
 	font-family: 'Syne';
 	font-weight: 700;
-	width: 180px;
+	width: auto;
 	text-align: center;
 	border: 1px solid #1D6154;
 	color: #1D6154;
 	background-color: white;
-	padding: 10px;
+	padding: 10px 25px;
 	border-radius: 60px ;
 }
 
