@@ -1,4 +1,4 @@
-//javascript asynchrone => fetch => Get request
+//programmation asynchrone => fetch => Get request
 let result
 
 // récupérer dynamiquement la galerie via fetch
