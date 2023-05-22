@@ -138,6 +138,14 @@ nav li {
 }
 
 /* reprise des éléments #contact pour #login */
+.li-login {
+	font-weight: bold;
+}
+
+.footer-li-space {
+margin-top: 100px;
+}
+
 #contact, #login {
 	width: 50%;
 	margin: auto;
