@@ -222,7 +222,7 @@ footer nav ul {
 }
 
 
-/* caractéristiques des éléments filterParent et filter crées en JS*/
+/* caractéristiques des boutons filterParent et filter crées dynamiquement par l'int JS*/
 .filterParent {
 	display: flex;
 	flex-direction: raw;
@@ -230,6 +230,7 @@ footer nav ul {
 	gap: 10px;
 	margin-bottom: 20px;	
 }
+
 
 .filter {
 	font-family: 'Syne';
@@ -239,7 +240,7 @@ footer nav ul {
 	border: 1px solid #1D6154;
 	color: #1D6154;
 	background-color: white;
-	padding: 30px;
+	padding: 10px;
 	border-radius: 60px ;
 }
 
