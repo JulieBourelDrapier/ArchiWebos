@@ -279,7 +279,10 @@ footer nav ul {
 	color: white;
 }
 
-/* modifications en lien avec les pages projects.html et addProjects.html */
+/* modifications en lien avec les éléments hidden */
+.hidden {
+	visibility: hidden;
+}
 .modify {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
