@@ -279,7 +279,7 @@ footer nav ul {
 	color: white;
 }
 
-/* modifications en lien avec la page Projects.html */
+/* modifications en lien avec les pages projects.html et addProjects.html */
 .modify {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
@@ -291,4 +291,30 @@ footer nav ul {
 	padding-left: 10%;/*55px;*/
 	padding-top: 20px;
 	color: #000000;
+}
+
+.black-strip {
+	margin: 0;
+}
+
+.ul-black-strip {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: black;
+	color: white;
+}
+
+.li-more-edition {
+	padding-top: 10px;
+}
+
+.publish-btn {
+	color: black;
+	border-radius: 25px;
+	padding: 11px;
+	background-color: white;
+	box-sizing: border-box;
 }
