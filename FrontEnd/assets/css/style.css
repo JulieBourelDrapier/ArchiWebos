@@ -234,8 +234,6 @@ a {
 	text-decoration: none;
 }
 
-
-
 input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
@@ -279,4 +277,18 @@ footer nav ul {
 .filter.selected {
 	background-color: #1D6154;
 	color: white;
+}
+
+/* modifications en lien avec la page Projects.html */
+.modify {
+	font-family: 'Work Sans' ;
+	font-size: 14px;
+	font-weight: 400;
+	color: #000000;
+}
+
+.modify-introduction {
+	padding-left: 10%;/*55px;*/
+	padding-top: 20px;
+	color: #000000;
 }
