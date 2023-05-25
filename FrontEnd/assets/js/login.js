@@ -7,7 +7,7 @@ const email = "sophie.bluel@test.tld"
 const password = "S0phie"
 const connected = email === "sophie.bluel@test.tld" && password === "S0phie"
 const unconnected = email !== "sophie.bluel@test.tld" || password !== "S0phie"
-const logButton = document.querySelector("#log-btn")
+const logButton = document.getElementById("#log-btn")
 
 function goToHomepage () {
   if (connected) { 
