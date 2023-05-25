@@ -281,8 +281,9 @@ footer nav ul {
 
 /* modifications en lien avec les éléments hidden */
 .hidden {
-	display: none;
+	visibility: hidden;
 }
+
 .modify {
 	font-family: 'Work Sans' ;
 	font-size: 14px;

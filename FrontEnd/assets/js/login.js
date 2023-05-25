@@ -1,25 +1,23 @@
-// annonce de la variable hidden pour avoir une portée globale
-let hidden 
+// annonce de la constante hidden pour avoir une portée globale
+const hidden = document.getElementsByClassName("hidden")
 
 // vérification de l'authentification pour se connecter et accéder à la homepage
-function checkAuthentification() {
-  let userId = "sophie.bluel@test.tld"
-  let confirmPassword = "S0phie"
-  let confirmId = document.querySelector("#email")
-  let password = document.querySelector("#password")
+//annonce des variables 
+const email = "sophie.bluel@test.tld"
+const password = "S0phie"
+const connected = email === "sophie.bluel@test.tld" && password === "S0phie"
+const unconnected = email !== "sophie.bluel@test.tld" || password !== "S0phie"
+const logButton = document.querySelector("#log-btn")
 
-  if (password == confirmPassword && confirmId == userId) {
-    document.querySelector("form").action = "index.html"
-    console.log("password")
-  }
-  else {
-    alert("Erreur dans l’identifiant ou le mot de passe")
+function goToHomepage () {
+  if (connected) { 
+    location.href = "index.html" 
+  } else {
+    console.log("Erreur dans l’identifiant ou le mot de passe")
   }
 }
 
-// fonction qui désactive le display hidden
-function showHiddenElements () {
-  let hidden = document.getElementsByClassName("hidden")
+// Eventlistener 
+logButton.addEventListener("click", goToHomepage)
 
-  if
-}
+// fonction qui désactive le display hidden si l'authentification est réussie
