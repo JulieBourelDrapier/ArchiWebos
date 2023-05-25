@@ -1,5 +1,10 @@
 //programmation asynchrone => fetch => Get request
 let result
+const token = localStorage.getItem('token')
+
+// annonce de la constante hidden pour avoir une portée globale
+const hidden = document.getElementsByClassName("hidden")
+//recuperer, parcourir, mettre variable dans une if
 
 // récupérer dynamiquement la galerie via fetch
 fetch("http://localhost:5678/api/works/")
