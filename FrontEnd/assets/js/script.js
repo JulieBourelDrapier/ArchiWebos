@@ -1,10 +1,29 @@
-//programmation asynchrone => fetch => Get request
-let result
-const token = localStorage.getItem('token')
+//programmation asynchrone => fetch => Get & post request
 
-// annonce de la constante hidden pour avoir une portée globale
-const hidden = document.getElementsByClassName("hidden")
+// annonce des variables présentes ci-dessous pour leur donner une portée globale
+let result //intervient dans la récupération de la galerie
+
+const token = localStorage.getItem('token')//fait en sorte que des éléments soient récupérés après login 
+
 //recuperer, parcourir, mettre variable dans une if
+const HiddenElements = document.getElementsByClassName("hidden") 
+ 
+function showHiddenElements() { 
+  HiddenElements.classList.remove("hidden")
+  if (token) {
+    HiddenElements = document.getElementsByClassName("hidden").style.visibility = "visible"
+  } else {
+    console.log("rien ne change")
+  }
+}
+  
+
+  
+    
+ 
+   
+
+
 
 // récupérer dynamiquement la galerie via fetch
 fetch("http://localhost:5678/api/works/")
