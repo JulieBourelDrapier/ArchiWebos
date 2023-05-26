@@ -8,17 +8,22 @@ const token = localStorage.getItem('token')//fait en sorte que des éléments so
 //recuperer, parcourir, mettre variable dans une if
 
 const hiddenElements = document.getElementsByClassName("hidden") 
-let elementIndex = 0
+let elementsIndex = 0
 
 function showHiddenElements() { 
   if (token) {
-    hiddenElements[elementIndex].classList.remove("hidden")
-    console.log("here I am")
-  } else {
+    for (let elementsIndex = 0; elementsIndex < hiddenElements.length; elementsIndex ++) {
+      console.log(hiddenElements[elementsIndex])
+      hiddenElements[elementsIndex].classList.remove("hidden")
+     }
+  } 
+  else {
     console.log("rien ne change")
   }
-} 
+}
 showHiddenElements()
+
+
 
   
 
