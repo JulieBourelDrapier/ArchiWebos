@@ -6,16 +6,20 @@ let result //intervient dans la récupération de la galerie
 const token = localStorage.getItem('token')//fait en sorte que des éléments soient récupérés après login 
 
 //recuperer, parcourir, mettre variable dans une if
-const HiddenElements = document.getElementsByClassName("hidden") 
- 
+
+const hiddenElements = document.getElementsByClassName("hidden") 
+let elementIndex = 0
+
 function showHiddenElements() { 
-  HiddenElements.classList.remove("hidden")
   if (token) {
-    HiddenElements = document.getElementsByClassName("hidden").style.visibility = "visible"
+    hiddenElements[elementIndex].classList.remove("hidden")
+    console.log("here I am")
   } else {
     console.log("rien ne change")
   }
-}
+} 
+showHiddenElements()
+
   
 
   

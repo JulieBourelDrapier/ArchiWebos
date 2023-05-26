@@ -2,7 +2,7 @@
 // vérification de l'authentification pour se connecter et accéder à la homepage
 //annonce des variables 
 const email = document.getElementById("email")
-const logButton = document.getElementById("log-btn")
+const logBtn = document.getElementById("log-btn")
 
 function authenticateUser(event) {
   event.preventDefault()
@@ -37,6 +37,5 @@ function authenticateUser(event) {
 }
 
 // Eventlistener 
-logButton.addEventListener("click", authenticateUser)
+logBtn.addEventListener("click", authenticateUser)
 
-// fonction qui désactive le display hidden si l'authentification est réussie
