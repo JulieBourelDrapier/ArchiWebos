@@ -1,8 +1,8 @@
 //programmation asynchrone => fetch => Get & post requests
-// annonce des variables pour leur donner une portée globale
+// annonce des variables à la portée globale
+const token        = localStorage.getItem("token")
 let result //intervient dans la récupération de la galerie
-const token          = localStorage.getItem("token")
-const hiddenElements = document.getElementsByClassName("hidden") 
+let hiddenElements = document.getElementsByClassName("hidden") 
 console.log(hiddenElements)
 
 //déclarer la fonction
@@ -10,10 +10,9 @@ function showHiddenElements() {
   console.log(hiddenElements)
   if (token) {
     console.log(hiddenElements.length)
-    for (let elementsIndex = 0; elementsIndex < hiddenElements.length; elementsIndex++) {
-      console.log(elementsIndex)
-      console.log(hiddenElements[elementsIndex])
-      hiddenElements[elementsIndex].classList.remove("hidden")
+    for (let element of hiddenElements) {
+      console.log(element)
+      element.classList.remove("hidden")
      }
   } 
   else {
@@ -22,19 +21,8 @@ function showHiddenElements() {
 //appeler la fonction
 showHiddenElements() 
 
-
-
-
-  
-
-  
-    
- 
-   
-
-
-
 // récupérer dynamiquement la galerie via fetch
+//mettre ces éléments dans une fonction pour plus de clarté
 fetch("http://localhost:5678/api/works/")
   .then(res => {
     if(res.ok){
@@ -90,9 +78,9 @@ function generateAndCreateGallery(categoryId = null) {
     generateAndCreateGallery(event.target.getAttribute('filterCategoryId'))
     document.querySelector("#filters .filterParent .filter.selected").classList.remove('selected')
     event.target.classList.add("selected")
-
   }
  
+//mettre ces éléments dans une fonction pour plus de clarté
 fetch("http://localhost:5678/api/categories/")
   .then(res => {
     if(res.ok){

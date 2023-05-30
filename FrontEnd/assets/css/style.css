@@ -280,18 +280,6 @@ footer nav ul {
 }
 
 /* modifications en lien avec les éléments hidden */
-
-.hidden {
-	display: none;
-}
-
-.modify {
-	font-family: 'Work Sans' ;
-	font-size: 14px;
-	font-weight: 400;
-	color: #000000;
-}
-
 .modify-introduction {
 	padding-left: 10%;/*55px;*/
 	padding-top: 20px;
@@ -324,3 +312,14 @@ footer nav ul {
 	background-color: white;
 	box-sizing: border-box;
 }
+.hidden {
+	display: none;
+}
+
+.modify {
+	font-family: 'Work Sans' ;
+	font-size: 14px;
+	font-weight: 400;
+	color: #000000;
+}
+
