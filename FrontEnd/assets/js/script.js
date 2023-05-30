@@ -3,18 +3,20 @@
 let result //intervient dans la récupération de la galerie
 const token          = localStorage.getItem("token")
 const hiddenElements = document.getElementsByClassName("hidden") 
-let elementsIndex    = 0
+console.log(hiddenElements)
 
 //déclarer la fonction
 function showHiddenElements() { 
+  console.log(hiddenElements)
   if (token) {
-    for (let elementsIndex = 0; elementsIndex < hiddenElements.length; elementsIndex ++) {
+    console.log(hiddenElements.length)
+    for (let elementsIndex = 0; elementsIndex < hiddenElements.length; elementsIndex++) {
+      console.log(elementsIndex)
       console.log(hiddenElements[elementsIndex])
       hiddenElements[elementsIndex].classList.remove("hidden")
      }
   } 
   else {
-    console.log("rien ne change")
   }
 }
 //appeler la fonction
