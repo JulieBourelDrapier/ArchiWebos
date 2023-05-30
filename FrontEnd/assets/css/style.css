@@ -280,8 +280,9 @@ footer nav ul {
 }
 
 /* modifications en lien avec les éléments hidden */
+
 .hidden {
-	/*visibility: hidden;*/
+	visibility: hidden;
 	display: none;
 }
 

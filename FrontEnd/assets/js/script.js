@@ -1,8 +1,7 @@
 //programmation asynchrone => fetch => Get & post requests
-
 // annonce des variables pour leur donner une portée globale
 let result //intervient dans la récupération de la galerie
-const token          = localStorage.getItem('token')
+const token          = localStorage.getItem("token")
 const hiddenElements = document.getElementsByClassName("hidden") 
 let elementsIndex    = 0
 
@@ -20,9 +19,7 @@ function showHiddenElements() {
 }
 //appeler la fonction
 showHiddenElements() 
-{
-console.log(showHiddenElements())
-}
+
 
 
 
