@@ -1,15 +1,12 @@
-//programmation asynchrone => fetch => Get & post request
+//programmation asynchrone => fetch => Get & post requests
 
-// annonce des variables présentes ci-dessous pour leur donner une portée globale
+// annonce des variables pour leur donner une portée globale
 let result //intervient dans la récupération de la galerie
-
-const token = localStorage.getItem('token')//fait en sorte que des éléments soient récupérés après login 
-
-//recuperer, parcourir, mettre variable dans une if
-
+const token          = localStorage.getItem('token')
 const hiddenElements = document.getElementsByClassName("hidden") 
-let elementsIndex = 0
+let elementsIndex    = 0
 
+//déclarer la fonction
 function showHiddenElements() { 
   if (token) {
     for (let elementsIndex = 0; elementsIndex < hiddenElements.length; elementsIndex ++) {
@@ -21,7 +18,11 @@ function showHiddenElements() {
     console.log("rien ne change")
   }
 }
-showHiddenElements()
+//appeler la fonction
+showHiddenElements() 
+{
+console.log(showHiddenElements())
+}
 
 
 

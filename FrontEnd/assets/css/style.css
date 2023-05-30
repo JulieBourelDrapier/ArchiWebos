@@ -281,7 +281,8 @@ footer nav ul {
 
 /* modifications en lien avec les éléments hidden */
 .hidden {
-	visibility: hidden;
+	/*visibility: hidden;*/
+	display: none;
 }
 
 .modify {
@@ -310,6 +311,7 @@ footer nav ul {
 	background-color: black;
 	color: white;
 }
+
 
 .li-more-edition {
 	padding-top: 10px;
