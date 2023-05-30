@@ -164,9 +164,6 @@ nav li {
 }
 
 /* reprise des éléments #contact pour #login et ajustements (pr login.html) */
-.li-login {
-	font-weight: bold;
-}
 
 #contact, #login {
 	width: 50%;
@@ -226,10 +223,6 @@ margin: auto;
 }
 
 /* modifications apportées concernant les éléments présent dans login.html*/
-.footer-li-space {
-	margin-top: 100px;
-}
-
 a {
 	text-decoration: none;
 }
@@ -250,6 +243,9 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
+.footer-li-space {
+	margin-top: 100px;
+}
 
 
 /* caractéristiques des boutons filterParent et filter crées dynamiquement par l'int JS*/
@@ -260,7 +256,6 @@ footer nav ul {
 	gap: 10px;
 	margin-bottom: 50px;	
 }
-
 
 .filter {
 	font-family: 'Syne';
@@ -280,10 +275,8 @@ footer nav ul {
 }
 
 /* modifications en lien avec les éléments hidden */
-.modify-introduction {
-	padding-left: 10%;/*55px;*/
-	padding-top: 20px;
-	color: #000000;
+.hidden {
+	display: none;
 }
 
 .black-strip {
@@ -300,7 +293,6 @@ footer nav ul {
 	color: white;
 }
 
-
 .li-more-edition {
 	padding-top: 10px;
 }
@@ -308,18 +300,30 @@ footer nav ul {
 .publish-btn {
 	color: black;
 	border-radius: 25px;
-	padding: 11px;
+	padding-top: 20px;
+	padding: 10px;
 	background-color: white;
 	box-sizing: border-box;
 }
-.hidden {
-	display: none;
-}
 
-.modify {
-	font-family: 'Work Sans' ;
+.modify-figure, .modify-article,.modify-section  {
+	color: #000000;
 	font-size: 14px;
 	font-weight: 400;
-	color: #000000;
+	font-family: 'Work Sans' ;
 }
+
+.modify-figure {
+	padding-left: 10%;/*55px;*/
+	padding-top: 20px;
+}
+
+.modify-article {
+	padding-bottom: 20px;
+} 
+
+.modify-section {
+	padding-left: 20px;
+}
+
 
