@@ -9,9 +9,29 @@ function showHiddenElements() {
   if (token) {
     Array.from(hiddenElements).forEach((element) => {
       element.classList.remove("hidden")
-     })
+    //2e action = login devient logout
+    document.querySelector(".connexion-link").textContent ="logout"   
+    })
   }
 }
+
+//annonce variable
+const connexionLink = document.querySelector(".connexion-link")
+//puis fonction
+function transformElement() {
+  if(Event) {
+    alert("lalalalala")
+  Event.preventDefault() //prevent default 
+  storage.removeItem("token")//unset localstorage 
+  location.reload() //refresh
+  }
+}
+
+//Add eventListener 
+connexionLink.addEventListener("click", transformElement)
+
+
+
 
 function generateAndCreateGallery(categoryId = null) {
   const galleryDiv = document.getElementsByClassName("gallery")[0]

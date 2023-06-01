@@ -326,4 +326,10 @@ footer nav ul {
 	padding-left: 20px;
 }
 
+/*logout*/
+.connexion-link {
+	font-size: 1.2em;
+	padding: 0 10px;
+}
+
 
