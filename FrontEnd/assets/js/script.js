@@ -1,44 +1,17 @@
 //programmation asynchrone => fetch => Get & post requests
 // annonce des variables à la portée globale
-const token        = localStorage.getItem("token")
 let result //intervient dans la récupération de la galerie
-let hiddenElements = document.getElementsByClassName("hidden") 
-console.log(hiddenElements)
 
 //déclarer la fonction
 function showHiddenElements() { 
-  console.log(hiddenElements)
+  let hiddenElements = document.getElementsByClassName("hidden")
+  const token = localStorage.getItem("token")
   if (token) {
-    console.log(hiddenElements.length)
-    for (let element of hiddenElements) {
-      console.log(element)
+    Array.from(hiddenElements).forEach((element) => {
       element.classList.remove("hidden")
-     }
-  } 
-  else {
+     })
   }
 }
-//appeler la fonction
-showHiddenElements() 
-
-// récupérer dynamiquement la galerie via fetch
-//mettre ces éléments dans une fonction pour plus de clarté
-fetch("http://localhost:5678/api/works/")
-  .then(res => {
-    if(res.ok){
-      res.json().then(data => {
-        result = data
-        generateAndCreateGallery()
-        
-      })
-    } else {
-      console.error('No data received')
-    }
-  })
-  .catch(error => {
-    console.error(error)
-    console.error('Penser à fr npm start')
-  })
 
 function generateAndCreateGallery(categoryId = null) {
   const galleryDiv = document.getElementsByClassName("gallery")[0]
@@ -72,52 +45,72 @@ function generateAndCreateGallery(categoryId = null) {
   }
 }
 
-  // création des boutons filtres + fonction filter 
-  function filterImgEvent(event)
-  {
-    generateAndCreateGallery(event.target.getAttribute('filterCategoryId'))
-    document.querySelector("#filters .filterParent .filter.selected").classList.remove('selected')
-    event.target.classList.add("selected")
-  }
- 
+// création des boutons filtres + fonction filter 
+function filterImgEvent(event)
+{
+  generateAndCreateGallery(event.target.getAttribute('filterCategoryId'))
+  document.querySelector("#filters .filterParent .filter.selected").classList.remove('selected')
+  event.target.classList.add("selected")
+}
+
+//appeler la fonction
+showHiddenElements()
+
+// récupérer dynamiquement la galerie via fetch
 //mettre ces éléments dans une fonction pour plus de clarté
-fetch("http://localhost:5678/api/categories/")
+fetch("http://localhost:5678/api/works/")
   .then(res => {
     if(res.ok){
-      const ulFilters = document.createElement('ul')
-      const liAll = document.createElement('li')
-      const filters = document.getElementById('filters')
-      
-      //configuer 
-      liAll.innerText = 'Tous'
-      liAll.addEventListener('click', filterImgEvent)
-      liAll.classList.add("filter", "selected") //attribution de la class à l'élément liAll FAIRE LE LIEN EN TRAVAILLANT SUR STYLE.CSS
-      
-      ulFilters.classList.add("filterParent")
-
-      //placer
-      ulFilters.append(liAll)
-      
-      //ajouter dans le DOM
-      filters.append(ulFilters)
-
       res.json().then(data => {
-        for (let i = 0; i < data.length; i++) {
-          const li = document.createElement('li')
-          li.innerText = data[i].name
-          li.setAttribute('filterCategoryId', data[i].id)
-          li.addEventListener('click', filterImgEvent)
-          ulFilters.append(li)
-          li.classList.add("filter") //attribution de la class à l'élément filter
-        }
+        result = data
+        generateAndCreateGallery()
+        
       })
-
-    }else {
+    } else {
       console.error('No data received')
     }
   })
   .catch(error => {
     console.error(error)
+    console.error('Penser à fr npm start')
   })
 
-  
+  //mettre ces éléments dans une fonction pour plus de clarté
+fetch("http://localhost:5678/api/categories/")
+.then(res => {
+  if(res.ok){
+    const ulFilters = document.createElement('ul')
+    const liAll = document.createElement('li')
+    const filters = document.getElementById('filters')
+    
+    //configuer 
+    liAll.innerText = 'Tous'
+    liAll.addEventListener('click', filterImgEvent)
+    liAll.classList.add("filter", "selected") //attribution de la class à l'élément liAll FAIRE LE LIEN EN TRAVAILLANT SUR STYLE.CSS
+    
+    ulFilters.classList.add("filterParent")
+
+    //placer
+    ulFilters.append(liAll)
+    
+    //ajouter dans le DOM
+    filters.append(ulFilters)
+
+    res.json().then(data => {
+      for (let i = 0; i < data.length; i++) {
+        const li = document.createElement('li')
+        li.innerText = data[i].name
+        li.setAttribute('filterCategoryId', data[i].id)
+        li.addEventListener('click', filterImgEvent)
+        ulFilters.append(li)
+        li.classList.add("filter") //attribution de la class à l'élément filter
+      }
+    })
+
+  }else {
+    console.error('No data received')
+  }
+})
+.catch(error => {
+  console.error(error)
+})
