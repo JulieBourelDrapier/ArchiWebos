@@ -24,7 +24,7 @@ const connexionLink = document.querySelector(".connexion-link")
 function logOut(event) {
   event.preventDefault() //prevent default
   localStorage.removeItem("token")//unset localstorage 
-  location.reload() //=refresh
+  location.reload()//location.href = "/FrontEnd/index.html"
 }
 //add eventListener 
 connexionLink.addEventListener("click", logOut)
@@ -45,8 +45,8 @@ function generateAndCreateGallery(categoryId = null) {
   }
   for (let i = 0; i < data.length; i++) {
     //générer les élements 
-    const figure = document.createElement('figure')
-    const img = document.createElement('img')
+    const figure     = document.createElement('figure')
+    const img        = document.createElement('img')
     const figcaption = document.createElement('figcaption')
 
     //configurer
