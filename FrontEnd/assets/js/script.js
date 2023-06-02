@@ -10,7 +10,7 @@ function showHiddenElements() {
     Array.from(hiddenElements).forEach((element) => {
       element.classList.remove("hidden")
     //2e action = login devient logout
-    document.querySelector(".connexion-link").textContent ="logout"   
+      document.querySelector(".connexion-link").textContent ="logout"   
     })
   }
 }
@@ -18,13 +18,10 @@ function showHiddenElements() {
 //annonce variable
 const connexionLink = document.querySelector(".connexion-link")
 //puis fonction
-function transformElement() {
-  if(Event) {
-    alert("lalalalala")
-  Event.preventDefault() //prevent default 
+function transformElement(event) {
+  event.preventDefault() //prevent default 
   storage.removeItem("token")//unset localstorage 
   location.reload() //refresh
-  }
 }
 
 //Add eventListener 
@@ -134,3 +131,4 @@ fetch("http://localhost:5678/api/categories/")
 .catch(error => {
   console.error(error)
 })
+
