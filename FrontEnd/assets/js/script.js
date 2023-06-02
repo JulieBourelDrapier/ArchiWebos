@@ -5,28 +5,29 @@ let result //intervient dans la récupération de la galerie
 //déclarer la fonction
 function showHiddenElements() { 
   let hiddenElements = document.getElementsByClassName("hidden")
-  const token = localStorage.getItem("token")
+  const token        = localStorage.getItem("token")
   if (token) {
+    //1ère action = rendre visible les éléments cachés 
     Array.from(hiddenElements).forEach((element) => {
       element.classList.remove("hidden")
     //2e action = login devient logout
-      document.querySelector(".connexion-link").textContent ="logout"   
+      document.querySelector(".connexion-link").textContent ="logout" 
+    //3e action hide filters 
+      document.getElementById("filters").setAttribute("style", "display:none")
     })
   }
 }
 
 //annonce variable
 const connexionLink = document.querySelector(".connexion-link")
-//puis fonction
-function transformElement(event) {
-  event.preventDefault() //prevent default 
-  storage.removeItem("token")//unset localstorage 
-  location.reload() //refresh
+//puis fonction pour se déconnecter
+function logOut(event) {
+  event.preventDefault() //prevent default
+  localStorage.removeItem("token")//unset localstorage 
+  location.reload() //=refresh
 }
-
-//Add eventListener 
-connexionLink.addEventListener("click", transformElement)
-
+//add eventListener 
+connexionLink.addEventListener("click", logOut)
 
 
 
