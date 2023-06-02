@@ -24,7 +24,7 @@ const connexionLink = document.querySelector(".connexion-link")
 function logOut(event) {
   event.preventDefault() //prevent default
   localStorage.removeItem("token")//unset localstorage 
-  location.reload()//location.href = "/FrontEnd/index.html"
+  location.reload()//location.href = "/FrontEnd/assets/login.js"
 }
 //add eventListener 
 connexionLink.addEventListener("click", logOut)
