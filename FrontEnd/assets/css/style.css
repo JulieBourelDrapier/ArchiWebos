@@ -332,5 +332,24 @@ footer nav ul {
 	padding: 0 10px;
 }
 
+/*MODAL*/
+.modal {
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background : rgba(0, 0, 0, 0.2);
+}
 
-
+.modal-wrapper {
+	overflow: auto;
+	width: 600px;
+	max-width: calc(100vh - 20px);
+	max-height: calc(100vh - 20px);
+	padding: 20px;
+	background-color: #fff;
+}
