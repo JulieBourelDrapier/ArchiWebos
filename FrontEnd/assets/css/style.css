@@ -333,6 +333,9 @@ footer nav ul {
 }
 
 /*MODAL*/
+
+* { box-sizing: border-box;}
+
 .modal {
 	position: fixed;
 	display: flex;
@@ -347,7 +350,7 @@ footer nav ul {
 
 .modal-wrapper {
 	overflow: auto;
-	width: 600px;
+	width: 800px;
 	max-width: calc(100vh - 20px);
 	max-height: calc(100vh - 20px);
 	padding: 20px;

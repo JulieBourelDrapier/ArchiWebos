@@ -44,7 +44,8 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets <span class="hidden modify-section"><i class="fa-regular fa-pen-to-square"></i> <a href="#modal1" class="js">Modifier</a></span></h2>
+		<h2>Mes Projets <span class="hidden modify-section"><i class="fa-regular fa-pen-to-square"></i> Modifier</span></h2>
+		<a href="#modal1" class="js">Ouvrir la modale</a>
 		<div id="filters"></div>
 		<div class="gallery"></div>
 	</section>
@@ -72,11 +73,13 @@
 </footer>
 
 
-	<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title" style="display:none;"></aside>
-	<div class="modal-wrapper">
-		<h2 id="modal-title">Galerie photo</h2>
-		<button class="btn-to-close-modal">X</button>
+<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titlemodal">
+	<div class="modal-wrapper js-modal-stop">
+		<h2 id="titlemodal">Galerie photo</h2>
+		<button class="js-modal-close">X</button>
 	</div>
+</aside>
+
 <script src="assets/js/script.js"></script>
 
 </body>
