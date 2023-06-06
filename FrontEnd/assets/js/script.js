@@ -134,6 +134,8 @@ fetch("http://localhost:5678/api/categories/")
 })
 
 // en lien avec la modale
+
+
 const modalContainer = document.querySelector(".modal-container")
 const modalTriggers = document.querySelectorAll(".modal-trigger")
 
