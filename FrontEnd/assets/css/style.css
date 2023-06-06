@@ -336,7 +336,7 @@ footer nav ul {
 
 * { box-sizing: border-box;}*/
 
-.modal {
+/*.modal {
 	position: fixed;
 	display: flex;
 	align-items: center;
@@ -351,8 +351,11 @@ footer nav ul {
 .modal-wrapper {
 	overflow: auto;
 	width: 800px;
-	max-width: calc(100vh - 20px);
-	max-height: calc(100vh - 20px);
+	max-width: 500px;
+	max-height: 300px;
 	padding: 20px;
 	background-color: #fff;
-}
+	transform: translate(-50px -50px);
+}*/
+
+
