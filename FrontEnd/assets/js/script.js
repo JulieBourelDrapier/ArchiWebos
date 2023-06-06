@@ -134,10 +134,27 @@ fetch("http://localhost:5678/api/categories/")
 })
 
 // en lien avec la modale
-
-
 const modalContainer = document.querySelector(".modal-container")
-const modalTriggers = document.querySelectorAll(".modal-trigger")
+const modalTriggers  = document.querySelectorAll(".modal-trigger")
+
+modalTriggers.addEventListener("click", openModal)
+function openModal(event) {//cette fonction donne lieu à la créa de 
+//générer les éléments de manière dynamique 
+const aside = document.createElement("aside")
+const overlay = document.createElement("div")
+const modal = document.createElement("div")
+const btnModal = document.createElement("button")
+const ttlModal = document.createElement("h2")
+
+aside.classList.add("modal-container")
+overlay.classList.add("overlay modal-trigger")
+modal.classList.add("modal")
+btnModal.classList.add("close-modal modal trigger")
+ttlModal.innerText = "Galerie photo"
+
+}
+
+
 
 modalTriggers.forEach(trigger => trigger.addEventListener("click", toggleModal))
 
