@@ -132,6 +132,49 @@ fetch("http://localhost:5678/api/categories/")
 .catch(error => {
   console.error(error)
 })
+		
+
+//role="dialog" 
+//aria-labelledby="titlemodal" style="display:none;">
+
+//création dynamique de la modale
+
+const modalAside = document.createElement("aside")
+modalAside.setAttribute("id", "modal1")
+modalAside.setAttribute("class", "modal")
+document.body.appendChild(modalAside)
+modalAside.ariaHidden = "true"
+console.log(modalAside)
+
+
+const modalDiv = document.createElement("div")
+modalDiv.setAttribute("class", "modal-wrapper"+"js-modal-stop")
+document.modalAside.appendChild(modalDiv)
+console.log(modalDiv)
+
+const modalFirstBtn = document.createElement("button")
+modalFirstBtn.setAttribute("class", "js-modal-close")
+document.modalDiv.appendChild(modalFirstBtn)
+modalFirstBtn.innerText = "X"
+console.log(modalFirstBtn)
+
+const modalTitle = document.createElement("h2") 
+modalTitle.setAttribute("class", "titlemodal")
+document.modalDiv.appendChild(modalTitle)
+modalTitle.innerText = "Galerie" + " " + "photo"
+console.log(modalTitle)
+
+const modalSecondBtn = document.createElement("button")
+modalSecondBtn.setAttribute("class", "js-modal-add-photo")
+document.modalDiv.appendChild(modalSecondBtn)
+modalSecondBtn.innerText = "Galerie" + " " + "photo"
+console.log(modalSecondBtn)
+
+const modalDelete = document.createElement("p")
+modalDelete.setAttribute("class", "delete")
+document.modalDiv.appendChild(modalDelete)
+modalDelete.innerText = "Supprimer" + " " + "la" + " " + "galerie"
+console.log(modalDelete)
 
 // en lien avec la modale
 let modal = null
@@ -139,7 +182,6 @@ const focusableSelector = "button, a, input, textarea"
 let focusables = []
 let previouslyFocusedElement = null
 
- 
 const openModal = function(e) {
   e.preventDefault()
   modal = document.querySelector(e.target.getAttribute("href"))//(permet de determiner l'élément cible (ici le lien))
