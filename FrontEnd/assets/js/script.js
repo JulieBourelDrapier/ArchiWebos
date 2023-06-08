@@ -134,30 +134,65 @@ fetch("http://localhost:5678/api/categories/")
 })
 
 // en lien avec la modale
-const modalContainer = document.querySelector(".modal-container")
-const modalTriggers  = document.querySelectorAll(".modal-trigger")
+let modal = null
+const focusableSelector = "button, a, input, textarea"
+let focusables = []
+let previouslyFocusedElement = null
 
-modalTriggers.addEventListener("click", openModal)
-function openModal(event) {//cette fonction donne lieu à la créa de 
-//générer les éléments de manière dynamique 
-const aside = document.createElement("aside")
-const overlay = document.createElement("div")
-const modal = document.createElement("div")
-const btnModal = document.createElement("button")
-const ttlModal = document.createElement("h2")
-
-aside.classList.add("modal-container")
-overlay.classList.add("overlay modal-trigger")
-modal.classList.add("modal")
-btnModal.classList.add("close-modal modal trigger")
-ttlModal.innerText = "Galerie photo"
-
+ 
+const openModal = function(e) {
+  e.preventDefault()
+  modal = document.querySelector(e.target.getAttribute("href"))//(permet de determiner l'élément cible (ici le lien))
+  modal.style.display = null // ATTENTION en lien avec le display mis dans HTML
+  focusables = Array.from(modal.querySelectorAll(focusableSelector))
+  focusables[0].focus()//par défaut mettre cet élément en focusable
+  modal.removeAttribute("aria-hidden")
+  modal.setAttribute("aria-modal", "true")
+  modal.addEventListener("click", closeModal)
+  modal.querySelector(".js-modal-close").addEventListener("click", closeModal)
+  modal.querySelector(".js-modal-close").addEventListener("click", stopPropagation)
 }
 
-
-
-modalTriggers.forEach(trigger => trigger.addEventListener("click", toggleModal))
-
-function toggleModal(){
-  modalContainer.classList.toggle("active")
+const closeModal = function (e) { //fonction qui prend en paramètre l'evenmnt
+  if (modal === null) return //en cas de modale non existente ça n'ira pas plus loin
+  e.preventDefault()
+  window.setTimeout(function () {
+    modal.style.display = "none"//permet de remasquer la modale
+    modal = null
+  }, 500)
+  modal.setAttribute("aria-hidden" , "true")//passe à true pour masquer l'elmnt
+  modal.removeAttribute("aria-modal")
+  modal.removeEventListener("click", closeModal)
+  modal.querySelector(".js-modal-close").removeEventListener("click", closeModal)
+  modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation)
 }
+
+const stopPropagation = function (e) {
+  e.stopPropagation()
+}
+
+const focusInModal = function (e) {
+  e.preventDefault()
+  let index = focusables.findIndex(f => f === modal.querySelector(":focus"))
+  index++
+  if (index >= focusables.length){
+  index = 0
+}
+  focusables[index].focus()
+}
+
+document.querySelectorAll(".js-modal").forEach(a => { //selectionne tous les liens qui ont la class js-modal
+  a.addEventListener("click", openModal)
+})
+
+window.addEventListener("keydown", function (e){
+  if (e.key === "Escape" || e.key === "Esc") {
+    closeModal(e)
+  }
+  if (e.key === "Tab" && modal !== null) {
+    focusInModal(e)
+  } 
+})
+
+// revoir la configuration des éléments par rapport à ce que j'ai besoin ici. 
+// créer addEventListener qui permette d'ouvrir la modale quand on clic sur "Modifier" (partie "mes projets")

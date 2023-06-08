@@ -36,7 +36,7 @@
 			<div class="hidden modify-figure"><i class="fa-regular fa-pen-to-square"></i> Modifier</div>
 		</figure>
 		<article>
-			<div class="hidden modify-article modal-trigger"><i class="fa-regular fa-pen-to-square"></i> Modifier</div>
+			<div class="hidden modify-article"><i class="fa-regular fa-pen-to-square"></i> Modifier</div>
 			<h2>Designer d'espace </h2>
 			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
 			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
@@ -44,7 +44,7 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets <span class="hidden modify-article"><i class="fa-regular fa-pen-to-square"></i> Modifier</span></h2>
+		<h2>Mes Projets <span class="hidden modify-section"><i class="fa-regular fa-pen-to-square"></i> Modifier</span></h2>
 		<div id="filters"></div>
 		<div class="gallery"></div>
 	</section>
@@ -70,6 +70,19 @@
 		</ul>
 	</nav>
 </footer>
+
+<a href="#modal1" class="js-modal">Ouvrir la boite modale</a>
+
+	<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titlemodal" style="display:none;">
+		<button class="js-modal-close">X</button><!--pour des questions d'accessibilité il est intéressant de mettre du texte ex : fermer la modale-->
+		<div class="modal-wrapper js-modal-stop">
+			<h2 id="titlemodal">Galerie photo</h2>
+			<input type="text"><!--simulation-->
+			<button class="js-modal-add-photo">Ajouter une photo</button>
+			<a href="#" class=" js-modal">Supprimer la gallerie</a>
+			
+		</div>
+	</aside>
 
 <script src="assets/js/script.js"></script>
 

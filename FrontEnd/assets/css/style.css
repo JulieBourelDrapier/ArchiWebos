@@ -329,81 +329,61 @@ footer nav ul {
 }
 
 /*******MODAL*******/
-.modal-btn {
-display: block;
-cursor: pointer;
-border: none;
+body, html {
+	margin: 0;
+	padding: 0;
 }
 
-/* le conteneur contient l'overlay et la modale*/
-.modal-container {
-	display: inline;
-	visibility: hidden;
-	position: fixed;
-	top: 0;
-	width: 100vw;
-	height: 100vh;
-	transition: visibility 0.4s;
-}
-
-.modal-container.active {
-	display: block;
-	visibility: visible;
-}
-
-.overlay {
-	opacity: 0;
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	/*left: -198px;*/
-	background:rgba(0, 0, 0, 0.4);
-	transition: opacity 0.4s 0.2s ease-out;
-}
-
-.modal-container.active .overlay {
-	opacity: 1;
-	transition: opacity 0.4s ease-out;
-}
+* { box-sizing: border-box; }
 
 .modal {
-	opacity: 0;
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.4);
+	animation: fadeIn .3s both;
+}
+
+.modal-wrapper {
+	overflow: auto;
 	width: 630px;
-	max-width: 500px;
-	min-width: 300px;
-	padding: 30px;
-	background: #fff;
-	border-radius: 5px;
-	position: absolute;
-	top: 40%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	transition: opacity 0.4s ease-out;
-	transform 0.4s ease-out;
+	max-width: calc(100vw - 20px);
+	max-height: calc(100vh - 20px);
+	padding: 20px;
+	background-color: #fff;
+	border-radius: 10px;	
+	animation: slideFromTop .5s both;
 }
 
-.modal-container.active .modal {
-	opacity: 1;
-	transform: translate(-50%, -50%);
-	transition: opacity 0.4s 0.2s ease-out;
-	transform 0.4s 0.2s ease-out;
+.modal[aria-hidden="true"] {
+	animation-name: fadeOut;
 }
 
-.close-modal {
-	border: none;
-	background: #fff;
-	font-size: 14px;
-	position: absolute;
-	top: 15px;
-	right: 15px;
-	cursor: pointer;
+.modal[aria-hidden="true"] .modal-wrapper {
+	animation-name: slideToBottom;
 }
 
-.modal h2 {
-	text-align: center;
-	padding-top: 60px;
-	padding-bottom: 45px;
-	color: black;
-	font-weight: 400;
-	font-family: 'Work Sans';
+@keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+	from { opacity: 1; }
+	to { opacity: 0; }
+}
+
+@keyframes slideFromTop{
+	from { transform: translateY(-50px);}
+	to { transform: translateY(0);}
+}
+
+@keyframes slideToBottom {
+	from { transform: translateY(0px);}
+	to { transform: translateY(50px);}
 }
