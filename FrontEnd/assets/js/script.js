@@ -133,48 +133,41 @@ fetch("http://localhost:5678/api/categories/")
   console.error(error)
 })
 		
-
-//role="dialog" 
-//aria-labelledby="titlemodal" style="display:none;">
-
 //création dynamique de la modale
+//const jsModal = document.getElementById("modal1")
+const modalLink = document.getElementsByClassName(".js-modal")
 
-const modalAside = document.createElement("aside")
-modalAside.setAttribute("id", "modal1")
-modalAside.setAttribute("class", "modal")
-document.body.appendChild(modalAside)
-modalAside.ariaHidden = "true"
-console.log(modalAside)
+function createModal(e) {
+  if("0") {
+    const body = document.createElement("body")
+    const modalAside = document.createElement("aside")
+    const modalDiv = document.createElement("div")
+    const modalFirstBtn = document.createElement("button")
+    const modalTitle = document.createElement("h2")   
+    const modalSecondBtn = document.createElement("button")
+    const modalDelete = document.createElement("a")
 
+    modalAside.setAttribute("id", "modal1")
+    modalAside.classList.add("modal")
+    modalDiv.classList.add("modal-wrapper", "js-modal-stop")
+    modalFirstBtn.classList.add("js-modal-close")
+    modalTitle.classList.add("title-modal")
+    modalSecondBtn.classList.add("js-modal-add-photo")
+    modalDelete.classList.add("js-delete-modal")
 
-const modalDiv = document.createElement("div")
-modalDiv.setAttribute("class", "modal-wrapper"+"js-modal-stop")
-document.modalAside.appendChild(modalDiv)
-console.log(modalDiv)
+    document.body.id = "body"
+    body.append(asideDiv)
+    asideDiv.append(modalDiv)
+    adideDiv.append(modalFirstBtn)
+    asideDiv.append(modalTitle)
+    asideDiv.append(modalSecondBtn)
+    asideDiv.append(modalDelete)
+    console.log(CreateModal)
+  }
+}
 
-const modalFirstBtn = document.createElement("button")
-modalFirstBtn.setAttribute("class", "js-modal-close")
-document.modalDiv.appendChild(modalFirstBtn)
-modalFirstBtn.innerText = "X"
-console.log(modalFirstBtn)
+modalLink.addEventListener("click", createModal)
 
-const modalTitle = document.createElement("h2") 
-modalTitle.setAttribute("class", "titlemodal")
-document.modalDiv.appendChild(modalTitle)
-modalTitle.innerText = "Galerie" + " " + "photo"
-console.log(modalTitle)
-
-const modalSecondBtn = document.createElement("button")
-modalSecondBtn.setAttribute("class", "js-modal-add-photo")
-document.modalDiv.appendChild(modalSecondBtn)
-modalSecondBtn.innerText = "Galerie" + " " + "photo"
-console.log(modalSecondBtn)
-
-const modalDelete = document.createElement("p")
-modalDelete.setAttribute("class", "delete")
-document.modalDiv.appendChild(modalDelete)
-modalDelete.innerText = "Supprimer" + " " + "la" + " " + "galerie"
-console.log(modalDelete)
 
 // en lien avec la modale
 let modal = null
