@@ -188,16 +188,14 @@ async function createModal (e) {
 
   modalFirstBtn.classList.add("js-modal-close")
   modalFirstBtn.innerText = "x"
-  modalFirstBtn.href=""
 
   modalTitle.classList.add("title-modal")
-  modalTitle.innerText = "Galerie photo"//ne marche pas
+  modalTitle.innerText = "Galerie photo"
 
   modalGallery.classList.add("modal-gallery")
 
   modalSecondBtn.classList.add("js-modal-add-photo")
   modalSecondBtn.innerText = "Ajouter une photo"
-  modalSecondBtn.href=""//ne marche pas
 
   modalDelete.classList.add("js-delete-gallery")
   modalDelete.innerText = "Supprimer la galerie"
