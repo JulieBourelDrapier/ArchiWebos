@@ -151,13 +151,14 @@ function createModal(e) {
 
   modalFirstBtn.classList.add("js-modal-close")
   modalFirstBtn.innerText = "x"
+  modalFirstBtn.href=""
 
   modalTitle.classList.add("title-modal")
-  modalTitle.innerText = "Galerie photo"
+  modalTitle.innerText = "Galerie photo"//ne marche pas
 
   modalSecondBtn.classList.add("js-modal-add-photo")
   modalSecondBtn.innerText = "Ajouter une photo"
-  modalSecondBtn.href=""
+  modalSecondBtn.href=""//ne marche pas
 
   modalDelete.classList.add("js-delete-gallery")
   modalDelete.innerText = "Supprimer la galerie"
@@ -172,12 +173,12 @@ function createModal(e) {
   modalDiv.append(modalDelete)
   console.log("createModal")
 
+  modalFirstBtn.addEventListener("click", closeModal)
 }
 
 modalLink.addEventListener("click", createModal)
-modal.addEventListener("click", closeModal)
-modal.querySelector(".js-modal-close").addEventListener("click", closeModal)
-modal.querySelector(".js-modal-close").addEventListener("click", stopPropagation)
+
+
 
 // en lien avec la modale
 
@@ -194,6 +195,8 @@ const closeModal = function (e) { //fonction qui prend en paramètre l'evenmnt
   modal.querySelector(".js-modal-close").removeEventListener("click", closeModal)
   modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation)
 }
+
+
 
 const stopPropagation = function (e) {
   e.stopPropagation()
