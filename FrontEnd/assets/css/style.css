@@ -345,12 +345,12 @@ footer nav ul {
 .modal-wrapper {
 	/*overflow: auto;*/
 	width: 630px;
-	max-width: calc(100vw - 20px);
-	max-height: calc(100vh - 20px);
-	padding: 10px;
+	max-width: calc(80vw - 20px);
+	max-height: calc(90vh - 20px);
 	background-color: #fff;
 	border-radius: 10px;	
 	animation: slideFromTop .5s both;
+	padding-bottom: 48px;
 }
 
 .modal[aria-hidden="true"] {
@@ -389,8 +389,10 @@ footer nav ul {
 .js-modal-close {
 	border: none;
 	background-color: #fff;
-	font-size: 20px;
-	padding-left: 575px;
+	font-size: 23px;
+	padding-top: 12px;
+	padding-bottom: 10px;
+	padding-left: 585px;
 }
 
 .title-modal {
@@ -415,9 +417,9 @@ footer nav ul {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	margin-left: 100px;
-	margin-right: 100px;
-	margin-top: 45px;
+	margin-left: 90px;
+	margin-right: 90px;
+	margin-top: 35px;
 	padding-bottom: 47px;
 	border-bottom: 1px solid #B3B3B3;
 }
