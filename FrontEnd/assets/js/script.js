@@ -135,7 +135,7 @@ fetch("http://localhost:5678/api/categories/")
 const modalLink = document.getElementById("js-modal")
 const body = document.body;
 
-function createModal(e) {
+function createModal (e) {
   const modalAside = document.createElement("aside")
   const modalDiv = document.createElement("div")
   const modalFirstBtn = document.createElement("button")
@@ -182,42 +182,20 @@ modalLink.addEventListener("click", createModal)
 
 // en lien avec la modale
 
-const closeModal = function (e) { //fonction qui prend en paramètre l'evenmnt
+function closeModal (e) {
   if (modal === null) return //en cas de modale non existente ça n'ira pas plus loin
   e.preventDefault()
   window.setTimeout(function () {
     modal.style.display = "none"//permet de remasquer la modale
     modal = null
   }, 500)
-  modal.setAttribute("aria-hidden" , "true")//passe à true pour masquer l'elmnt
-  modal.removeAttribute("aria-modal")
-  modal.removeEventListener("click", closeModal)
+
   modal.querySelector(".js-modal-close").removeEventListener("click", closeModal)
   modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation)
 }
 
 
 
-const stopPropagation = function (e) {
-  e.stopPropagation()
-}
-
-const focusInModal = function (e) {
-  e.preventDefault()
-  let index = focusables.findIndex(f => f === modal.querySelector(":focus"))
-  index++
-  if (index >= focusables.length){
-  index = 0
-}
-  focusables[index].focus()
-}
 
 
-window.addEventListener("keydown", function (e){
-  if (e.key === "Escape" || e.key === "Esc") {
-    closeModal(e)
-  }
-  if (e.key === "Tab" && modal !== null) {
-    focusInModal(e)
-  } 
-})
+
