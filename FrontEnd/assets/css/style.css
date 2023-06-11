@@ -343,11 +343,11 @@ footer nav ul {
 }
 
 .modal-wrapper {
-	overflow: auto;
+	/*overflow: auto;*/
 	width: 630px;
 	max-width: calc(100vw - 20px);
 	max-height: calc(100vh - 20px);
-	padding: 20px;
+	padding: 10px;
 	background-color: #fff;
 	border-radius: 10px;	
 	animation: slideFromTop .5s both;
@@ -390,6 +390,12 @@ footer nav ul {
 	border: none;
 	background-color: #fff;
 	font-size: 20px;
+	padding-left: 575px;
+}
+
+.title-modal {
+	font-size: 26px;
+	font-weight: 400;
 }
 
 .js-modal-add-photo {
@@ -404,14 +410,20 @@ footer nav ul {
 }
 
 .modal-gallery {
-	justify-content: center;
+	justify-content: space-around;
 	align-items: center;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	margin-left: 100px;
+	margin-right: 100px;
+	margin-top: 45px;
+	padding-bottom: 47px;
+	border-bottom: 1px solid #B3B3B3;
 }
 
 .modal-gallery img{
-	width: 75px;
-	display: fle
+	width: 78px;
+	padding-top: 10px;
 }
+

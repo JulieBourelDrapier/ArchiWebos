@@ -83,7 +83,7 @@ function generateAndCreateGalleryModal(selector, categoryId = null) {
     //configurer
     img.setAttribute('src', data[i].imageUrl)
     img.setAttribute('alt', data[i].title)
-    figcaption.innerText = "editer"
+    figcaption.innerText = "éditer"
 
     // placer les éléments générés
     figure.append(img)
@@ -176,7 +176,7 @@ async function createModal (e) {
   const modalAside = document.createElement("aside")
   const modalDiv = document.createElement("div")
   const modalFirstBtn = document.createElement("button")
-  const modalTitle = document.createElement("h2")  
+  const modalTitle = document.createElement("h3")  
   const modalSecondBtn = document.createElement("button")
   const modalDelete = document.createElement("a")
   const modalGallery = document.createElement("div")
