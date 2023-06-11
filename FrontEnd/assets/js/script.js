@@ -9,10 +9,12 @@ function showHiddenElements() {
     Array.from(hiddenElements).forEach((element) => {
       element.classList.remove("hidden")
     //2e action = login devient logout
-      document.querySelector(".connexion-link").textContent ="logout" 
+      document.querySelector(".connexion-link").textContent ="logout"
     //3e action hide filters 
       document.getElementById("filters").setAttribute("style", "display:none")
     })
+    //add eventListener 
+    connexionLink.addEventListener("click", logOut)
   }
 }
 
@@ -24,13 +26,12 @@ function logOut(event) {
   localStorage.removeItem("token")//unset localstorage 
   location.reload()//location.href = "/FrontEnd/assets/login.js"
 }
-//add eventListener 
-connexionLink.addEventListener("click", logOut)
 
 
 
-function generateAndCreateGallery(categoryId = null) {
-  const galleryDiv = document.getElementsByClassName("gallery")[0]
+
+function generateAndCreateGallery(selector, categoryId = null) {
+  const galleryDiv = document.getElementsByClassName(selector)[0]
   galleryDiv.innerHTML = ''
   let data
   if(categoryId !== null) {
@@ -61,10 +62,42 @@ function generateAndCreateGallery(categoryId = null) {
   }
 }
 
+function generateAndCreateGalleryModal(selector, categoryId = null) {
+  const galleryDiv = document.getElementsByClassName(selector)[0]
+  galleryDiv.innerHTML = ''
+  let data
+  if(categoryId !== null) {
+    data = result.filter((img) => {
+      return Number.parseInt(categoryId) === img.categoryId
+    })
+  }
+  else {
+    data = result
+  }
+  for (let i = 0; i < data.length; i++) {
+    //générer les élements 
+    const figure     = document.createElement('figure')
+    const img        = document.createElement('img')
+    const figcaption = document.createElement('figcaption')
+
+    //configurer
+    img.setAttribute('src', data[i].imageUrl)
+    img.setAttribute('alt', data[i].title)
+    figcaption.innerText = "editer"
+
+    // placer les éléments générés
+    figure.append(img)
+    figure.append(figcaption)
+
+    // ajouter les éléments dans le DOM
+    galleryDiv.append(figure)
+  }
+}
+
 // création des boutons filtres + fonction filter 
 function filterImgEvent(event)
 {
-  generateAndCreateGallery(event.target.getAttribute('filterCategoryId'))
+  generateAndCreateGallery("gallery", event.target.getAttribute('filterCategoryId'))
   document.querySelector("#filters .filterParent .filter.selected").classList.remove('selected')
   event.target.classList.add("selected")
 }
@@ -91,7 +124,7 @@ async function fetchWorks() {
 
 async function FetchAndCreateGallery() {
   result = await fetchWorks()
-  generateAndCreateGallery()
+  generateAndCreateGallery("gallery")
 }
 
 FetchAndCreateGallery()
@@ -139,14 +172,14 @@ fetch("http://localhost:5678/api/categories/")
 //création dynamique de la modale
 const modalLink = document.getElementById("js-modal")
 
-function createModal (e) {
+async function createModal (e) {
   const modalAside = document.createElement("aside")
   const modalDiv = document.createElement("div")
   const modalFirstBtn = document.createElement("button")
   const modalTitle = document.createElement("h2")  
   const modalSecondBtn = document.createElement("button")
   const modalDelete = document.createElement("a")
-
+  const modalGallery = document.createElement("div")
   //configurer
   modalAside.id = "modal1"
   modalAside.classList.add("modal")
@@ -159,6 +192,8 @@ function createModal (e) {
 
   modalTitle.classList.add("title-modal")
   modalTitle.innerText = "Galerie photo"//ne marche pas
+
+  modalGallery.classList.add("modal-gallery")
 
   modalSecondBtn.classList.add("js-modal-add-photo")
   modalSecondBtn.innerText = "Ajouter une photo"
@@ -173,9 +208,12 @@ function createModal (e) {
   modalAside.append(modalDiv)
   modalDiv.append(modalFirstBtn)
   modalDiv.append(modalTitle)
+  modalDiv.append(modalGallery)
   modalDiv.append(modalSecondBtn)
   modalDiv.append(modalDelete)
   console.log("createModal")
+
+  generateAndCreateGalleryModal("modal-gallery")
 
   modalFirstBtn.addEventListener("click", closeModal)
 }

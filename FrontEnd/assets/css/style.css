@@ -403,3 +403,15 @@ footer nav ul {
 	color: #D65353;
 }
 
+.modal-gallery {
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.modal-gallery img{
+	width: 75px;
+	display: fle
+}
