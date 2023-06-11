@@ -74,22 +74,27 @@ showHiddenElements()
 
 // récupérer dynamiquement la galerie via fetch
 //mettre ces éléments dans une fonction pour plus de clarté
-fetch("http://localhost:5678/api/works/")
-  .then(res => {
+async function fetchWorks() {
+  try {
+    const res = await fetch("http://localhost:5678/api/works/")
     if(res.ok){
-      res.json().then(data => {
-        result = data
-        generateAndCreateGallery()
-        
-      })
+      const data = await res.json()
+      return data
     } else {
       console.error('No data received')
     }
-  })
-  .catch(error => {
+  } catch(error) {
     console.error(error)
     console.error('Penser à fr npm start')
-  })
+  }
+}
+
+async function FetchAndCreateGallery() {
+  result = await fetchWorks()
+  generateAndCreateGallery()
+}
+
+FetchAndCreateGallery()
 
   //mettre ces éléments dans une fonction pour plus de clarté
 fetch("http://localhost:5678/api/categories/")
@@ -133,7 +138,6 @@ fetch("http://localhost:5678/api/categories/")
 		
 //création dynamique de la modale
 const modalLink = document.getElementById("js-modal")
-const body = document.body;
 
 function createModal (e) {
   const modalAside = document.createElement("aside")
@@ -144,7 +148,7 @@ function createModal (e) {
   const modalDelete = document.createElement("a")
 
   //configurer
-  modalAside.setAttribute("id", "modal1")
+  modalAside.id = "modal1"
   modalAside.classList.add("modal")
 
   modalDiv.classList.add("modal-wrapper", "js-modal-stop")
@@ -165,7 +169,7 @@ function createModal (e) {
   modalDelete.href=""
 
   //placer dans le dom
-  body.append(modalAside)
+  document.body.append(modalAside)
   modalAside.append(modalDiv)
   modalDiv.append(modalFirstBtn)
   modalDiv.append(modalTitle)
@@ -178,20 +182,10 @@ function createModal (e) {
 
 modalLink.addEventListener("click", createModal)
 
-
-
-// en lien avec la modale
-
+//Fermer la modale
 function closeModal (e) {
-  if (modal === null) return //en cas de modale non existente ça n'ira pas plus loin
-  e.preventDefault()
-  window.setTimeout(function () {
-    modal.style.display = "none"//permet de remasquer la modale
-    modal = null
-  }, 500)
-
-  modal.querySelector(".js-modal-close").removeEventListener("click", closeModal)
-  modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation)
+  console.log("nouvellefonctionenlienavecmodale")
+  modal.style.display = "none"//permet de masquer la modale
 }
 
 

@@ -389,6 +389,7 @@ footer nav ul {
 .js-modal-close {
 	border: none;
 	background-color: #fff;
+	font-size: 20px;
 }
 
 .js-modal-add-photo {
