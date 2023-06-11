@@ -1,5 +1,3 @@
-//programmation asynchrone => fetch => Get & post requests
-// annonce des variables à la portée globale
 let result //intervient dans la récupération de la galerie
 
 //déclarer la fonction
@@ -134,59 +132,54 @@ fetch("http://localhost:5678/api/categories/")
 })
 		
 //création dynamique de la modale
-//const jsModal = document.getElementById("modal1")
-const modalLink = document.getElementsByClassName(".js-modal")
+const modalLink = document.getElementById("js-modal")
+const body = document.body;
 
 function createModal(e) {
-  if("0") {
-    const body = document.createElement("body")
-    const modalAside = document.createElement("aside")
-    const modalDiv = document.createElement("div")
-    const modalFirstBtn = document.createElement("button")
-    const modalTitle = document.createElement("h2")   
-    const modalSecondBtn = document.createElement("button")
-    const modalDelete = document.createElement("a")
+  const modalAside = document.createElement("aside")
+  const modalDiv = document.createElement("div")
+  const modalFirstBtn = document.createElement("button")
+  const modalTitle = document.createElement("h2")  
+  const modalSecondBtn = document.createElement("button")
+  const modalDelete = document.createElement("a")
 
-    modalAside.setAttribute("id", "modal1")
-    modalAside.classList.add("modal")
-    modalDiv.classList.add("modal-wrapper", "js-modal-stop")
-    modalFirstBtn.classList.add("js-modal-close")
-    modalTitle.classList.add("title-modal")
-    modalSecondBtn.classList.add("js-modal-add-photo")
-    modalDelete.classList.add("js-delete-modal")
+  //configurer
+  modalAside.setAttribute("id", "modal1")
+  modalAside.classList.add("modal")
 
-    document.body.id = "body"
-    body.append(asideDiv)
-    asideDiv.append(modalDiv)
-    adideDiv.append(modalFirstBtn)
-    asideDiv.append(modalTitle)
-    asideDiv.append(modalSecondBtn)
-    asideDiv.append(modalDelete)
-    console.log(CreateModal)
-  }
+  modalDiv.classList.add("modal-wrapper", "js-modal-stop")
+
+  modalFirstBtn.classList.add("js-modal-close")
+  modalFirstBtn.innerText = "x"
+
+  modalTitle.classList.add("title-modal")
+  modalTitle.innerText = "Galerie photo"
+
+  modalSecondBtn.classList.add("js-modal-add-photo")
+  modalSecondBtn.innerText = "Ajouter une photo"
+  modalSecondBtn.href=""
+
+  modalDelete.classList.add("js-delete-gallery")
+  modalDelete.innerText = "Supprimer la galerie"
+  modalDelete.href=""
+
+  //placer dans le dom
+  body.append(modalAside)
+  modalAside.append(modalDiv)
+  modalDiv.append(modalFirstBtn)
+  modalDiv.append(modalTitle)
+  modalDiv.append(modalSecondBtn)
+  modalDiv.append(modalDelete)
+  console.log("createModal")
+
 }
 
 modalLink.addEventListener("click", createModal)
-
+modal.addEventListener("click", closeModal)
+modal.querySelector(".js-modal-close").addEventListener("click", closeModal)
+modal.querySelector(".js-modal-close").addEventListener("click", stopPropagation)
 
 // en lien avec la modale
-let modal = null
-const focusableSelector = "button, a, input, textarea"
-let focusables = []
-let previouslyFocusedElement = null
-
-const openModal = function(e) {
-  e.preventDefault()
-  modal = document.querySelector(e.target.getAttribute("href"))//(permet de determiner l'élément cible (ici le lien))
-  modal.style.display = null // ATTENTION en lien avec le display mis dans HTML
-  focusables = Array.from(modal.querySelectorAll(focusableSelector))
-  focusables[0].focus()//par défaut mettre cet élément en focusable
-  modal.removeAttribute("aria-hidden")
-  modal.setAttribute("aria-modal", "true")
-  modal.addEventListener("click", closeModal)
-  modal.querySelector(".js-modal-close").addEventListener("click", closeModal)
-  modal.querySelector(".js-modal-close").addEventListener("click", stopPropagation)
-}
 
 const closeModal = function (e) { //fonction qui prend en paramètre l'evenmnt
   if (modal === null) return //en cas de modale non existente ça n'ira pas plus loin
@@ -216,9 +209,6 @@ const focusInModal = function (e) {
   focusables[index].focus()
 }
 
-document.querySelectorAll(".js-modal").forEach(a => { //selectionne tous les liens qui ont la class js-modal
-  a.addEventListener("click", openModal)
-})
 
 window.addEventListener("keydown", function (e){
   if (e.key === "Escape" || e.key === "Esc") {
@@ -228,6 +218,3 @@ window.addEventListener("keydown", function (e){
     focusInModal(e)
   } 
 })
-
-// revoir la configuration des éléments par rapport à ce que j'ai besoin ici. 
-// créer addEventListener qui permette d'ouvrir la modale quand on clic sur "Modifier" (partie "mes projets")
