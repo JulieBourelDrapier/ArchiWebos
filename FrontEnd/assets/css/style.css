@@ -39,7 +39,7 @@ section {
 
 body {
 	line-height: 1;
-	background-color: #E5E5E5;
+	/*background-color: #E5E5E5;*/
 }
 
 ol, ul {
@@ -105,13 +105,26 @@ h2{
 
 nav ul {
 	display: flex;
-	align-items: center;
 	list-style-type: none;
-
+	gap: 40px;
 }
+
 nav li {
-	padding: 0 10px;
-	font-size: 2em;
+	padding-top: 10px;
+	font-size: 1.2em;
+}
+
+.connexion-link {
+	font-size: 1.2em;
+	padding-top: 10px;
+}
+
+.logo-instagram {
+	font-size: 0.8em;
+}
+
+.li img {
+	color: blue;
 }
 
 .footer-li:hover {
@@ -257,16 +270,24 @@ footer nav ul {
 	margin-bottom: 50px;	
 }
 
+.filter:hover {
+	background-color: #1D6154;
+	color: #fff;
+}
+
 .filter {
-	font-family: 'Syne';
-	font-weight: 700;
-	width: auto;
-	text-align: center;
-	border: 1px solid #1D6154;
 	color: #1D6154;
-	background-color: white;
-	padding: 10px 25px;
-	border-radius: 60px ;
+	background-color: #fff;
+	font-family: 'Syne';
+	font-size: 1.1em;
+	border: 1.8px solid #1D6154;
+	border-radius: 60px;
+	text-align: center;
+	padding-left: 30px;
+	padding-right: 30px;
+	padding-top: 16px;
+	min-width: 100px;
+	height: 35px;
 }
 
 .filter.selected {
