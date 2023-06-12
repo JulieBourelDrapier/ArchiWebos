@@ -193,6 +193,7 @@ async function createModal (e) {
 
   modalSecondBtn.id = "js-modal-add-photo"
   modalSecondBtn.innerText = "Ajouter une photo"
+  modalSecondBtn.addEventListener("click", addPhoto)
 
   modalDelete.classList.add("js-delete-gallery")
   modalDelete.innerText = "Supprimer la galerie"
@@ -206,7 +207,6 @@ async function createModal (e) {
   modalDiv.append(modalGallery)
   modalDiv.append(modalSecondBtn)
   modalDiv.append(modalDelete)
-  console.log("createModal")
 
   generateAndCreateGalleryModal("modal-gallery")
 
@@ -223,14 +223,10 @@ function closeModal (e) {
 }
 
 //ajouter une photo
+
 function addPhoto (e) {
-  console.log("fonctionquipermetd'ajouterunephotodanslagalerie")
-  const photoToAdd = document.getElementById("js-modal-add-photo")
-  
-
+  console.log("fonctionquipermetdajouterunephotodanslagalerie")
 }
-
-photoToAdd.addEventListener("click", addPhoto)
 
 
 

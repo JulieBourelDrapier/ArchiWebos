@@ -215,7 +215,7 @@ nav li {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#log-btn, .js-modal-add-photo {
+#log-btn, #js-modal-add-photo {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -422,7 +422,7 @@ gap: 25px;
 	font-weight: 400;
 }
 
-.js-modal-add-photo {
+#js-modal-add-photo {
 	display: block;
 	width: 237px;
 	height: 36px;
