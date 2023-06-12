@@ -361,7 +361,7 @@ footer nav ul {
 	animation: fadeIn .9s both;
 }
 .modal-wrapper {
-	/*overflow: auto;*/
+	overflow: auto;
 	width: 630px;
 	max-width: calc(80vw - 20px);
 	max-height: calc(90vh - 20px);
@@ -369,14 +369,6 @@ footer nav ul {
 	border-radius: 10px;	
 	animation: slideFromTop .5s both;
 	padding-bottom: 48px;
-}
-
-.modal[aria-hidden="true"] {
-	animation-name: fadeOut;
-}
-
-.modal[aria-hidden="true"] .modal-wrapper {
-	animation-name: slideToBottom;
 }
 
 @keyframes fadeIn {
