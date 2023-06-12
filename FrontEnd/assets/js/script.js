@@ -218,11 +218,16 @@ async function createModal (e) {
 
 modalLink.addEventListener("click", createModal)
 
+
 //Fermer la modale
 function closeModal (e) {
-  console.log("nouvellefonctionenlienavecmodale")
-  modal.style.display = "none"//permet de masquer la modale
+  const modal = document.getElementById("modal1")
+  modal.remove()
 }
+
+//ajouter une photo
+
+
 
 
 
