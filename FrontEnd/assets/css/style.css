@@ -306,6 +306,19 @@ footer nav ul {
 	box-sizing: border-box;
 }
 
+.nav {
+	display: flex;
+	flex-direction: row;
+	gap: 40px;
+	font-size: 1.2em;
+	padding-top: 20px;
+}
+
+.nav img {
+
+}
+
+
 .modify-figure, .modify-article,.modify-section  {
 	color: #000000;
 	font-size: 14px;
