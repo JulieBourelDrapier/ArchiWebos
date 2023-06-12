@@ -27,9 +27,6 @@ function logOut(event) {
   location.reload()//location.href = "/FrontEnd/assets/login.js"
 }
 
-
-
-
 function generateAndCreateGallery(selector, categoryId = null) {
   const galleryDiv = document.getElementsByClassName(selector)[0]
   galleryDiv.innerHTML = ''
@@ -194,7 +191,7 @@ async function createModal (e) {
 
   modalGallery.classList.add("modal-gallery")
 
-  modalSecondBtn.classList.add("js-modal-add-photo")
+  modalSecondBtn.id = "js-modal-add-photo"
   modalSecondBtn.innerText = "Ajouter une photo"
 
   modalDelete.classList.add("js-delete-gallery")
@@ -226,7 +223,14 @@ function closeModal (e) {
 }
 
 //ajouter une photo
+function addPhoto (e) {
+  console.log("fonctionquipermetd'ajouterunephotodanslagalerie")
+  const photoToAdd = document.getElementById("js-modal-add-photo")
+  
 
+}
+
+photoToAdd.addEventListener("click", addPhoto)
 
 
 
