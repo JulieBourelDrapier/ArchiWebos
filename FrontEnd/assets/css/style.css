@@ -123,7 +123,7 @@ nav li {
 	font-size: 0.8em;
 }
 
-.li img {
+.nav li {
 	color: blue;
 }
 
@@ -336,6 +336,7 @@ gap: 25px;
 
 .modify-content span {
 	margin-top: 33px;
+	cursor: pointer;
 }
 
 .modify-figure, .modify-article {
