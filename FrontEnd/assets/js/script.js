@@ -73,26 +73,27 @@ function generateAndCreateGalleryModal(selector, categoryId = null) {
   }
   for (let i = 0; i < data.length; i++) {
     //générer les élements 
-    const figure       = document.createElement('figure')
-    const img          = document.createElement('img')
-    const figcaption   = document.createElement('figcaption')
-    const iconElement1 = document.createElement('i')
-    const iconElement2 = document.createElement('i')
+    const figure         = document.createElement('figure')
+    const img            = document.createElement('img')
+    const iconsContainer = document.createElement('div')
+    const figcaption     = document.createElement('figcaption')
+    const iconVisible    = document.createElement('i')
     //configurer
     img.setAttribute('src', data[i].imageUrl)
     img.setAttribute('alt', data[i].title)
     figcaption.innerText = "éditer"
-    iconElement1.classList.add("fa-solid", "fa-arrows-up-down-left-right", "crossed-arrows-icon")
-    iconElement2.classList.add("fa-solid", "fa-trash-can", "trash-icon")
+    iconsContainer.classList.add("icons-container")
+    iconVisible.classList.add("fa", "fa-trash-can","icons")
+    //iconHidden.classList.add("fa-solid", "fa-arrows-up-down-left-right", "crossed-arrows-icon", "icon-gallery")
     
     // placer les éléments générés
     figure.append(img)
     figure.append(figcaption)
-    figure.append(iconElement1)
-    figure.append(iconElement2)
+    figure.append(iconsContainer)
+    iconsContainer.append(iconVisible)
+    //figure.append(iconHidden)
     // ajouter les éléments dans le DOM
     galleryDiv.append(figure)
-    
   }
 }
 
