@@ -73,21 +73,25 @@ function generateAndCreateGalleryModal(selector, categoryId = null) {
   }
   for (let i = 0; i < data.length; i++) {
     //générer les élements 
-    const figure     = document.createElement('figure')
-    const img        = document.createElement('img')
-    const figcaption = document.createElement('figcaption')
-
+    const figure      = document.createElement('figure')
+    const img         = document.createElement('img')
+    const figcaption  = document.createElement('figcaption')
+    const iconElement1 = document.createElement('i')
+    const iconElement2 = document.createElement('i')
     //configurer
     img.setAttribute('src', data[i].imageUrl)
     img.setAttribute('alt', data[i].title)
     figcaption.innerText = "éditer"
-
+    iconElement1.classList.add("fa-solid", "fa-trash-can", "trash-icon")
+    iconElement2.classList.add("fa-solid", "fa-arrows-up-down-left-right", "crossed-arrows-icon")
     // placer les éléments générés
     figure.append(img)
     figure.append(figcaption)
-
+    figure.append(iconElement1)
+    figure.append(iconElement2)
     // ajouter les éléments dans le DOM
     galleryDiv.append(figure)
+    
   }
 }
 
@@ -222,57 +226,8 @@ function closeModal (e) {
   modal.remove()
 }
 
-//ajouter une photo
-
 function addPhoto (e) {
-  console.log("fonctionquipermetdajouterunephotodanslagalerie")
-  modal1.remove()
-    const addPhotoDiv = document.createElement("div")
-    const addPhotoGoBackBtn = document.createElement("icone")
-    const addPhotoCloseBtn = document.createElement("button")
-    const addPhotoTitle = document.createElement("h3")  
-    const addPhotoValidate = document.createElement("a")
-    const addPhotoForm = document.createElement("form")
-    
-    //configurer
-    modalAside.id = "modal1"
-    modalAside.classList.add("modal")
-  
-    modalDiv.classList.add("modal-wrapper", "js-modal-stop")
-  
-    modalFirstBtn.classList.add("js-modal-close")
-    modalFirstBtn.innerText = "x"
-  
-    modalTitle.classList.add("title-modal")
-    modalTitle.innerText = "Galerie photo"
-  
-    modalGallery.classList.add("modal-gallery")
-  
-    modalSecondBtn.id = "js-modal-add-photo"
-    modalSecondBtn.innerText = "Ajouter une photo"
-    modalSecondBtn.addEventListener("click", addPhoto)
-  
-    modalDelete.classList.add("js-delete-gallery")
-    modalDelete.innerText = "Supprimer la galerie"
-    modalDelete.href=""
-  
-    //placer dans le dom
-    document.body.append(modalAside)
-    modalAside.append(modalDiv)
-    modalDiv.append(modalFirstBtn)
-    modalDiv.append(modalTitle)
-    modalDiv.append(modalGallery)
-    modalDiv.append(modalSecondBtn)
-    modalDiv.append(modalDelete)
-  
-    generateAndCreateGalleryModal("modal-gallery")
-  
-    modalFirstBtn.addEventListener("click", closeModal)
+  const modal = document.getElementById("modal1")
+  modal.remove()
 }
-
-
-
-
-
-
 
