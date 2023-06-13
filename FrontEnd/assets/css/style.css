@@ -448,11 +448,12 @@ gap: 25px;
 
 .modal-gallery img{
 	width: 78px;
-	padding-top: 10px;
+	padding-top: 20px;
 }
 
 figure {
 	position: relative;
+	transition: transform .2s ease-out;
 }
 
 .icons {
@@ -461,16 +462,16 @@ background-color: #000;
 padding: 4px;
 position: absolute;
 z-index: 1;
-top: 15px;
+top: 22px;
 border-radius: 2px;
 }
 
 .icon1 {
-	right: 5px;
+	right: 3px;
 }
 
 .icon2 {
-	right: 30px;
+	right: 25px;
 }
 
 .icons-container {

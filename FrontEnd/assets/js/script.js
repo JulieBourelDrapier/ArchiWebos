@@ -61,7 +61,7 @@ function generateAndCreateGallery(selector, categoryId = null) {
 
 function generateAndCreateGalleryModal(selector, categoryId = null) {
   const galleryDiv = document.getElementsByClassName(selector)[0]
-  galleryDiv.innerHTML = ''
+  galleryDiv.innerHTML = ""
   let data
   if(categoryId !== null) {
     data = result.filter((img) => {
@@ -88,18 +88,18 @@ function generateAndCreateGalleryModal(selector, categoryId = null) {
     iconVisible.classList.add("fa", "fa-trash-can","icons", "icon1")
     iconInvisible.classList.add("fa-solid", "fa-arrows-up-down-left-right", "icons", "icon2")
     //setting of  display property for icons
-    iconVisible.style.display = "inline-block"
-   
-    iconInvisible.style.display = "inline-block"
-    iconInvisible.style.opacity = "0"
+      iconVisible.style.display = "inline-block"
+      iconInvisible.style.display = "inline-block"
+      iconInvisible.style.opacity = "0"
     //addEventListener to make the icon appear and disappear
-    figure.addEventListener('mouseenter', () => {
+      figure.addEventListener('mouseenter', () => {
       iconInvisible.style.opacity = "1"
+      figure.style.transform = "scale(1.2)"
     })
     figure.addEventListener('mouseleave', () => {
       iconInvisible.style.opacity = "0"
+      figure.style.transform = "scale(1)"
     })
-
     // placer les éléments générés
     figure.append(img)
     figure.append(figcaption)
@@ -235,6 +235,7 @@ async function createModal (e) {
 
 modalLink.addEventListener("click", createModal)
 
+// supprimer l'élément selectionné grace à l'icone trash container 
 
 //Fermer la modale
 function closeModal (e) {
