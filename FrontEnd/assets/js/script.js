@@ -6,7 +6,7 @@ function showHiddenElements() {
   const token        = localStorage.getItem("token")
   if (token) {
     //1ère action = rendre visible les éléments cachés 
-    Array.from(hiddenElements).forEach((element) => {
+      Array.from(hiddenElements).forEach((element) => {
       element.classList.remove("hidden")
     //2e action = login devient logout
       document.querySelector(".connexion-link").textContent ="logout"
@@ -73,20 +73,19 @@ function generateAndCreateGalleryModal(selector, categoryId = null) {
   }
   for (let i = 0; i < data.length; i++) {
     //générer les élements 
-    const figure         = document.createElement('figure')
-    const img            = document.createElement('img')
-    const iconsContainer = document.createElement('div')
-    const figcaption     = document.createElement('figcaption')
-    const iconVisible    = document.createElement('i')
-    const iconInvisible  = document.createElement('i')
-    //configurer
-    
-    img.setAttribute('src', data[i].imageUrl)
-    img.setAttribute('alt', data[i].title)
-    figcaption.innerText = "éditer"
-    iconsContainer.classList.add("icons-container")
-    iconVisible.classList.add("fa", "fa-trash-can","icons", "icon1")
-    iconInvisible.classList.add("fa-solid", "fa-arrows-up-down-left-right", "icons", "icon2")
+      const figure         = document.createElement('figure')
+      const img            = document.createElement('img')
+      const iconsContainer = document.createElement('div')
+      const figcaption     = document.createElement('figcaption')
+      const iconVisible    = document.createElement('i')
+      const iconInvisible  = document.createElement('i')
+      //configurer
+      img.setAttribute('src', data[i].imageUrl)
+      img.setAttribute('alt', data[i].title)
+      figcaption.innerText = "éditer"
+      iconsContainer.classList.add("icons-container")
+      iconVisible.classList.add("fa", "fa-trash-can","icons", "icon1",)
+      iconInvisible.classList.add("fa-solid", "fa-arrows-up-down-left-right", "icons", "icon2")
     //setting of  display property for icons
       iconVisible.style.display = "inline-block"
       iconInvisible.style.display = "inline-block"
@@ -96,20 +95,21 @@ function generateAndCreateGalleryModal(selector, categoryId = null) {
       iconInvisible.style.opacity = "1"
       figure.style.transform = "scale(1.2)"
     })
-    figure.addEventListener('mouseleave', () => {
+      figure.addEventListener('mouseleave', () => {
       iconInvisible.style.opacity = "0"
       figure.style.transform = "scale(1)"
     })
     // placer les éléments générés
-    figure.append(img)
-    figure.append(figcaption)
-    figure.append(iconsContainer)
-    iconsContainer.append(iconVisible)
-    iconsContainer.append(iconInvisible)
+      figure.append(img)
+      figure.append(figcaption)
+      figure.append(iconsContainer)
+      iconsContainer.append(iconVisible)
+      iconsContainer.append(iconInvisible)
     // ajouter les éléments dans le DOM
     galleryDiv.append(figure)
   }
 }
+
 
 // création des boutons filtres + fonction filter 
 function filterImgEvent(event)
@@ -235,8 +235,15 @@ async function createModal (e) {
 
 modalLink.addEventListener("click", createModal)
 
-// supprimer l'élément selectionné grace à l'icone trash container 
-
+//delete work
+function deleteWork(e) {
+  const trashIcon = document.getElementById("icon1")
+  trashIcon.addEventListener("click", event => {
+    const figureElement = event.target.closest("figure")
+    console.log("removed element", figureElement)
+    figureElement.remove()
+  })
+}
 //Fermer la modale
 function closeModal (e) {
   const modal = document.getElementById("modal1")
@@ -245,6 +252,7 @@ function closeModal (e) {
 
 function addPhoto (e) {
   const modal = document.getElementById("modal1")
-  modal.remove()
+  
 }
+
 
