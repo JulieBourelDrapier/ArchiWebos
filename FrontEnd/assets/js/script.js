@@ -78,20 +78,34 @@ function generateAndCreateGalleryModal(selector, categoryId = null) {
     const iconsContainer = document.createElement('div')
     const figcaption     = document.createElement('figcaption')
     const iconVisible    = document.createElement('i')
+    const iconInvisible  = document.createElement('i')
     //configurer
+    
     img.setAttribute('src', data[i].imageUrl)
     img.setAttribute('alt', data[i].title)
     figcaption.innerText = "éditer"
     iconsContainer.classList.add("icons-container")
-    iconVisible.classList.add("fa", "fa-trash-can","icons")
-    //iconHidden.classList.add("fa-solid", "fa-arrows-up-down-left-right", "crossed-arrows-icon", "icon-gallery")
-    
+    iconVisible.classList.add("fa", "fa-trash-can","icons", "icon1")
+    iconInvisible.classList.add("fa-solid", "fa-arrows-up-down-left-right", "icons", "icon2")
+    //setting of  display property for icons
+    iconVisible.style.display = "inline-block"
+   
+    iconInvisible.style.display = "inline-block"
+    iconInvisible.style.opacity = "0"
+    //addEventListener to make the icon appear and disappear
+    figure.addEventListener('mouseenter', () => {
+      iconInvisible.style.opacity = "1"
+    })
+    figure.addEventListener('mouseleave', () => {
+      iconInvisible.style.opacity = "0"
+    })
+
     // placer les éléments générés
     figure.append(img)
     figure.append(figcaption)
     figure.append(iconsContainer)
     iconsContainer.append(iconVisible)
-    //figure.append(iconHidden)
+    iconsContainer.append(iconInvisible)
     // ajouter les éléments dans le DOM
     galleryDiv.append(figure)
   }

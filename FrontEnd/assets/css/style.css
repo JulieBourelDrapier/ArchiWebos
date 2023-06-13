@@ -458,9 +458,23 @@ figure {
 .icons {
 color: white;
 background-color: #000;
-padding: 3px;
+padding: 4px;
 position: absolute;
 z-index: 1;
 top: 15px;
-right: 5px;
+border-radius: 2px;
+}
+
+.icon1 {
+	right: 5px;
+}
+
+.icon2 {
+	right: 30px;
+}
+
+.icons-container {
+	display: flex;
+	justify-content: space-between;
+	min-width: 50px;
 }
