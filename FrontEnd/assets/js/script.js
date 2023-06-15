@@ -17,7 +17,6 @@ function showHiddenElements() {
     connexionLink.addEventListener("click", logOut)
   }
 }
-
 //annonce variable
 const connexionLink = document.querySelector(".connexion-link")
 //puis fonction pour se déconnecter
@@ -106,11 +105,12 @@ function generateAndCreateGalleryModal(selector, categoryId = null) {
       iconsContainer.append(iconVisible)
       iconsContainer.append(iconInvisible)
     // ajouter les éléments dans le DOM
-    galleryDiv.append(figure)
+      galleryDiv.append(figure)
   }
 }
 
 
+  
 // création des boutons filtres + fonction filter 
 function filterImgEvent(event)
 {
@@ -235,15 +235,50 @@ async function createModal (e) {
 
 modalLink.addEventListener("click", createModal)
 
-//delete work
-function deleteWork(e) {
-  const trashIcon = document.getElementById("icon1")
-  trashIcon.addEventListener("click", event => {
-    const figureElement = event.target.closest("figure")
-    console.log("removed element", figureElement)
-    figureElement.remove()
-  })
+//delete photo
+function deleteWork() {
+  fetch ("http://localhost:5678/api/works/", {
+  method: "DELETE",
+  headers: {
+    "Content-Type": "application/json"
+  }
+})
+.then(response => {
+  if (!response.ok) {
+    throw new Error("Network response was not ok")
+  }
+  console.log("Photo deleted successfully")
+})
+.catch(error => {
+  console.error("There was a problem deleting the photo:", error)
+})
 }
+
+function deletePhoto() {
+  fetch ("http://localhost:5678/api/works/", {
+  method: "DELETE",
+  headers: {
+    "Content-Type": "application/json"
+  }
+})
+.then(response => {
+  if (!response.ok) {
+    throw new Error("Network response was not ok")
+  }
+  console.log("Photo deleted successfully")
+})
+.catch(error => {
+  console.error("There was a problem deleting the photo:", error)
+})
+}
+
+const icon1 = document.querySelector(".icon1")
+icon1.addEventListener("click", deletePhoto)
+
+
+
+
+
 //Fermer la modale
 function closeModal (e) {
   const modal = document.getElementById("modal1")
@@ -254,5 +289,4 @@ function addPhoto (e) {
   const modal = document.getElementById("modal1")
   
 }
-
 
