@@ -185,7 +185,8 @@ fetch("http://localhost:5678/api/categories/")
 .catch(error => {
   console.error(error)
 })
-		
+	
+
 //création dynamique de la modale
 const modalLink = document.getElementById("js-modal")
 
@@ -209,38 +210,13 @@ async function createModal (e) {
   modalSecondBtn.id = "js-modal-add-photo"
   modalSecondBtn.innerText = "Ajouter une photo"
   
-  modalSecondBtn.addEventListener("click", function() {
-    
-    const modalTitle2 = document.querySelector(".title-modal")
-    modalTitle2.innerText = "Ajout photo"
-
-    const modalGallery = document.querySelector(".modal-gallery")
-    
-    modalGallery.innerHTML = "tratartrtatrtse"
-    
-    const form = document.createElement("form")
-    const input = document.createElement("input")
-    input.type = "text"
-    form.appendChild(input)
-    const ttlBtn = document.createElement("button")
-    ttlBtn.textContent = "Titre"
-  
-    
-    const form2 = document.createElement("form")
-    const input2 = document.createElement("input")
-    input2.type = "text"
-    form2.appendChild(input2)
-    const catBtn = document.createElement("button")
-    catBtn.textContent = "Catégorie"
-
-    const validateBtn = document.querySelector(".js-modal-add-photo")
-    validateBtn.innerText = "valider"
-
-    form.appendChild(ttlBtn)
-    form2.appendChild(catBtn)
-    modalDiv.appendChild(validateBtn)
-    modalGallery.appendChild(form)
-  })
+  //effecer le contenu de la modal1 au click sur  modalSecondBtn ("js-modal-add-photo")
+  modalSecondBtn.addEventListener("click", clearModal)
+    function clearModal () {
+    //modif le visuel de la modale en del, add ou modifiant les éléments 
+    const modalAside = document.querySelector(".modal")
+    modalAside.innerText = ""
+  }
 
   modalDelete.classList.add("js-delete-gallery")
   modalDelete.innerText = "Supprimer la galerie"
