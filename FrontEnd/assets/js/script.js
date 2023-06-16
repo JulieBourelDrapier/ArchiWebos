@@ -57,9 +57,7 @@ function generateAndCreateGallery(selector, categoryId = null) {
     galleryDiv.append(figure)
   }
 }
-
-
-  
+ 
 // création des boutons filtres + fonction filter 
 function filterImgEvent(event)
 {
@@ -185,23 +183,20 @@ function configureModalElements(modalAside, modalDiv, modalFirstBtn, modalTitle,
   modalDiv.append(modalDelete);
   }
   
-  function addEventListenersToModalElements(modalFirstBtn, modalSecondBtn, modalDiv) {
-    modalSecondBtn.addEventListener("click", clearModal);
-    modalFirstBtn.addEventListener("click", closeModal);
-  }
-  
-  function clearModal() {
+function clearModal() {
     const modalDiv = document.querySelector(".modal-wrapper");
     modalDiv.innerText = "";
   }
-  function closeModal() {
+function closeModal() {
     const modalAside = document.querySelector(".modal");
     modalAside.remove();
   }
-  //function generateAndCreateGalleryModal("modal-gallery") {
-    //const gallery = document.getElementById("modal-gallery")
-  //}
-  function generateAndCreateGalleryModal(selector, categoryId = null) {
+function addEventListenersToModalElements(modalFirstBtn, modalSecondBtn) {
+    modalSecondBtn.addEventListener("click", clearModal);
+    modalFirstBtn.addEventListener("click", closeModal);
+  }
+ 
+function generateAndCreateGalleryModal(selector, categoryId = null) {
     const galleryDiv = document.getElementsByClassName(selector)[0]
     galleryDiv.innerHTML = ""
     let data
@@ -251,11 +246,65 @@ function configureModalElements(modalAside, modalDiv, modalFirstBtn, modalTitle,
         galleryDiv.append(figure)
     }
   }
-  
-  
+//Modal 2
+  const linkToModal2 = document.getElementById("js-modal-add-photo")
+  linkToModal2.addEventListener("click", createModal2)
+  async function createModal2 (e) {
+  //récup des éléments existants 
+  const modalAside = document.querySelector("#modal1")
+  const modalDiv = document.querySelector(".modal-wrapper")
+  const modalFirstBtn = document.querySelector(".js-modal-close")
+  const modalTitle = document.querySelector(".title-modal") 
+  modalTitle.innerText = "Ajout photo"
+  const modalSecondBtn = document.querySelector("#js-modal-add-photo")
+  modalSecondBtn.innerText = "+ ajouter photo"
+  //création des nouveaux éléments 
+  const modal2Arrow = document.createElement("i")
+  const modal2Div2 = document.createElement("div")
+  const landscapeIcon = document.createElement("i")
+  const modal2Form = document.createElement("form")
+  const modal2Input1 = document.createElement("input")
+  const modal2Input2 = document.createElement("input")
+  const modal2ValidateBtn = document.createElement("js-modal-validate")
 
+  //configurer
+  configureModal2Elements(modalAside, modalDiv, modalFirstBtn, modalTitle, modalSecondBtn, modal2Arrow, modal2Div2, landscapeIcon, modal2Form, modal2Input1, modal2Input2, modal2ValidateBtn)
+  
+  //addEventListener 
+  addEventListeners.ToModal2Elements(modalFirstBtn, modalSecondBtn, modal2ValidateBtn)
+}
+function configureModal2Elements(modal2Arrow, modal2Div2, landscapeIcon, modal2P, modal2Form, modal2Input1, modal2Input2, modal2ValidateBtn) {
+  modal2Arrow.classList.add("fa-solid", "fa-arrow-left")
+  modal2Div2.id="modal2-div2"
+  landscapeIcon.id = "modal2-landscape-icon"
+  modal2P.id = "modal2-p"
+  modal2Form.id = "modal2-form"
+  modal2Input1.id = "modal2-input1"
+  modal2Input2.id = "modal2-input2"
+  modal2ValidateBtn.id = "modal2-validate-btn"
+  modal2ValidateBtn.innerText = "valider"
+  
+  // Placer les éléments ds la modale
+  modalDiv.append(modal2Arrow)
+  modalDiv.append(modal2Title)
+  modalAside.append(modal2Div2)
+  modal2Div2.append(landscapeIcon)
+  modal2Div2.append(modalFirstBtn)
+  modal2Div2.append(modal2P)
+  modalDiv.append(modal2Form)
+  modalDiv.append(modal2Input1)
+  modalDiv.append(modal2Input2)
+  modalDiv.append(modal2ValidateBtn)
+  }
+function closeModal2() {
+    const modalAside = document.querySelector("#modal1");
+    modalAside.remove();
+  }
+function addEventListenersToModal2Elements(modal2CloseBtn, modal2AddPhotoBtn) {
+    modal2CloseBtn.addEventListener("click", closeModal2);
+    modal2AddPhotoBtn.addEventListener("click", addPhoto);
+  }
 //delete photo
-
 async function deletePhoto(e) {
   console.log("Photo deleted")
   fetch ("http://localhost:5678/api/works/1", {
@@ -274,18 +323,10 @@ async function deletePhoto(e) {
   console.error("There was a problem deleting the photo:", error)
 })
 }
-const trashIcon = document.querySelector(".icon1")
-trashIcon.addEventListener("click", deletePhoto)
-
-
-//Fermer la modale
-function closeModal (e) {
-  const modal = document.getElementById("modal1")
-  modal.remove()
-}
+  const trashIcon = document.querySelector(".icon1")
+  trashIcon.addEventListener("click", deletePhoto)
 
 function addPhoto (e) {
-  const modal = document.getElementById("modal1")
-  
+   
 }
 
