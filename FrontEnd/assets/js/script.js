@@ -58,57 +58,6 @@ function generateAndCreateGallery(selector, categoryId = null) {
   }
 }
 
-function generateAndCreateGalleryModal(selector, categoryId = null) {
-  const galleryDiv = document.getElementsByClassName(selector)[0]
-  galleryDiv.innerHTML = ""
-  let data
-  if(categoryId !== null) {
-    data = result.filter((img) => {
-      return Number.parseInt(categoryId) === img.categoryId
-    })
-  }
-  else {
-    data = result
-  }
-  for (let i = 0; i < data.length; i++) {
-    //générer les élements 
-      const figure         = document.createElement('figure')
-      const img            = document.createElement('img')
-      const iconsContainer = document.createElement('div')
-      const figcaption     = document.createElement('figcaption')
-      const iconVisible    = document.createElement('i')
-      const iconInvisible  = document.createElement('i')
-      //configurer
-      img.setAttribute('src', data[i].imageUrl)
-      img.setAttribute('alt', data[i].title)
-      figcaption.innerText = "éditer"
-      iconsContainer.classList.add("icons-container")
-      iconVisible.classList.add("fa", "fa-trash-can","icons", "icon1",)
-      iconInvisible.classList.add("fa-solid", "fa-arrows-up-down-left-right", "icons", "icon2")
-      //setting of  display property for icons
-      iconVisible.style.display = "inline-block"
-      iconInvisible.style.display = "inline-block"
-      iconInvisible.style.opacity = "0"
-      //addEventListener to make the icon appear and disappear
-      figure.addEventListener('mouseenter', () => {
-      iconInvisible.style.opacity = "1"
-      figure.style.transform = "scale(1.2)"
-    })
-      figure.addEventListener('mouseleave', () => {
-      iconInvisible.style.opacity = "0"
-      figure.style.transform = "scale(1)"
-    })
-      // placer les éléments générés
-      figure.append(img)
-      figure.append(figcaption)
-      figure.append(iconsContainer)
-      iconsContainer.append(iconVisible)
-      iconsContainer.append(iconInvisible)
-      // ajouter les éléments dans le DOM
-      galleryDiv.append(figure)
-  }
-}
-
 
   
 // création des boutons filtres + fonction filter 
@@ -184,11 +133,11 @@ fetch("http://localhost:5678/api/categories/")
 })
 .catch(error => {
   console.error(error)
-})
-	
+}) 
 
-//création dynamique de la modale
+//création dynamique de la modale refactorisée
 const modalLink = document.getElementById("js-modal")
+modalLink.addEventListener("click", createModal)
 
 async function createModal (e) {
   const modalAside = document.createElement("aside")
@@ -198,45 +147,112 @@ async function createModal (e) {
   const modalSecondBtn = document.createElement("button")
   const modalDelete = document.createElement("a")
   const modalGallery = document.createElement("div")
+
   //configurer
-  modalAside.id = "modal1"
-  modalAside.classList.add("modal")
-  modalDiv.classList.add("modal-wrapper", "js-modal-stop")
-  modalFirstBtn.classList.add("js-modal-close")
-  modalFirstBtn.innerText = "x"
-  modalTitle.classList.add("title-modal")
-  modalTitle.innerText = "Galerie photo"
-  modalGallery.classList.add("modal-gallery")
-  modalSecondBtn.id = "js-modal-add-photo"
-  modalSecondBtn.innerText = "Ajouter une photo"
+  configureModalElements(modalAside, modalDiv, modalFirstBtn, modalTitle, modalSecondBtn, modalDelete, modalGallery)
   
-  //effecer le contenu de la modal1 au click sur  modalSecondBtn ("js-modal-add-photo")
-  modalSecondBtn.addEventListener("click", clearModal)
-    function clearModal () {
-    //modif le visuel de la modale en del, add ou modifiant les éléments 
-    const modalAside = document.querySelector(".modal")
-    modalAside.innerText = ""
-  }
-
-  modalDelete.classList.add("js-delete-gallery")
-  modalDelete.innerText = "Supprimer la galerie"
-  modalDelete.href=""
-
-  //placer dans le dom
-  document.body.append(modalAside)
-  modalAside.append(modalDiv)
-  modalDiv.append(modalFirstBtn)
-  modalDiv.append(modalTitle)
-  modalDiv.append(modalGallery)
-  modalDiv.append(modalSecondBtn)
-  modalDiv.append(modalDelete)
-
+  //addEventListener 
+  addEventListenersToModalElements(modalFirstBtn, modalSecondBtn, modalDiv)
+  
+  //mettre les éléments de la modale dans le DOM
+  document.body.append(modalAside);
+  
+  //générer la galerie de la modale
   generateAndCreateGalleryModal("modal-gallery")
-
-  modalFirstBtn.addEventListener("click", closeModal)
 }
 
-modalLink.addEventListener("click", createModal)
+function configureModalElements(modalAside, modalDiv, modalFirstBtn, modalTitle, modalSecondBtn, modalDelete, modalGallery) {
+  modalAside.id = "modal1";
+  modalAside.classList.add("modal");
+  modalDiv.classList.add("modal-wrapper", "js-modal-stop");
+  modalFirstBtn.classList.add("js-modal-close");
+  modalFirstBtn.innerText = "x";
+  modalTitle.classList.add("title-modal");
+  modalTitle.innerText = "Galerie photo";
+  modalGallery.classList.add("modal-gallery");
+  modalSecondBtn.id = "js-modal-add-photo";
+  modalSecondBtn.innerText = "Ajouter une photo";
+  modalDelete.classList.add("js-delete-gallery");
+  modalDelete.innerText = "Supprimer la galerie";
+  modalDelete.href="";
+  
+  // Placer les éléments ds la modale
+  modalAside.append(modalDiv);
+  modalDiv.append(modalFirstBtn);
+  modalDiv.append(modalTitle);
+  modalDiv.append(modalGallery);
+  modalDiv.append(modalSecondBtn);
+  modalDiv.append(modalDelete);
+  }
+  
+  function addEventListenersToModalElements(modalFirstBtn, modalSecondBtn, modalDiv) {
+    modalSecondBtn.addEventListener("click", clearModal);
+    modalFirstBtn.addEventListener("click", closeModal);
+  }
+  
+  function clearModal() {
+    const modalDiv = document.querySelector(".modal-wrapper");
+    modalDiv.innerText = "";
+  }
+  function closeModal() {
+    const modalAside = document.querySelector(".modal");
+    modalAside.remove();
+  }
+  //function generateAndCreateGalleryModal("modal-gallery") {
+    //const gallery = document.getElementById("modal-gallery")
+  //}
+  function generateAndCreateGalleryModal(selector, categoryId = null) {
+    const galleryDiv = document.getElementsByClassName(selector)[0]
+    galleryDiv.innerHTML = ""
+    let data
+    if(categoryId !== null) {
+      data = result.filter((img) => {
+        return Number.parseInt(categoryId) === img.categoryId
+      })
+    }
+    else {
+      data = result
+    }
+    for (let i = 0; i < data.length; i++) {
+      //générer les élements 
+        const figure         = document.createElement('figure')
+        const img            = document.createElement('img')
+        const iconsContainer = document.createElement('div')
+        const figcaption     = document.createElement('figcaption')
+        const iconVisible    = document.createElement('i')
+        const iconInvisible  = document.createElement('i')
+        //configurer
+        img.setAttribute('src', data[i].imageUrl)
+        img.setAttribute('alt', data[i].title)
+        figcaption.innerText = "éditer"
+        iconsContainer.classList.add("icons-container")
+        iconVisible.classList.add("fa", "fa-trash-can","icons", "icon1",)
+        iconInvisible.classList.add("fa-solid", "fa-arrows-up-down-left-right", "icons", "icon2")
+        //setting of  display property for icons
+        iconVisible.style.display = "inline-block"
+        iconInvisible.style.display = "inline-block"
+        iconInvisible.style.opacity = "0"
+        //addEventListener to make the icon appear and disappear
+        figure.addEventListener('mouseenter', () => {
+        iconInvisible.style.opacity = "1"
+        figure.style.transform = "scale(1.2)"
+      })
+        figure.addEventListener('mouseleave', () => {
+        iconInvisible.style.opacity = "0"
+        figure.style.transform = "scale(1)"
+      })
+        // placer les éléments générés
+        figure.append(img)
+        figure.append(figcaption)
+        figure.append(iconsContainer)
+        iconsContainer.append(iconVisible)
+        iconsContainer.append(iconInvisible)
+        // ajouter les éléments dans le DOM
+        galleryDiv.append(figure)
+    }
+  }
+  
+  
 
 //delete photo
 
