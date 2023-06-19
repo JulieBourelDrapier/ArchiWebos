@@ -251,44 +251,44 @@ function generateAndCreateGalleryModal(selector, categoryId = null) {
   const modalDiv       = document.querySelector(".modal-wrapper.js-modal-stop")
   const modalFirstBtn  = document.querySelector(".js-modal-close")
   const modalTitle     = document.querySelector(".title-modal") 
-  const modalGallery   = document.querySelector(".modal-gallery")
   const modalSecondBtn = document.querySelector("#js-modal-add-photo")
   
   //création des nouveaux éléments 
   const controlDiv        = document.createElement("div")
-  const linkToGoBack      = document.createElement("a")
   const modal2Arrow       = document.createElement("i")
   const landscapeIcon     = document.createElement("i")
+  const photoSelectionDiv = document.createElement("div")
   const modal2Form        = document.createElement("form")
   const modal2Input1      = document.createElement("input")
   const modal2Input2      = document.createElement("input")
   const modal2ValidateBtn = document.createElement("js-modal-validate")
 
   //configurer
-  configureModal2Elements(modalAside, modalDiv, modalFirstBtn, modalTitle, modalGallery, modalSecondBtn, controlDiv, linkToGoBack, modal2Arrow, landscapeIcon, modal2Form, modal2Input1, modal2Input2, modal2ValidateBtn)
+  configureModal2Elements(modalAside, modalDiv, modalFirstBtn, modalTitle, photoSelectionDiv, modalSecondBtn, controlDiv, modal2Arrow, landscapeIcon, modal2Form, modal2Input1, modal2Input2, modal2ValidateBtn)
   
   //addEventListener 
-  addEventListeners.ToModal2Elements(linkToGoBack, modalFirstBtn, modalSecondBtn, modal2ValidateBtn)
+  addEventListeners.ToModal2Elements(modalFirstBtn, modalSecondBtn, modal2ValidateBtn)
 }
-function configureModal2Elements(modalAside, modalDiv, controlDiv, modalFirstBtn, linkToGoBack, arrowIcon, modalTitle, modalGallery,  landscapeIcon, modalSecondBtn, modal2P, modal2Form, modal2Input1, modal2Input2, modal2ValidateBtn) {
-  controlDiv.classList.add    ("control-div")
-  linkToGoBack.setAttribute   ("href", "#")
-  modalTitle.innerText        = "Ajout photo"
-  arrowIcon.classList.add     ("fa-sharp", "fa-solid", "fa-arrow-left", "icon3")
-  landscapeIcon.classList.add ("fa-sharp", "fa-solid", "fa-image-landscape", "icon4")
-  modalSecondBtn.innerText    = "+ ajouter photo"
-  modal2P.id                  = "modal2-p"
-  modal2Form.id               = "modal2-form"
-  modal2Input1.id             = "modal2-input1"
-  modal2Input2.id             = "modal2-input2"
-  modal2ValidateBtn.id        = "modal2-validate-btn"
-  modal2ValidateBtn.innerText = "Valider"
-  
+function configureModal2Elements(modalAside, modalDiv, controlDiv, modalFirstBtn, arrowIcon, modalTitle, modalGallery,  landscapeIcon, modalSecondBtn, modal2P, modal2Form, modal2Input1, modal2Input2, modal2ValidateBtn) {
+  controlDiv.classList.add       ("control-div")
+  modalTitle.innerText           = "Ajout photo"
+  arrowIcon.classList.add        ("fa-sharp", "fa-solid", "fa-arrow-left", "icon3")
+  photoSelectionDiv.classList.add("photo-selection-div")
+  landscapeIcon.classList.add    ("fa-sharp", "fa-solid", "fa-image-landscape", "icon4")
+  modalSecondBtn.innerText       = "+ ajouter photo"
+  modal2P.id                     = "modal2-p"
+  modal2Form.id                  = "modal2-form"
+  modal2Input1.id                = "modal2-input1"
+  modal2Input2.id                = "modal2-input2"
+  modal2ValidateBtn.id           = "modal2-validate-btn"
+  modal2ValidateBtn.innerText    = "Valider"
+
+
   // Placer les éléments ds la modale
   modalAside.append(modalDiv)
-  modalDiv.append(controlDiv, modalTitle, modalGallery, modal2Form, modal2ValidateBtn)
-  controlDiv.append(modalFirstBtn, linkToGoBack, arrowIcon)
-  modalGallery.append(landscapeIcon, modalSecondBtn, modal2P)
+  modalDiv.append(controlDiv, modalTitle, photoSelectionDiv, modal2Form, modal2ValidateBtn)
+  controlDiv.append(modalFirstBtn, modal2Arrow)
+  photoSelectionDiv.append(landscapeIcon, modalSecondBtn, modal2P)
   modal2Form.append(modal2Input1, modal2Input2)
   }
 
