@@ -3,22 +3,22 @@ const connexionLink = document.querySelector(".connexion-link")
 const modalLink = document.getElementById("js-modal")
 
 // ********** VARIABLES **********
-let result //intervient dans la récupération de la galerie
+let result // récupération de la galerie
 
 // ********** FUNCTIONS **********
+
 /**
  * Removes the token stored in localStorage and reloads the page.
- *
  * @param {Event} event - The event triggered when logging out.
  */
-function logOut(event) {
-  event.preventDefault() //prevent default
-  localStorage.removeItem("token")//unset localstorage 
-  location.reload()//location.href = "/FrontEnd/assets/login.js"
+function logOut(e) {
+  e.preventDefault();
+  localStorage.removeItem("token");
+  location.reload();
 }
+
 /**
  * Asynchronously fetches works and generates a gallery with the results.
- *
  * @return {Promise<void>} A Promise that resolves when the gallery is created.
  */
 async function FetchGallery() {
@@ -42,99 +42,90 @@ function showHiddenElements() {
   }
 }
 
-
 /**
  * Generates and creates a gallery based on the given selector and optional categoryId.
- *
  * @param {string} selector - The CSS selector of the div to create the gallery in.
  * @param {number} [categoryId=null] - The optional category ID to filter images by.
  */
 function generateGallery(selector, categoryId = null) {
-  const galleryDiv = document.getElementsByClassName(selector)[0]
-  galleryDiv.innerHTML = ''
-  let data
+  const galleryDiv = document.getElementsByClassName(selector)[0];
+  galleryDiv.innerHTML = '';
+  let data;
   if(categoryId !== null) {
     data = result.filter((img) => {
-      return Number.parseInt(categoryId) === img.categoryId
+      return Number.parseInt(categoryId) === img.categoryId;
     })
   }
   else {
-    data = result
+    data = result;
   }
   for (let i = 0; i < data.length; i++) {
     //générer les élements 
-    const figure     = document.createElement('figure')
-    const img        = document.createElement('img')
-    const figcaption = document.createElement('figcaption')
-
-    //configurer
-    img.setAttribute('src', data[i].imageUrl)
-    img.setAttribute('alt', data[i].title)
-    figcaption.innerText = data[i].title
-
-    // placer les éléments générés
-    figure.append(img)
-    figure.append(figcaption)
-
-    // ajouter les éléments dans le DOM
-    galleryDiv.append(figure)
+    const figure     = document.createElement('figure');
+    const img        = document.createElement('img');
+    const figcaption = document.createElement('figcaption');
+    //les configurer
+    img.setAttribute('src', data[i].imageUrl);
+    img.setAttribute('alt', data[i].title);
+    figcaption.innerText = data[i].title;
+    // les placer dans le DOM
+    figure.append(img);
+    figure.append(figcaption);
+    galleryDiv.append(figure);
   }
 }
  
-// création des boutons filtres + fonction filter 
-function filterImgEvent(event)
-{
-  generateGallery("gallery", event.target.getAttribute('filterCategoryId'))
-  document.querySelector("#filters .filterParent .filter.selected").classList.remove('selected')
-  event.target.classList.add("selected")
+function filterImgEvent(event){
+  generateGallery("gallery", event.target.getAttribute('filterCategoryId'));
+  document.querySelector("#filters .filterParent .filter .selected").classList.remove('selected');
+  event.target.classList.add("selected");
 }
 
-// récupérer dynamiquement la galerie via fetch
-//mettre ces éléments dans une fonction pour plus de clarté
+
 async function fetchWorks() {
   try {
-    const res = await fetch("http://localhost:5678/api/works/")
+    const res = await fetch("http://localhost:5678/api/works/");
     if(res.ok){
-      const data = await res.json()
-      return data
+      const data = await res.json();
+      return data;
     } else {
-      console.error('No data received')
+      console.error('No data received');
     }
   } catch(error) {
-    console.error(error)
-    console.error('Penser à fr npm start')
+    console.error(error);
+    console.error('Penser à fr npm start');
   }
 }
 
 
 async function createModal (e) {
-  const modalAside      = document.createElement("aside")
-  const modalDiv        = document.createElement("div")
-  const modalFirstBtn   = document.createElement("button")
-  const modalTitle      = document.createElement("h3")  
-  const modalSecondBtn  = document.createElement("button")
-  const modalDelete     = document.createElement("a")
-  const modalGallery    = document.createElement("div")
+  const modalAside      = document.createElement("aside");
+  const modalDiv        = document.createElement("div");
+  const closeBtn        = document.createElement("button");
+  const modalTitle      = document.createElement("h3");
+  const modalSecondBtn  = document.createElement("button");
+  const modalDelete     = document.createElement("a");
+  const modalGallery    = document.createElement("div");
 
   //configurer
-  configureModalElements(modalAside, modalDiv, modalFirstBtn, modalTitle, modalSecondBtn, modalDelete, modalGallery)
+  configureModalElements(modalAside, modalDiv, closeBtn, modalTitle, modalSecondBtn, modalDelete, modalGallery)
   
   //addEventListener 
-  addEventListenersToModalElements(modalFirstBtn, modalSecondBtn, modalDiv)
+  addEventListenersToModalElements(closeBtn, modalSecondBtn, modalDiv)
   
   //mettre les éléments de la modale dans le DOM
   document.body.append(modalAside);
   
   //générer la galerie de la modale
-  generateAndCreateGalleryModal("modal-gallery")
+  generateGalleryModal("modal-gallery")
 }
 
-function configureModalElements(modalAside, modalDiv, modalFirstBtn, modalTitle, modalSecondBtn, modalDelete, modalGallery) {
+function configureModalElements(modalAside, modalDiv, closeBtn, modalTitle, modalSecondBtn, modalDelete, modalGallery) {
   modalAside.id               = "modal1"
   modalAside.classList.add    ("modal")
   modalDiv.classList.add      ("modal-wrapper", "js-modal-stop")
-  modalFirstBtn.classList.add ("js-modal-close")
-  modalFirstBtn.innerText     = "x"
+  closeBtn.classList.add ("js-modal-close")
+  closeBtn.innerText     = "x"
   modalTitle.classList.add    ("title-modal")
   modalTitle.innerText        = "Galerie photo"
   modalGallery.classList.add  ("modal-gallery")
@@ -146,7 +137,7 @@ function configureModalElements(modalAside, modalDiv, modalFirstBtn, modalTitle,
   
   // Placer les éléments ds la modale
   modalAside.append(modalDiv);
-  modalDiv.append(modalFirstBtn, modalTitle, modalGallery, modalSecondBtn, modalDelete);
+  modalDiv.append(closeBtn, modalTitle, modalGallery, modalSecondBtn, modalDelete);
   }
   
 function clearModal() {
@@ -157,16 +148,16 @@ function closeModal() {
     const modalAside = document.querySelector(".modal")
     modalAside.remove()
   }
-function addEventListenersToModalElements(modalFirstBtn, modalSecondBtn) {
+function addEventListenersToModalElements(closeBtn, modalSecondBtn) {
     modalSecondBtn.addEventListener("click", createModal2);
-    modalFirstBtn.addEventListener("click", closeModal);
+    closeBtn.addEventListener("click", closeModal);
   }
  
   async function createModal2 (e) {
     //récup les éléments existants 
     const modalAside     = document.querySelector("#modal1")
     const modalDiv       = document.querySelector(".modal-wrapper.js-modal-stop")
-    const modalFirstBtn  = document.querySelector(".js-modal-close")
+    const closeBtn       = document.querySelector(".js-modal-close")
     const modalTitle     = document.querySelector(".title-modal") 
     const modalSecondBtn = document.querySelector("#js-modal-add-photo")
     
@@ -181,12 +172,12 @@ function addEventListenersToModalElements(modalFirstBtn, modalSecondBtn) {
     const modal2ValidateBtn = document.createElement("js-modal-validate")
   
     //configurer
-    configureModal2Elements(modalAside, modalDiv, modalFirstBtn, modalTitle, photoSelectionDiv, modalSecondBtn, controlDiv, modal2Arrow, landscapeIcon, modal2Form, modal2Input1, modal2Input2, modal2ValidateBtn)
+    configureModal2Elements(modalAside, modalDiv, closeBtn, modalTitle, photoSelectionDiv, modalSecondBtn, controlDiv, modal2Arrow, landscapeIcon, modal2Form, modal2Input1, modal2Input2, modal2ValidateBtn)
     
     //addEventListener 
-    addEventListeners.ToModal2Elements(modalFirstBtn, modalSecondBtn, modal2ValidateBtn)
+    addEventListeners.ToModal2Elements(closeBtn, modalSecondBtn, modal2ValidateBtn)
   }
-  function configureModal2Elements(modalAside, modalDiv, controlDiv, modalFirstBtn, arrowIcon, modalTitle, modalGallery,  landscapeIcon, modalSecondBtn, modal2P, modal2Form, modal2Input1, modal2Input2, modal2ValidateBtn) {
+  function configureModal2Elements(modalAside, modalDiv, controlDiv, closeBtn, arrowIcon, modalTitle, modalGallery,  landscapeIcon, modalSecondBtn, modal2P, modal2Form, modal2Input1, modal2Input2, modal2ValidateBtn) {
     controlDiv.classList.add       ("control-div")
     modalTitle.innerText           = "Ajout photo"
     arrowIcon.classList.add        ("fa-sharp", "fa-solid", "fa-arrow-left", "icon3")
@@ -200,11 +191,10 @@ function addEventListenersToModalElements(modalFirstBtn, modalSecondBtn) {
     modal2ValidateBtn.id           = "modal2-validate-btn"
     modal2ValidateBtn.innerText    = "Valider"
   
-  
     // Placer les éléments ds la modale
     modalAside.append(modalDiv)
     modalDiv.append(controlDiv, modalTitle, photoSelectionDiv, modal2Form, modal2ValidateBtn)
-    controlDiv.append(modalFirstBtn, modal2Arrow)
+    controlDiv.append(closeBtn, modal2Arrow)
     photoSelectionDiv.append(landscapeIcon, modalSecondBtn, modal2P)
     modal2Form.append(modal2Input1, modal2Input2)
     }
@@ -213,8 +203,8 @@ function addEventListenersToModalElements(modalFirstBtn, modalSecondBtn) {
       const modalAside = document.querySelector(".modal")
       modalAside.remove()
     }
-  function addEventListenersToModal2Elements(modalFirstBtn) {
-      modalFirstBtn.addEventListener("click", closeModal2)
+  function addEventListenersToModal2Elements(closeBtn) {
+      closeBtn.addEventListener("click", closeModal2)
   }
       //modalSecondBtn.addEventListener("click", addPhoto);
       //modal2ValidateBtn.addEventListener("click", NOTDefinedYET);
@@ -247,11 +237,10 @@ function addEventListenersToModalElements(modalFirstBtn, modalSecondBtn) {
   }
   
   
-  function addPhoto (e) {
-     
+  function addPhoto (e) {  
   }
   
-  function generateAndCreateGalleryModal(selector, categoryId = null) {
+  function generateGalleryModal(selector, categoryId = null) {
     const galleryDiv = document.getElementsByClassName(selector)[0]
     galleryDiv.innerHTML = ""
     let data
