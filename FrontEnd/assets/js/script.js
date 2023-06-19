@@ -188,7 +188,7 @@ function closeModal() {
     modalAside.remove();
   }
 function addEventListenersToModalElements(modalFirstBtn, modalSecondBtn) {
-    modalSecondBtn.addEventListener("click", clearModal);
+    modalSecondBtn.addEventListener("click", createModal2);
     modalFirstBtn.addEventListener("click", closeModal);
   }
  
@@ -294,12 +294,12 @@ function closeModal2() {
     const modalAside = document.querySelector(".modal");
     modalAside.remove();
   }
-function addEventListenersToModal2Elements(modalFirstBtn, modalSecondBtn, modal2ValidateBtn) {
+function addEventListenersToModal2Elements(modalFirstBtn) {
     modalFirstBtn.addEventListener("click", closeModal2);
+}
     //modalSecondBtn.addEventListener("click", addPhoto);
     //modal2ValidateBtn.addEventListener("click", toBeDefined);
-  }
-
+  
 //delete photo
 async function deletePhoto(e) {
   console.log("Photo deleted")
