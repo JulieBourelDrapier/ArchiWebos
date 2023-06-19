@@ -1,6 +1,7 @@
 // ********** CONSTANTS **********
 const connexionLink = document.querySelector(".connexion-link")
 const modalLink = document.getElementById("js-modal")
+const modalContainer = document.querySelector(".modal-wrapper.js-modal-stop")
 
 // ********** VARIABLES **********
 let result // récupération de la galerie
@@ -22,23 +23,23 @@ function logOut(e) {
  * @return {Promise<void>} A Promise that resolves when the gallery is created.
  */
 async function FetchGallery() {
-  result = await fetchWorks()
-  generateGallery("gallery")
+  result = await fetchWorks();
+  generateGallery("gallery");
 }
 
 /**
  * Shows hidden elements if user is authenticated and perform additional actions.
  */
 function showHiddenElements() { 
-  let hiddenElements = document.getElementsByClassName("hidden")
-  const token        = localStorage.getItem("token")
+  let hiddenElements = document.getElementsByClassName("hidden");
+  const token        = localStorage.getItem("token");
   if (token) {
       Array.from(hiddenElements).forEach((element) => {
-      element.classList.remove("hidden")
-      document.querySelector(".connexion-link").textContent ="logout"
-      document.getElementById("filters").setAttribute("style", "display:none")
+      element.classList.remove("hidden");
+      document.querySelector(".connexion-link").textContent ="logout";
+      document.getElementById("filters").setAttribute("style", "display:none");
     })
-    connexionLink.addEventListener("click", logOut)
+    connexionLink.addEventListener("click", logOut);
   }
 }
 
@@ -106,8 +107,8 @@ async function fetchWorks() {
 }
 
 /**
- * Asynchronously creates a modal with various elements. This function configures the modal elements and adds event
- * listeners to them. Finally, it appends the modal to the body of the document
+ * Asynchronously creates a modal with various elements. This function configures the modal elements
+ * and adds event listeners to them. Finally, it appends the modal to the body of the document
  * and generates the gallery of the modal.
  * @param {Event} e - The event that triggered the function.
  * @return {Promise<void>} - A promise that resolves when the modal is created.
@@ -161,12 +162,10 @@ function configureModalElements(modalAside, modalContainer, closeBtn, modalTitle
   
 /**
  * Clears the content of the modal container.
-
  * @param {none}
  * @return {void}
  */
 function clearModal() {
-  const modalContainer = document.querySelector(".modal-wrapper.js-modal-stop")
   modalContainer.innerText = ""
   }  
 
