@@ -100,18 +100,18 @@ async function fetchWorks() {
 
 async function createModal (e) {
   const modalAside      = document.createElement("aside");
-  const modalContainer       = document.createElement("div");
-  const closeBtn   = document.createElement("button");
+  const modalContainer  = document.createElement("div");
+  const closeBtn        = document.createElement("button");
   const modalTitle      = document.createElement("h3")  
-  const modalSecondBtn  = document.createElement("button")
+  const addPhotoBtn     = document.createElement("button")
   const modalDelete     = document.createElement("a")
   const modalGallery    = document.createElement("div")
 
   //configurer
-  configureModalElements(modalAside, modalContainer, closeBtn, modalTitle, modalSecondBtn, modalDelete, modalGallery)
+  configureModalElements(modalAside, modalContainer, closeBtn, modalTitle, addPhotoBtn, modalDelete, modalGallery)
   
   //addEventListener 
-  addEventListenersToModalElements(closeBtn, modalSecondBtn, modalContainer)
+  addEventListenersToModalElements(closeBtn, addPhotoBtn, modalContainer)
   
   //mettre les éléments de la modale dans le DOM
   document.body.append(modalAside);
@@ -120,24 +120,24 @@ async function createModal (e) {
   generateGalleryModal("modal-gallery")
 }
 
-function configureModalElements(modalAside, modalContainer, closeBtn, modalTitle, modalSecondBtn, modalDelete, modalGallery) {
+function configureModalElements(modalAside, modalContainer, closeBtn, modalTitle, addPhotoBtn, modalDelete, modalGallery) {
   modalAside.id               = "modal1"
   modalAside.classList.add    ("modal")
-  modalContainer.classList.add      ("modal-wrapper", "js-modal-stop")
-  closeBtn.classList.add ("js-modal-close")
-  closeBtn.innerText     = "x"
+  modalContainer.classList.add("modal-wrapper", "js-modal-stop")
+  closeBtn.classList.add      ("js-modal-close")
+  closeBtn.innerText          = "x"
   modalTitle.classList.add    ("title-modal")
   modalTitle.innerText        = "Galerie photo"
   modalGallery.classList.add  ("modal-gallery")
-  modalSecondBtn.id           = "js-modal-add-photo"
-  modalSecondBtn.innerText    = "Ajouter une photo"
+  addPhotoBtn.id           = "js-modal-add-photo"
+  addPhotoBtn.innerText    = "Ajouter une photo"
   modalDelete.classList.add   ("js-delete-gallery")
   modalDelete.innerText       = "Supprimer la galerie"
   modalDelete.href            = "#"
   
   // Placer les éléments ds la modale
   modalAside.append(modalContainer);
-  modalContainer.append(closeBtn, modalTitle, modalGallery, modalSecondBtn, modalDelete);
+  modalContainer.append(closeBtn, modalTitle, modalGallery, addPhotoBtn, modalDelete);
   }
   
 function clearModal() {
@@ -148,8 +148,8 @@ function closeModal() {
     const modalAside = document.querySelector(".modal")
     modalAside.remove()
   }
-function addEventListenersToModalElements(closeBtn, modalSecondBtn) {
-    modalSecondBtn.addEventListener("click", createModal2);
+function addEventListenersToModalElements(closeBtn, addPhotoBtn) {
+    addPhotoBtn.addEventListener("click", createModal2);
     closeBtn.addEventListener("click", closeModal);
   }
  
@@ -159,7 +159,7 @@ function addEventListenersToModalElements(closeBtn, modalSecondBtn) {
     const modalContainer        = document.querySelector(".modal-wrapper.js-modal-stop")
     const closeBtn  = document.querySelector(".js-modal-close")
     const modalTitle     = document.querySelector(".title-modal") 
-    const modalSecondBtn = document.querySelector("#js-modal-add-photo")
+    const addPhotoBtn = document.querySelector("#js-modal-add-photo")
     
     //création des nouveaux éléments 
     const controlDiv        = document.createElement("div")
@@ -172,18 +172,18 @@ function addEventListenersToModalElements(closeBtn, modalSecondBtn) {
     const modal2ValidateBtn = document.createElement("js-modal-validate")
   
     //configurer
-    configureModal2Elements(modalAside, modalContainer, closeBtn, modalTitle, photoSelectionDiv, modalSecondBtn, controlDiv, modal2Arrow, landscapeIcon, modal2Form, modal2Input1, modal2Input2, modal2ValidateBtn)
+    configureModal2Elements(modalAside, modalContainer, closeBtn, modalTitle, photoSelectionDiv, addPhotoBtn, controlDiv, modal2Arrow, landscapeIcon, modal2Form, modal2Input1, modal2Input2, modal2ValidateBtn)
     
     //addEventListener 
-    addEventListeners.ToModal2Elements(closeBtn, modalSecondBtn, modal2ValidateBtn)
+    addEventListeners.ToModal2Elements(closeBtn, addPhotoBtn, modal2ValidateBtn)
   }
-  function configureModal2Elements(modalAside, modalContainer, controlDiv, closeBtn, arrowIcon, modalTitle, modalGallery,  landscapeIcon, modalSecondBtn, modal2P, modal2Form, modal2Input1, modal2Input2, modal2ValidateBtn) {
+  function configureModal2Elements(modalAside, modalContainer, controlDiv, closeBtn, arrowIcon, modalTitle, modalGallery,  landscapeIcon, addPhotoBtn, modal2P, modal2Form, modal2Input1, modal2Input2, modal2ValidateBtn) {
     controlDiv.classList.add       ("control-div")
     modalTitle.innerText           = "Ajout photo"
     arrowIcon.classList.add        ("fa-sharp", "fa-solid", "fa-arrow-left", "icon3")
     photoSelectionDiv.classList.add("photo-selection-div")
     landscapeIcon.classList.add    ("fa-sharp", "fa-solid", "fa-image-landscape", "icon4")
-    modalSecondBtn.innerText       = "+ ajouter photo"
+    addPhotoBtn.innerText       = "+ ajouter photo"
     modal2P.id                     = "modal2-p"
     modal2Form.id                  = "modal2-form"
     modal2Input1.id                = "modal2-input1"
@@ -195,7 +195,7 @@ function addEventListenersToModalElements(closeBtn, modalSecondBtn) {
     modalAside.append(modalContainer)
     modalContainer.append(controlDiv, modalTitle, photoSelectionDiv, modal2Form, modal2ValidateBtn)
     controlDiv.append(closeBtn, modal2Arrow)
-    photoSelectionDiv.append(landscapeIcon, modalSecondBtn, modal2P)
+    photoSelectionDiv.append(landscapeIcon, addPhotoBtn, modal2P)
     modal2Form.append(modal2Input1, modal2Input2)
     }
   
@@ -206,7 +206,7 @@ function addEventListenersToModalElements(closeBtn, modalSecondBtn) {
   function addEventListenersToModal2Elements(closeBtn) {
     closeBtn.addEventListener("click", closeModal2)
   }
-      //modalSecondBtn.addEventListener("click", addPhoto);
+      //addPhotoBtn.addEventListener("click", addPhoto);
       //modal2ValidateBtn.addEventListener("click", NOTDefinedYET);
     
   //delete photo
