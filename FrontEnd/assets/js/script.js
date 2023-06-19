@@ -242,8 +242,9 @@ function generateAndCreateGalleryModal(selector, categoryId = null) {
         galleryDiv.append(figure)
 
       iconVisible.addEventListener("click", deletePhoto(data[i].id, img))
+      }
     }
-  }
+  
 //Modal 2
   const LinkToModal2 = document.getElementById("js-modal-add-photo")
   if (LinkToModal2 !== null) {
@@ -309,28 +310,29 @@ function addEventListenersToModal2Elements(modalFirstBtn) {
 //delete photo
 function deletePhoto(id, img) {
   return async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     e.stopPropagation()
     img.remove()
-    console.log("Photo deleting...")
+    console.log("Suppression en cours...")
     try {
       const response = await fetch ("http://localhost:5678/api/works/" + id, {
-      method: "DELETE",
-      headers: {
-        accept: '*/*',
-        "Authorization": `Bearer ${localStorage.getItem("token")}`
-      }
-    })
+        method: "DELETE",
+        headers: {
+          accept: '*/*',
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+      });
       if (!response.ok) {
-        throw new Error("Network response was not ok")
+        throw new Error("qqch n'a pas marché")
       }
-      console.log("Photo deleted successfully")
+      console.log("Photo supprimé avec succès")
     }
-  catch(error ){
-    console.error("There was a problem deleting the photo:", error)
-  }
+    catch(error) {
+      console.error("un pb est survenu au cours de la supp de la photo:", error)
+    }
   }
 }
+
 
 function addPhoto (e) {
    
