@@ -256,6 +256,7 @@ function generateAndCreateGalleryModal(selector, categoryId = null) {
   
   //création des nouveaux éléments 
   const controlDiv        = document.createElement("div")
+  const linkToGoBack      = document.createElement("a")
   const modal2Arrow       = document.createElement("i")
   const landscapeIcon     = document.createElement("i")
   const modal2Form        = document.createElement("form")
@@ -264,13 +265,14 @@ function generateAndCreateGalleryModal(selector, categoryId = null) {
   const modal2ValidateBtn = document.createElement("js-modal-validate")
 
   //configurer
-  configureModal2Elements(modalAside, modalDiv, modalFirstBtn, modalTitle, modalGallery, modalSecondBtn, controlDiv, modal2Arrow, landscapeIcon, modal2Form, modal2Input1, modal2Input2, modal2ValidateBtn)
+  configureModal2Elements(modalAside, modalDiv, modalFirstBtn, modalTitle, modalGallery, modalSecondBtn, controlDiv, linkToGoBack, modal2Arrow, landscapeIcon, modal2Form, modal2Input1, modal2Input2, modal2ValidateBtn)
   
   //addEventListener 
-  addEventListeners.ToModal2Elements(modalFirstBtn, modalSecondBtn, modal2ValidateBtn)
+  addEventListeners.ToModal2Elements(linkToGoBack, modalFirstBtn, modalSecondBtn, modal2ValidateBtn)
 }
-function configureModal2Elements(modalAside, modalDiv, controlDiv, modalFirstBtn, arrowIcon, modalTitle, modalGallery,  landscapeIcon, modalSecondBtn, modal2P, modal2Form, modal2Input1, modal2Input2, modal2ValidateBtn) {
+function configureModal2Elements(modalAside, modalDiv, controlDiv, modalFirstBtn, linkToGoBack, arrowIcon, modalTitle, modalGallery,  landscapeIcon, modalSecondBtn, modal2P, modal2Form, modal2Input1, modal2Input2, modal2ValidateBtn) {
   controlDiv.classList.add    ("control-div")
+  linkToGoBack.setAttribute   ("href", "#")
   modalTitle.innerText        = "Ajout photo"
   arrowIcon.classList.add     ("fa-sharp", "fa-solid", "fa-arrow-left", "icon3")
   landscapeIcon.classList.add ("fa-sharp", "fa-solid", "fa-image-landscape", "icon4")
@@ -285,7 +287,7 @@ function configureModal2Elements(modalAside, modalDiv, controlDiv, modalFirstBtn
   // Placer les éléments ds la modale
   modalAside.append(modalDiv)
   modalDiv.append(controlDiv, modalTitle, modalGallery, modal2Form, modal2ValidateBtn)
-  controlDiv.append(modalFirstBtn, modal2Arrow)
+  controlDiv.append(modalFirstBtn, linkToGoBack, arrowIcon)
   modalGallery.append(landscapeIcon, modalSecondBtn, modal2P)
   modal2Form.append(modal2Input1, modal2Input2)
   }
