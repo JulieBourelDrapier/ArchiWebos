@@ -104,11 +104,11 @@ async function createModal (e) {
   const closeBtn        = document.createElement("button");
   const modalTitle      = document.createElement("h3")  
   const addPhotoBtn     = document.createElement("button")
-  const modalDelete     = document.createElement("a")
+  const deleteGallery   = document.createElement("a")
   const modalGallery    = document.createElement("div")
 
   //configurer
-  configureModalElements(modalAside, modalContainer, closeBtn, modalTitle, addPhotoBtn, modalDelete, modalGallery)
+  configureModalElements(modalAside, modalContainer, closeBtn, modalTitle, addPhotoBtn, deleteGallery, modalGallery)
   
   //addEventListener 
   addEventListenersToModalElements(closeBtn, addPhotoBtn, modalContainer)
@@ -120,7 +120,7 @@ async function createModal (e) {
   generateGalleryModal("modal-gallery")
 }
 
-function configureModalElements(modalAside, modalContainer, closeBtn, modalTitle, addPhotoBtn, modalDelete, modalGallery) {
+function configureModalElements(modalAside, modalContainer, closeBtn, modalTitle, addPhotoBtn, deleteGallery, modalGallery) {
   modalAside.id               = "modal1"
   modalAside.classList.add    ("modal")
   modalContainer.classList.add("modal-wrapper", "js-modal-stop")
@@ -131,13 +131,13 @@ function configureModalElements(modalAside, modalContainer, closeBtn, modalTitle
   modalGallery.classList.add  ("modal-gallery")
   addPhotoBtn.id           = "js-modal-add-photo"
   addPhotoBtn.innerText    = "Ajouter une photo"
-  modalDelete.classList.add   ("js-delete-gallery")
-  modalDelete.innerText       = "Supprimer la galerie"
-  modalDelete.href            = "#"
+  deleteGallery.classList.add   ("js-delete-gallery")
+  deleteGallery.innerText       = "Supprimer la galerie"
+  deleteGallery.href            = "#"
   
   // Placer les éléments ds la modale
   modalAside.append(modalContainer);
-  modalContainer.append(closeBtn, modalTitle, modalGallery, addPhotoBtn, modalDelete);
+  modalContainer.append(closeBtn, modalTitle, modalGallery, addPhotoBtn, deleteGallery);
   }
   
 function clearModal() {
