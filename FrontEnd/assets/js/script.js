@@ -98,8 +98,8 @@ fetch("http://localhost:5678/api/categories/")
 .then(res => {
   if(res.ok){
     const ulFilters = document.createElement('ul')
-    const liAll = document.createElement('li')
-    const filters = document.getElementById('filters')
+    const liAll     = document.createElement('li')
+    const filters   = document.getElementById('filters')
     
     //configuer 
     liAll.innerText = 'Tous'
@@ -138,13 +138,13 @@ const modalLink = document.getElementById("js-modal")
 modalLink.addEventListener("click", createModal)
 
 async function createModal (e) {
-  const modalAside = document.createElement("aside")
-  const modalDiv = document.createElement("div")
-  const modalFirstBtn = document.createElement("button")
-  const modalTitle = document.createElement("h3")  
-  const modalSecondBtn = document.createElement("button")
-  const modalDelete = document.createElement("a")
-  const modalGallery = document.createElement("div")
+  const modalAside      = document.createElement("aside")
+  const modalDiv        = document.createElement("div")
+  const modalFirstBtn   = document.createElement("button")
+  const modalTitle      = document.createElement("h3")  
+  const modalSecondBtn  = document.createElement("button")
+  const modalDelete     = document.createElement("a")
+  const modalGallery    = document.createElement("div")
 
   //configurer
   configureModalElements(modalAside, modalDiv, modalFirstBtn, modalTitle, modalSecondBtn, modalDelete, modalGallery)
@@ -160,19 +160,19 @@ async function createModal (e) {
 }
 
 function configureModalElements(modalAside, modalDiv, modalFirstBtn, modalTitle, modalSecondBtn, modalDelete, modalGallery) {
-  modalAside.id = "modal1";
-  modalAside.classList.add("modal");
-  modalDiv.classList.add("modal-wrapper", "js-modal-stop");
-  modalFirstBtn.classList.add("js-modal-close");
-  modalFirstBtn.innerText = "x";
-  modalTitle.classList.add("title-modal");
-  modalTitle.innerText = "Galerie photo";
-  modalGallery.classList.add("modal-gallery");
-  modalSecondBtn.id = "js-modal-add-photo";
-  modalSecondBtn.innerText = "Ajouter une photo";
-  modalDelete.classList.add("js-delete-gallery");
-  modalDelete.innerText = "Supprimer la galerie";
-  modalDelete.href="";
+  modalAside.id               = "modal1"
+  modalAside.classList.add    ("modal")
+  modalDiv.classList.add      ("modal-wrapper", "js-modal-stop")
+  modalFirstBtn.classList.add ("js-modal-close")
+  modalFirstBtn.innerText     = "x"
+  modalTitle.classList.add    ("title-modal")
+  modalTitle.innerText        = "Galerie photo"
+  modalGallery.classList.add  ("modal-gallery")
+  modalSecondBtn.id           = "js-modal-add-photo"
+  modalSecondBtn.innerText    = "Ajouter une photo"
+  modalDelete.classList.add   ("js-delete-gallery")
+  modalDelete.innerText       = "Supprimer la galerie"
+  modalDelete.href            = "#"
   
   // Placer les éléments ds la modale
   modalAside.append(modalDiv);
@@ -180,15 +180,15 @@ function configureModalElements(modalAside, modalDiv, modalFirstBtn, modalTitle,
   }
   
 function clearModal() {
-    const modalDiv = document.querySelector(".modal-wrapper");
-    modalDiv.innerText = "";
+    const modalDiv     = document.querySelector(".modal-wrapper")
+    modalDiv.innerText = ""
   }
 function closeModal() {
-    const modalAside = document.querySelector(".modal");
-    modalAside.remove();
+    const modalAside = document.querySelector(".modal")
+    modalAside.remove()
   }
 function addEventListenersToModalElements(modalFirstBtn, modalSecondBtn) {
-    modalSecondBtn.addEventListener("click", clearModal, createModal2);
+    modalSecondBtn.addEventListener("click", createModal2);
     modalFirstBtn.addEventListener("click", closeModal);
   }
  
@@ -240,11 +240,15 @@ function generateAndCreateGalleryModal(selector, categoryId = null) {
         iconsContainer.append(iconInvisible)
         // ajouter les éléments dans le DOM
         galleryDiv.append(figure)
+
+      iconVisible.addEventListener("click", deletePhoto(data[i].id, img))
     }
   }
 //Modal 2
   const LinkToModal2 = document.getElementById("js-modal-add-photo")
-  LinkToModal2.addEventListener("click", createModal2)
+  if (LinkToModal2 !== null) {
+    LinkToModal2.addEventListener("click", createModal2)
+  }
   async function createModal2 (e) {
   //récup les éléments existants 
   const modalAside     = document.querySelector("#modal1")
@@ -293,36 +297,40 @@ function configureModal2Elements(modalAside, modalDiv, controlDiv, modalFirstBtn
   }
 
 function closeModal2() {
-    const modalAside = document.querySelector(".modal");
-    modalAside.remove();
+    const modalAside = document.querySelector(".modal")
+    modalAside.remove()
   }
 function addEventListenersToModal2Elements(modalFirstBtn) {
-    modalFirstBtn.addEventListener("click", closeModal2);
+    modalFirstBtn.addEventListener("click", closeModal2)
 }
     //modalSecondBtn.addEventListener("click", addPhoto);
-    //modal2ValidateBtn.addEventListener("click", toBeDefined);
+    //modal2ValidateBtn.addEventListener("click", NOTDefinedYET);
   
 //delete photo
-async function deletePhoto(e) {
-  console.log("Photo deleted")
-  fetch ("http://localhost:5678/api/works/1", {
-  method: "DELETE",
-  headers: {
-    "Content-Type": "application/json"
+function deletePhoto(id, img) {
+  return async (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    img.remove()
+    console.log("Photo deleting...")
+    try {
+      const response = await fetch ("http://localhost:5678/api/works/" + id, {
+      method: "DELETE",
+      headers: {
+        accept: '*/*',
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
+      }
+    })
+      if (!response.ok) {
+        throw new Error("Network response was not ok")
+      }
+      console.log("Photo deleted successfully")
+    }
+  catch(error ){
+    console.error("There was a problem deleting the photo:", error)
   }
-})
-.then(response => {
-  if (!response.ok) {
-    throw new Error("Network response was not ok")
   }
-  console.log("Photo deleted successfully")
-})
-.catch(error => {
-  console.error("There was a problem deleting the photo:", error)
-})
 }
-  const trashIcon = document.querySelector(".icon1")
-  trashIcon.addEventListener("click", deletePhoto)
 
 function addPhoto (e) {
    
