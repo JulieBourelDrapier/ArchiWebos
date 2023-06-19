@@ -188,7 +188,7 @@ function closeModal() {
     modalAside.remove();
   }
 function addEventListenersToModalElements(modalFirstBtn, modalSecondBtn) {
-    modalSecondBtn.addEventListener("click", createModal2);
+    modalSecondBtn.addEventListener("click", clearModal, createModal2);
     modalFirstBtn.addEventListener("click", closeModal);
   }
  
