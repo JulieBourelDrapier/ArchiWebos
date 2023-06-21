@@ -28,7 +28,7 @@ function authenticateUser(event) {
         res.json().then(data => {
           result = data
           localStorage.setItem("token", data.token) //(clé+valeur)
-          location.href = "/FrontEnd/index.html"
+          location.href = "index.html"
         })
     } else {
       alert("Erreur dans l’identifiant ou le mot de passe")

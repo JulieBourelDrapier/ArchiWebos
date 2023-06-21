@@ -132,7 +132,7 @@ function generateAndCreateGalleryModal(selector, categoryId = null) {
     // ajouter les éléments dans le DOM
       galleryDiv.append(figure);
     
-      iconVisible.addEventListener("click", deletePhoto(data[i].id, img));
+      iconVisible.addEventListener("click", deletePhoto(data[i].id, figure));
   }
 }
 
@@ -188,7 +188,6 @@ function deletePhoto(id, img) {
   return async (e) => {
     e.preventDefault();
     e.stopPropagation();
-    img.remove();
     console.log("Suppression en cours...");
     try {
       const response = await fetch ("http://localhost:5678/api/works/" + id, {
@@ -201,6 +200,7 @@ function deletePhoto(id, img) {
       if (!response.ok) {
         throw new Error("qqch n'a pas marché");
       }
+      img.remove();
       console.log("Photo supprimé avec succès");
     }
     catch(error) {
