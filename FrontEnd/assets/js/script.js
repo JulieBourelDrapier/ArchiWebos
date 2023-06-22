@@ -139,10 +139,7 @@ function generateAndCreateGalleryModal(selector, categoryId = null) {
   }
 }
 
-//function clearModal() {
-  //const modalDiv     = document.querySelector(".modal-wrapper")
-  //modalDiv.innerText = ""
-//}
+
 
 function closeModal (e) {
   const modal = document.getElementById("modal1");
@@ -154,6 +151,10 @@ function addPhoto (e) {
   modal.remove();
 }
 
+//function clearModal() {
+  //const modalDiv     = document.querySelector(".modal-wrapper")
+  //modalDiv.innerText = ""
+//}
 
 async function createSecondModal (e) {
   //récup les éléments existants 
@@ -165,7 +166,7 @@ async function createSecondModal (e) {
   const divNav            = document.createElement("div");
   const leftArrow         = document.createElement("i");
 
-  const applySectionDiv   = document.createElement("div");
+  const applySelectionDiv = document.createElement("div");
   const landscapeIcon     = document.createElement("i");
   const selectPhotoBtn    = document.createElement("btn");
   const suggSpan          = document.createElement("span");
@@ -176,7 +177,7 @@ async function createSecondModal (e) {
   const validateBtn       = document.createElement("js-modal-validate");
   
   //configurer
-  modalAside.id = modal2
+  modalAside.id =                "modal2";
   divNav.classList.add           ("div-nav");
   modalTitle.innerText             = "AJOUT PHOOOOOOOOOTO";
   leftArrow.classList.add        ("fa-sharp", "fa-solid", "fa-arrow-left", "icon3");
@@ -237,7 +238,7 @@ async function createModal (e) {
   generateAndCreateGalleryModal("modal-gallery");
   
   modalFirstBtn.addEventListener("click", closeModal);
-  secondModalLink.addEventListener("click", createSecondModal);
+  modalSecondBtn.addEventListener("click", createSecondModal);
 }
 
 function deletePhoto(id, img) {
@@ -272,6 +273,7 @@ function addPhoto (e) {
 showHiddenElements();
 
 FetchAndCreateGallery();
+
 
 //mettre ces éléments dans une fonction pour plus de clarté
 fetch("http://localhost:5678/api/categories/")
