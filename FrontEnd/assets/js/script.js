@@ -140,8 +140,10 @@ function generateAndCreateGalleryModal(selector, categoryId = null) {
 }
 
 function closeModal (e) {
-  const modal = document.getElementsByClassName("modal")[0];
+  console.log("close modal")
+  const modal = document.querySelector(".modal");
   modal.remove();
+  document.removeEventListener("click", closeModal);
 }
 
 function addPhoto (e) {
@@ -149,7 +151,27 @@ function addPhoto (e) {
   modal.remove();
 }
 
+async function createCategoriesOptions() {
+  try {
+    const res = await fetch("http://localhost:5678/api/categories/");
+    if(res.ok){
+      data = await res.json()
+      const opts = []
+      for (let i = 0; i < data.length; i++) {
+        opts.push(new Option(data[i].name, data[i].id))
+      }
+      return opts
+    } else {
+      console.error("No data received");
+    }
+  }
+  catch(error) {
+    console.error(error);
+  }
+}
+
 async function createSecondModal (e) {
+  // e.stopPropagation();
   //récup les éléments existants 
   const secondModalAside     = document.createElement("aside");
   const secondModalDiv       = document.createElement("div");
@@ -167,11 +189,7 @@ async function createSecondModal (e) {
   const titleLabel           = document.createElement("label");
   const titleInput           = document.createElement("input");
   const categoryLabel        = document.createElement("label");
-  const categoryInput        = document.createElement("input");
-  const categoryOptions      = document.createElement("datalist");
-  const option1              = document.createElement("option");
-  const option2              = document.createElement("option");
-  const option3              = document.createElement("option");
+  const categorySelect       = document.createElement("select");
   const submitBtn            = document.createElement("button");
 
   //configurer
@@ -198,34 +216,28 @@ async function createSecondModal (e) {
   titleInput.name                = "title";
   titleInput.required            = true;
   categoryLabel.textContent      = "Catégorie";
-  categoryInput.type             = "text";
-  categoryInput.name             = "category";
-  categoryInput.required         = true;
-  categoryOptions.id             = "category-options";
-  option1.value                  = "Objets";
-  option2.value                  = "Appartements";
-  option3.value                  = "Hôtels & Restaurants";
   submitBtn.classList.add        = "submit-btn";
   submitBtn.type                 = "submit";
   submitBtn.textContent          = "Valider";
 
-  //ajouter datalist
-  categoryInput.setAttribute("list", "category-options");
-
   //placer dans le dom
-  document.body.append(secondModalAside);
+  document.body.prepend(secondModalAside);
   secondModalAside.append(secondModalDiv);
   secondModalDiv.append(divNav, secondModalTitle, applySelectionDiv, form, submitBtn);
   divNav.append(leftArrow, secondModalFirstBtn);
   applySelectionDiv.append(landscapeIcon, secondModalSecondBtn, suggSpan);
-  form.append(titleLabel, titleInput, categoryLabel, categoryInput);
-  categoryOptions.append(option1, option2, option3);
+  const opts = await createCategoriesOptions();
+  opts.forEach(option => {
+    categorySelect.add(option);
+  })
+  form.append(titleLabel, titleInput, categoryLabel, categorySelect);
 
 
   leftArrow.addEventListener("click", createModal);
-  secondModalAside.addEventListener("click", closeModal);
+  secondModalDiv.addEventListener("click", stopPropagation);
+  window.addEventListener('click', clickOutsideModal, {capture: true});
   secondModalFirstBtn.addEventListener("click", closeModal);
-  //secondModalSecondBtn.addEventListener("click", addPhoto);
+  secondModalSecondBtn.addEventListener("click", addPhoto);
   
   //form.addEventListener("submit", createSecondModal);
   submitBtn.addEventListener("click", (event) => {
@@ -263,15 +275,30 @@ async function createModal (e) {
   modalDelete.innerText = "Supprimer la galerie";
   modalDelete.href="#";
   //placer dans le dom
-  document.body.append(modalAside);
+  document.body.prepend(modalAside);
   modalAside.append(modalDiv);
   modalDiv.append(modalFirstBtn, modalTitle, modalGallery, modalSecondBtn, modalDelete);
 
   generateAndCreateGalleryModal("modal-gallery");
   
   modalFirstBtn.addEventListener("click", closeModal);
-  modalAside.addEventListener("click", closeModal);
+  modalAside.addEventListener("click", stopPropagation);
+  window.addEventListener('click', clickOutsideModal, {capture: true});
+  // window.addEventListener('click', clickOutsideModal);
   modalSecondBtn.addEventListener("click", createSecondModal);
+}
+
+function clickOutsideModal(e) {
+  console.log(e.target)
+  if (!document.querySelector(".modal-wrapper.js-modal-stop")?.contains(e.target)) {
+    closeModal();
+    window.removeEventListener('click', clickOutsideModal, {capture: true})
+  }
+};
+
+function stopPropagation (e) {
+  console.log("stopPropagation");	
+  e.stopPropagation();
 }
 
 function deletePhoto(id, img) {
@@ -299,7 +326,33 @@ function deletePhoto(id, img) {
   }
 }
 
-function addPhoto (e) {   
+function submitPhoto (e) { 
+  console.log("fonction ajout photo");
+  const img = document.getElementsByClassName("img");
+  const titleInput = document.getElementById("title");
+  const categoryInput = document.getElementById("category");
+  fetch("http://localhost:5678/api/post/works"),
+  {
+    method: "POST",
+    headers: {
+      accept: '*/*',
+      "Authorization": `Bearer ${localStorage.getItem("token")}`
+    },
+    body: JSON.stringify({
+      img: img[0].src,
+      title: titleInput.value,
+      category: categoryInput.value
+    })
+  }
+  .then(res => {
+    if (res.ok) {
+      res.json().then(data => {
+        console.log(data);
+      })
+    } else {
+     alert("Une erreur est survenue");
+    }
+  });
 }
   
 //************** MAIN CODE ***************
@@ -342,20 +395,3 @@ fetch("http://localhost:5678/api/categories/")
 .catch(error => {
   console.error(error);
 })
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
