@@ -149,11 +149,6 @@ function addPhoto (e) {
   modal.remove();
 }
 
-//function clearModal() {
-  //const modalAside     = document.querySelector(".modal");
-  //modalDiv.innerText = ""
-//}
-
 async function createSecondModal (e) {
   //récup les éléments existants 
   const secondModalAside     = document.createElement("aside");
@@ -228,9 +223,17 @@ async function createSecondModal (e) {
 
 
   leftArrow.addEventListener("click", createModal);
-  //modalSecondBtn.addEventListener("click", addPhoto);
-  secondModalDiv.addEventListener("click", closeSecondModal);
-  submitBtn.addEventListener("click", function() {
+  secondModalAside.addEventListener("click", closeModal);
+  secondModalFirstBtn.addEventListener("click", closeModal);
+  //secondModalSecondBtn.addEventListener("click", addPhoto);
+  
+  form.addEventListener("submit", createSecondModal);
+  submitBtn.addEventListener("click", (event) => {
+    event.preventDefault();
+    if (titleInput.value === "" || categoryInput.value === "") {
+      alert("Veillez à remplir tous les champs s'il vous plait");
+    }
+    else
     form.submit();
   });
 }
