@@ -1,12 +1,15 @@
 //*************** variables **************
-let result;//intervient dans la récupération de la galerie
+let result;//récupère la galerie
 
 //************** constantes ***************
 const connexionLink = document.querySelector(".connexion-link");
 const modalLink = document.getElementById("js-modal");
+const secondModalLink = document.getElementById("js-modal-add-photo");
+
 
 //************** addEventListener ********
 modalLink.addEventListener("click", createModal);
+
 
 //************* fonctions ****************
 function showHiddenElements() { 
@@ -136,6 +139,73 @@ function generateAndCreateGalleryModal(selector, categoryId = null) {
   }
 }
 
+//function clearModal() {
+  //const modalDiv     = document.querySelector(".modal-wrapper")
+  //modalDiv.innerText = ""
+//}
+
+function closeModal (e) {
+  const modal = document.getElementById("modal1");
+  modal.remove();
+}
+
+function addPhoto (e) {
+  const modal = document.getElementById("modal1");
+  modal.remove();
+}
+
+
+async function createSecondModal (e) {
+  //récup les éléments existants 
+  const modalAside     = document.querySelector("#modal1");
+  const modalDiv       = document.querySelector(".modal-wrapper.js-modal-stop");
+  const modalFirstBtn  = document.querySelector(".js-modal-close");
+  const modalTitle     = document.querySelector(".title-modal");
+  //création des nouveaux éléments 
+  const divNav            = document.createElement("div");
+  const leftArrow         = document.createElement("i");
+
+  const applySectionDiv   = document.createElement("div");
+  const landscapeIcon     = document.createElement("i");
+  const selectPhotoBtn    = document.createElement("btn");
+  const suggSpan          = document.createElement("span");
+
+  const form              = document.createElement("form");
+  const firstInput        = document.createElement("input");
+  const secondInput       = document.createElement("input");
+  const validateBtn       = document.createElement("js-modal-validate");
+  
+  //configurer
+  modalAside.id = modal2
+  divNav.classList.add           ("div-nav");
+  modalTitle.innerText             = "AJOUT PHOOOOOOOOOTO";
+  leftArrow.classList.add        ("fa-sharp", "fa-solid", "fa-arrow-left", "icon3");
+  
+  applySelectionDiv.classList.add  ("apply-selection-div");
+  landscapeIcon.classList.add    ("fa-sharp", "fa-solid", "fa-image-landscape", "icon4");
+  selectPhotoBtn.classList.add   ("photo-selection-div");
+  selectPhotoBtn.innerText       = "+ ajouter photo";
+  suggSpan.id                    = "suggestions-span";
+
+  form.classList.add             = "form";
+  firstInput.classList.add       = "title-input";
+  secondInput.classList.add      = "cat-input";
+  validateBtn.classList.add      = "validate-btn";
+  validateBtn.innerText          = "Valider";
+    
+  // Placer les éléments ds la modale
+  document.body.append(modalAside);
+  modalAside.append(modalDiv);
+  modalDiv.append(divNav, modalTitle, applySelectionDiv, form, validateBtn);
+  divNav.append(modalFirstBtn, leftArrow);
+  applySelectionDiv.append(landscapeIcon, selectPhotoBtn, suggSpan);
+  form.append(firstInput, secondInput);
+
+  modalFirstBtn.addEventListener("click", closeModal);
+  
+  }
+
+
 async function createModal (e) {
   const modalAside     = document.createElement("aside");
   const modalDiv       = document.createElement("div");
@@ -158,7 +228,7 @@ async function createModal (e) {
   modalSecondBtn.addEventListener("click", addPhoto);
   modalDelete.classList.add("js-delete-gallery");
   modalDelete.innerText = "Supprimer la galerie";
-  modalDelete.href="";
+  modalDelete.href="#";
   //placer dans le dom
   document.body.append(modalAside);
   modalAside.append(modalDiv);
@@ -167,21 +237,7 @@ async function createModal (e) {
   generateAndCreateGalleryModal("modal-gallery");
   
   modalFirstBtn.addEventListener("click", closeModal);
-}
-
-//function clearModal() {
-  //const modalDiv     = document.querySelector(".modal-wrapper")
-  //modalDiv.innerText = ""
-//}
-
-function closeModal (e) {
-  const modal = document.getElementById("modal1");
-  modal.remove();
-}
-
-function addPhoto (e) {
-  const modal = document.getElementById("modal1");
-  modal.remove();
+  secondModalLink.addEventListener("click", createSecondModal);
 }
 
 function deletePhoto(id, img) {
@@ -211,8 +267,8 @@ function deletePhoto(id, img) {
 
 function addPhoto (e) {   
 }
-
-//************** MAIN  ***************
+  
+//************** MAIN CODE ***************
 showHiddenElements();
 
 FetchAndCreateGallery();
@@ -252,52 +308,9 @@ fetch("http://localhost:5678/api/categories/")
   console.error(error);
 })
 
-//Modal 2
-const linkToSecondModal = document.getElementById("js-modal-add-photo");
-if (linkToSecondModal !== null) {
-  linkToSecondModal.addEventListener("click", createSecondModal);
-}
 
-async function createSecondModal (e) {
-//récup les éléments existants 
-const modalAside     = document.querySelector("#modal1");
-const modalDiv       = document.querySelector(".modal-wrapper.js-modal-stop");
-const modalFirstBtn  = document.querySelector(".js-modal-close");
-const modalTitle     = document.querySelector(".title-modal");
-const modalSecondBtn = document.querySelector("#js-modal-add-photo");
 
-//création des nouveaux éléments 
-const controlDiv        = document.createElement("div");
-const modal2Arrow       = document.createElement("i");
-const landscapeIcon     = document.createElement("i");
-const photoSelectionDiv = document.createElement("div");
-const modal2Form        = document.createElement("form");
-const modal2Input1      = document.createElement("input");
-const modal2Input2      = document.createElement("input");
-const modal2ValidateBtn = document.createElement("js-modal-validate");
-
-//configurer
-  controlDiv.classList.add       ("control-div");
-  modalTitle.innerText           = "Ajout photo";
-  arrowIcon.classList.add        ("fa-sharp", "fa-solid", "fa-arrow-left", "icon3");
-  photoSelectionDiv.classList.add("photo-selection-div");
-  landscapeIcon.classList.add    ("fa-sharp", "fa-solid", "fa-image-landscape", "icon4");
-  modalSecondBtn.innerText       = "+ ajouter photo";
-  modal2P.id                     = "modal2-p";
-  modal2Form.id                  = "modal2-form";
-  modal2Input1.id                = "modal2-input1";
-  modal2Input2.id                = "modal2-input2";
-  modal2ValidateBtn.id           = "modal2-validate-btn";
-  modal2ValidateBtn.innerText    = "Valider";
-  
-  // Placer les éléments ds la modale
-  modalAside.append(modalDiv);
-  modalDiv.append(controlDiv, modalTitle, photoSelectionDiv, modal2Form, modal2ValidateBtn);
-  controlDiv.append(modalFirstBtn, modal2Arrow);
-  photoSelectionDiv.append(landscapeIcon, modalSecondBtn, modal2P);
-  modal2Form.append(modal2Input1, modal2Input2);
-}
-
+ 
 
 
 
