@@ -215,7 +215,7 @@ nav li {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#log-btn, #js-modal-add-photo {
+#log-btn, #js-modal-add-photo, #js-second-modal-add-photo, .submit-btn {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -408,13 +408,16 @@ gap: 25px;
 	text-align: center;
 }
 
-.js-modal-close {
+.js-modal-close, .js-second-modal-close {
 	border: none;
 	background-color: #fff;
 	font-size: 23px;
-	padding-top: 12px;
 	padding-bottom: 10px;
+}
+
+.js-modal-close {
 	padding-left: 585px;
+	padding-top: 12px;
 }
 
 .title-modal {
@@ -478,4 +481,63 @@ border-radius: 2px;
 	display: flex;
 	justify-content: space-between;
 	min-width: 50px;
+}
+
+/*second modal*/
+.div-nav {
+	display: flex;
+	justify-content: space-between;
+	padding: 30px;
+}
+
+.icon3 {
+	font-size: 1.2em;
+	text-align: center;
+	padding-top: 6px;
+}
+
+.js-second-modal-close {
+	padding-top: 0px;
+}
+
+#js-second-modal-add-photo {
+	color: #306685;
+	background-color: #CBD6DC;
+	margin: 0 auto;
+	width: 180px;
+	height: 36px;
+	font-weight: 500;
+	font-size: 14px;
+}
+
+.apply-selection-div {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background : #E8F1F6;
+	margin: 40px;
+	min-width: 420px;
+	padding: 15px;
+	gap: 10px;
+}
+
+.icon4 {
+	font-size: 4em;
+	color: #CBD6DC;
+	font-weight: lighter;
+}
+
+#suggestions-span {
+	font-size: 10px;
+	font-weight: 400;
+	color: #444444;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	margin: 20px;
+	padding: 20px;
+	gap: 20px;
 }

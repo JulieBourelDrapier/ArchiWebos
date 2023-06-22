@@ -114,17 +114,17 @@ function generateAndCreateGalleryModal(selector, categoryId = null) {
     iconVisible.classList.add("fa", "fa-trash-can","icons", "icon1");
     iconInvisible.classList.add("fa-solid", "fa-arrows-up-down-left-right", "icons", "icon2");
     //setting of  display property for icons
-      iconVisible.style.display = "inline-block";
+      iconVisible.style.display   = "inline-block";
       iconInvisible.style.display = "inline-block";
       iconInvisible.style.opacity = "0";
     //addEventListener to make the icon appear and disappear
       figure.addEventListener('mouseenter', () => {
       iconInvisible.style.opacity = "1";
-      figure.style.transform = "scale(1.2)";
+      figure.style.transform      = "scale(1.2)";
     })
       figure.addEventListener('mouseleave', () => {
       iconInvisible.style.opacity = "0";
-      figure.style.transform = "scale(1)";
+      figure.style.transform      = "scale(1)";
     })
     // placer les éléments générés
       figure.append(img);
@@ -139,8 +139,6 @@ function generateAndCreateGalleryModal(selector, categoryId = null) {
   }
 }
 
-
-
 function closeModal (e) {
   const modal = document.getElementById("modal1");
   modal.remove();
@@ -152,59 +150,90 @@ function addPhoto (e) {
 }
 
 //function clearModal() {
-  //const modalDiv     = document.querySelector(".modal-wrapper")
+  //const modalAside     = document.querySelector(".modal");
   //modalDiv.innerText = ""
 //}
 
 async function createSecondModal (e) {
   //récup les éléments existants 
-  const modalAside     = document.querySelector("#modal1");
-  const modalDiv       = document.querySelector(".modal-wrapper.js-modal-stop");
-  const modalFirstBtn  = document.querySelector(".js-modal-close");
-  const modalTitle     = document.querySelector(".title-modal");
-  //création des nouveaux éléments 
-  const divNav            = document.createElement("div");
-  const leftArrow         = document.createElement("i");
+  const secondModalAside     = document.createElement("aside");
+  const secondModalDiv       = document.createElement("div");
+  const divNav               = document.createElement("div");
+  const leftArrow            = document.createElement("i");
+  const secondModalFirstBtn  = document.createElement("button");
+  const secondModalTitle     = document.createElement("h3"); 
+  const applySelectionDiv    = document.createElement("div");
+  const landscapeIcon        = document.createElement("i");
+  const secondModalSecondBtn = document.createElement("button");
+  const suggSpan             = document.createElement("span");
 
-  const applySelectionDiv = document.createElement("div");
-  const landscapeIcon     = document.createElement("i");
-  const selectPhotoBtn    = document.createElement("btn");
-  const suggSpan          = document.createElement("span");
+  //ELEMENTS DU FORMULAIRE
+  const form                 = document.createElement("form");
+  const titleLabel           = document.createElement("label");
+  const titleInput           = document.createElement("input");
+  const categoryLabel        = document.createElement("label");
+  const categoryInput        = document.createElement("input");
+  const categoryOptions      = document.createElement("datalist");
+  const option1              = document.createElement("option");
+  const option2              = document.createElement("option");
+  const option3              = document.createElement("option");
+  const submitBtn            = document.createElement("button");
 
-  const form              = document.createElement("form");
-  const firstInput        = document.createElement("input");
-  const secondInput       = document.createElement("input");
-  const validateBtn       = document.createElement("js-modal-validate");
-  
   //configurer
-  modalAside.id =                "modal2";
-  divNav.classList.add           ("div-nav");
-  modalTitle.innerText             = "AJOUT PHOOOOOOOOOTO";
-  leftArrow.classList.add        ("fa-sharp", "fa-solid", "fa-arrow-left", "icon3");
-  
-  applySelectionDiv.classList.add  ("apply-selection-div");
-  landscapeIcon.classList.add    ("fa-sharp", "fa-solid", "fa-image-landscape", "icon4");
-  selectPhotoBtn.classList.add   ("photo-selection-div");
-  selectPhotoBtn.innerText       = "+ ajouter photo";
-  suggSpan.id                    = "suggestions-span";
+  secondModalAside.id               = "modal2";
+  secondModalAside.classList.add    ("modal");
+  secondModalDiv.classList.add      ("modal-wrapper", "js-modal-stop");
+  divNav.classList.add              ("div-nav");
+  leftArrow.classList.add           ("fa-sharp", "fa-solid", "fa-arrow-left", "icon3");
+  secondModalFirstBtn.classList.add ("js-second-modal-close");
+  secondModalFirstBtn.innerText     = "x";
+  secondModalTitle.classList.add    ("title-modal");
+  secondModalTitle.innerText        = "Ajout photo";
+  applySelectionDiv.classList.add   ("apply-selection-div");
+  landscapeIcon.classList.add       ("fa-regular", "fa-image", "icon4");
+  secondModalSecondBtn.id           = "js-second-modal-add-photo";
+  secondModalSecondBtn.innerText    = "+ Ajouter photo";
+  suggSpan.id                       = "suggestions-span";
+  suggSpan.innerText                = "jpg, png : 4mo max";
 
-  form.classList.add             = "form";
-  firstInput.classList.add       = "title-input";
-  secondInput.classList.add      = "cat-input";
-  validateBtn.classList.add      = "validate-btn";
-  validateBtn.innerText          = "Valider";
-    
-  // Placer les éléments ds la modale
-  document.body.append(modalAside);
-  modalAside.append(modalDiv);
-  modalDiv.append(divNav, modalTitle, applySelectionDiv, form, validateBtn);
-  divNav.append(modalFirstBtn, leftArrow);
-  applySelectionDiv.append(landscapeIcon, selectPhotoBtn, suggSpan);
-  form.append(firstInput, secondInput);
+  //CONFIG DES ELEMENTS EN LIEN AVEC LE FORMULAIRE
+  form.classList.add             = "second-modal-form";
+  titleLabel.textContent         = "Titre";
+  titleInput.type                = "text";
+  titleInput.name                = "title";
+  titleInput.required            = true;
+  categoryLabel.textContent      = "Catégorie";
+  categoryInput.type             = "text";
+  categoryInput.name             = "category";
+  categoryInput.required         = true;
+  categoryOptions.id             = "category-options";
+  option1.value                  = "Objets";
+  option2.value                  = "Appartements";
+  option3.value                  = "Hôtels & Restaurants";
+  submitBtn.classList.add        = "submit-btn";
+  submitBtn.type                 = "submit";
+  submitBtn.textContent          = "Valider";
 
-  modalFirstBtn.addEventListener("click", closeModal);
-  
-  }
+  //ajouter datalist
+  categoryInput.setAttribute("list", "category-options");
+
+  //placer dans le dom
+  document.body.append(secondModalAside);
+  secondModalAside.append(secondModalDiv);
+  secondModalDiv.append(divNav, secondModalTitle, applySelectionDiv, form, submitBtn);
+  divNav.append(leftArrow, secondModalFirstBtn);
+  applySelectionDiv.append(landscapeIcon, secondModalSecondBtn, suggSpan);
+  form.append(titleLabel, titleInput, categoryLabel, categoryInput);
+  categoryOptions.append(option1, option2, option3);
+
+
+  leftArrow.addEventListener("click", createModal);
+  //modalSecondBtn.addEventListener("click", addPhoto);
+  secondModalDiv.addEventListener("click", closeSecondModal);
+  submitBtn.addEventListener("click", function() {
+    form.submit();
+  });
+}
 
 
 async function createModal (e) {
@@ -238,7 +267,8 @@ async function createModal (e) {
   generateAndCreateGalleryModal("modal-gallery");
   
   modalFirstBtn.addEventListener("click", closeModal);
-  modalSecondBtn.addEventListener("click", createSecondModal);
+  modalAside.addEventListener("click", closeModal);
+  modalSecondBtn.addEventListener("click", createSecondModal, closeModal);
 }
 
 function deletePhoto(id, img) {
