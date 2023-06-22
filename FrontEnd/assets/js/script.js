@@ -140,7 +140,7 @@ function generateAndCreateGalleryModal(selector, categoryId = null) {
 }
 
 function closeModal (e) {
-  const modal = document.getElementById("modal1");
+  const modal = document.getElementsByClassName("modal")[0];
   modal.remove();
 }
 
@@ -227,11 +227,11 @@ async function createSecondModal (e) {
   secondModalFirstBtn.addEventListener("click", closeModal);
   //secondModalSecondBtn.addEventListener("click", addPhoto);
   
-  form.addEventListener("submit", createSecondModal);
+  //form.addEventListener("submit", createSecondModal);
   submitBtn.addEventListener("click", (event) => {
     event.preventDefault();
     if (titleInput.value === "" || categoryInput.value === "") {
-      alert("Veillez à remplir tous les champs s'il vous plait");
+      alert("Veuillez remplir tous les champs");
     }
     else
     form.submit();
@@ -271,7 +271,7 @@ async function createModal (e) {
   
   modalFirstBtn.addEventListener("click", closeModal);
   modalAside.addEventListener("click", closeModal);
-  modalSecondBtn.addEventListener("click", createSecondModal, closeModal);
+  modalSecondBtn.addEventListener("click", createSecondModal);
 }
 
 function deletePhoto(id, img) {
