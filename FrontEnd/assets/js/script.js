@@ -224,6 +224,7 @@ async function createSecondModal (e) {
   titleInput.required               = true;
   categoryLabel.textContent         = "Catégorie";
   submitBtn.classList.add           = "submit-btn";
+  submitBtn.id                      = "validate-btn";
   submitBtn.type                    = "submit";
   submitBtn.textContent             = "Valider";
 
