@@ -155,8 +155,8 @@ async function createCategoriesOptions() {
   try {
     const res = await fetch("http://localhost:5678/api/categories/");
     if(res.ok){
-      data = await res.json()
-      const opts = []
+      const data = await res.json()
+      const opts = [new Option ("","")];
       for (let i = 0; i < data.length; i++) {
         opts.push(new Option(data[i].name, data[i].id))
       }
@@ -179,7 +179,6 @@ async function createSecondModal (e) {
   const leftArrow            = document.createElement("i");
   const secondModalFirstBtn  = document.createElement("button");
   const secondModalTitle     = document.createElement("h3"); 
-
   //ELEMENTS DU FORMULAIRE
   const form                 = document.createElement("form");
   const applySelectionDiv    = document.createElement("div");
@@ -192,6 +191,7 @@ async function createSecondModal (e) {
   const titleInput           = document.createElement("input");
   const categoryLabel        = document.createElement("label");
   const categorySelect       = document.createElement("select");
+  const borderDiv            = document.createElement("div");
   const submitBtn            = document.createElement("button");
   //configurer
   secondModalAside.id               = "modal2";
@@ -216,11 +216,15 @@ async function createSecondModal (e) {
   addImageLabel.htmlFor             = "image-input";
   suggSpan.id                       = "suggestions-span";
   suggSpan.innerText                = "jpg, png : 4mo max";
+  titleLabel.id                     = "title-label";
   titleLabel.textContent            = "Titre";
+  titleInput.id                     = "title-input";
   titleInput.type                   = "text";
   titleInput.name                   = "title";
   titleInput.required               = true;
+  categorySelect.id                 = "category-select";
   categoryLabel.textContent         = "Catégorie";
+  borderDiv.id                      = "border-div"; 
   submitBtn.classList.add           = "submit-btn";
   submitBtn.id                      = "validate-btn";
   submitBtn.type                    = "submit";
@@ -235,7 +239,7 @@ async function createSecondModal (e) {
   opts.forEach(option => {
     categorySelect.add(option);
   })
-  form.append(applySelectionDiv, titleLabel, titleInput, categoryLabel, categorySelect, submitBtn);
+  form.append(applySelectionDiv, titleLabel, titleInput, categoryLabel, categorySelect, borderDiv, submitBtn);
 
 
   leftArrow.addEventListener("click", createModal);
