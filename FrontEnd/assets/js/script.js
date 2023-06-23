@@ -179,13 +179,15 @@ async function createSecondModal (e) {
   const leftArrow            = document.createElement("i");
   const secondModalFirstBtn  = document.createElement("button");
   const secondModalTitle     = document.createElement("h3"); 
-  const applySelectionDiv    = document.createElement("div");
-  const landscapeIcon        = document.createElement("i");
-  const secondModalSecondBtn = document.createElement("button");
-  const suggSpan             = document.createElement("span");
 
   //ELEMENTS DU FORMULAIRE
   const form                 = document.createElement("form");
+  const applySelectionDiv    = document.createElement("div");
+  const landscapeIcon        = document.createElement("i");
+  const secondModalSecondBtn = document.createElement("button");
+  const addImageLabel        = document.createElement("label");
+  const addImageInput        = document.createElement("input");
+  const suggSpan             = document.createElement("span");
   const titleLabel           = document.createElement("label");
   const titleInput           = document.createElement("input");
   const categoryLabel        = document.createElement("label");
@@ -202,35 +204,40 @@ async function createSecondModal (e) {
   secondModalFirstBtn.innerText     = "x";
   secondModalTitle.classList.add    ("title-modal");
   secondModalTitle.innerText        = "Ajout photo";
+  
+  //CONFIG DES ELEMENTS EN LIEN AVEC LE FORMULAIRE
+  form.classList.add                = "second-modal-form";
   applySelectionDiv.classList.add   ("apply-selection-div");
   landscapeIcon.classList.add       ("fa-regular", "fa-image", "icon4");
   secondModalSecondBtn.id           = "js-second-modal-add-photo";
-  secondModalSecondBtn.innerText    = "+ Ajouter photo";
+  secondModalSecondBtn.textContent  = "+ Ajouter photo";
+  addImageInput.type                = "file";
+  addImageInput.id                  = "image-input";
+  addImageInput.style.display       = "none";
+  addImageLabel.textContent         = "";
+  addImageLabel.htmlFor             = "image-input";
   suggSpan.id                       = "suggestions-span";
   suggSpan.innerText                = "jpg, png : 4mo max";
-
-  //CONFIG DES ELEMENTS EN LIEN AVEC LE FORMULAIRE
-  form.classList.add             = "second-modal-form";
-  titleLabel.textContent         = "Titre";
-  titleInput.type                = "text";
-  titleInput.name                = "title";
-  titleInput.required            = true;
-  categoryLabel.textContent      = "Catégorie";
-  submitBtn.classList.add        = "submit-btn";
-  submitBtn.type                 = "submit";
-  submitBtn.textContent          = "Valider";
+  titleLabel.textContent            = "Titre";
+  titleInput.type                   = "text";
+  titleInput.name                   = "title";
+  titleInput.required               = true;
+  categoryLabel.textContent         = "Catégorie";
+  submitBtn.classList.add           = "submit-btn";
+  submitBtn.type                    = "submit";
+  submitBtn.textContent             = "Valider";
 
   //placer dans le dom
   document.body.prepend(secondModalAside);
   secondModalAside.append(secondModalDiv);
   secondModalDiv.append(divNav, secondModalTitle, applySelectionDiv, form, submitBtn);
   divNav.append(leftArrow, secondModalFirstBtn);
-  applySelectionDiv.append(landscapeIcon, secondModalSecondBtn, suggSpan);
+  applySelectionDiv.append(landscapeIcon, secondModalSecondBtn, addImageInput, addImageLabel, suggSpan);
   const opts = await createCategoriesOptions();
   opts.forEach(option => {
     categorySelect.add(option);
   })
-  form.append(titleLabel, titleInput, categoryLabel, categorySelect);
+  form.append(applySelectionDiv, titleLabel, titleInput, categoryLabel, categorySelect);
 
 
   leftArrow.addEventListener("click", createModal);
