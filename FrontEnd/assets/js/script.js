@@ -193,7 +193,6 @@ async function createSecondModal (e) {
   const categoryLabel        = document.createElement("label");
   const categorySelect       = document.createElement("select");
   const submitBtn            = document.createElement("button");
-
   //configurer
   secondModalAside.id               = "modal2";
   secondModalAside.classList.add    ("modal");
@@ -204,7 +203,6 @@ async function createSecondModal (e) {
   secondModalFirstBtn.innerText     = "x";
   secondModalTitle.classList.add    ("title-modal");
   secondModalTitle.innerText        = "Ajout photo";
-  
   //CONFIG DES ELEMENTS EN LIEN AVEC LE FORMULAIRE
   form.classList.add                = "second-modal-form";
   applySelectionDiv.classList.add   ("apply-selection-div");
@@ -227,18 +225,17 @@ async function createSecondModal (e) {
   submitBtn.id                      = "validate-btn";
   submitBtn.type                    = "submit";
   submitBtn.textContent             = "Valider";
-
   //placer dans le dom
   document.body.prepend(secondModalAside);
   secondModalAside.append(secondModalDiv);
-  secondModalDiv.append(divNav, secondModalTitle, applySelectionDiv, form, submitBtn);
+  secondModalDiv.append(divNav, secondModalTitle, applySelectionDiv, form);
   divNav.append(leftArrow, secondModalFirstBtn);
   applySelectionDiv.append(landscapeIcon, secondModalSecondBtn, addImageInput, addImageLabel, suggSpan);
   const opts = await createCategoriesOptions();
   opts.forEach(option => {
     categorySelect.add(option);
   })
-  form.append(applySelectionDiv, titleLabel, titleInput, categoryLabel, categorySelect);
+  form.append(applySelectionDiv, titleLabel, titleInput, categoryLabel, categorySelect, submitBtn);
 
 
   leftArrow.addEventListener("click", createModal);
