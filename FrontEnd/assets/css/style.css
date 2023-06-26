@@ -111,11 +111,23 @@ nav ul {
 
 nav li {
 	font-size: 1.2em;
+	color: #000;
 }
 
 .connexion-link {
 	font-size: 1.2em;
 }
+
+nav li:hover, .connexion-link a:active, a:hover {
+	color: #000;
+	font-weight: bolder;
+}
+
+.login-page a {
+	color: #000;
+	font-weight: bold;
+}
+
 
 .insta {
 	width: 25px;
@@ -124,10 +136,7 @@ nav li {
 
 .logo-instagram {
 	font-size: 0.8em;
-}
-
-.nav li {
-	color: blue;
+	color: #000;
 }
 
 .footer-li:hover {
@@ -246,6 +255,7 @@ margin: auto;
 /* MODIFICATIONS ELEMENTS login.html*/
 a {
 	text-decoration: none;
+	color: #000;
 }
 
 input[type="submit"] {
