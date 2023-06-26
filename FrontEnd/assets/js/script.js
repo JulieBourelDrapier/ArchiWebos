@@ -6,10 +6,8 @@ const connexionLink = document.querySelector(".connexion-link");
 const modalLink = document.getElementById("js-modal");
 const secondModalLink = document.getElementById("js-modal-add-photo");
 
-
 //************** addEventListener ********
 modalLink.addEventListener("click", createModal);
-
 
 //************* fonctions ****************
 function showHiddenElements() { 
@@ -251,13 +249,11 @@ async function createSecondModal (e) {
   window.addEventListener('click', clickOutsideModal, {capture: true});
   secondModalFirstBtn.addEventListener("click", closeModal);
   addImageInput.addEventListener("change", updateImageDisplay);
-  // submitBtn.addEventListener("click", submitPhoto);
-
-  //form.addEventListener("submit", createSecondModal);
+  
   submitBtn.addEventListener("click", (event) => {
     event.preventDefault();
     if (titleInput.value === "" || categorySelect.value === "" || addImageInput.files.length === 0) {
-      alert("Veillez à remplir tous les champs s'il vous plait");
+      alert("Tous les champs doivent être remplis");
     }
     else
       submitPhoto();

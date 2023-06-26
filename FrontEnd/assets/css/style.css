@@ -511,7 +511,8 @@ border-radius: 2px;
 	background-color: #CBD6DC;
 	margin: 0 auto;
 	width: 170px;
-	height: 42px;
+	height: 16px;
+	padding: 16px;
 	font-weight: 500;
 	font-size: 1em;
 }
@@ -532,6 +533,10 @@ border-radius: 2px;
 	margin-top: 30px;
 }
 
+#validate-btn:hover {
+	background-color: #1D6154;
+}
+
 .apply-selection-div {
 	display: flex;
 	flex-direction: column;
@@ -541,7 +546,7 @@ border-radius: 2px;
 	margin: 40px;
 	min-width: 420px;
 	padding: 15px;
-	gap: 10px;
+	/*gap: 10px;*/
 }
 
 .icon4 {
@@ -554,6 +559,7 @@ border-radius: 2px;
 	font-size: 10px;
 	font-weight: 400;
 	color: #444444;
+	padding-top: 8px;
 }
 
 form {
@@ -566,4 +572,12 @@ form {
 
 .preview img{
 	width: 150px;
+}
+
+.preview ol {
+	text-align: center;
+}
+
+.preview p {
+	display: none;
 }
