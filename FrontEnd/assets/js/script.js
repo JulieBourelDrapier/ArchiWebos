@@ -5,6 +5,11 @@ let result;//récupère la galerie
 const connexionLink = document.querySelector(".connexion-link");
 const modalLink = document.getElementById("js-modal");
 const secondModalLink = document.getElementById("js-modal-add-photo");
+const fileTypes = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+];
 
 //************** addEventListener ********
 modalLink.addEventListener("click", createModal);
@@ -338,12 +343,6 @@ function updateImageDisplay(e) {
   }
 }
 
-const fileTypes = [
-  "image/jpeg",
-  "image/jpg",
-  "image/png",
-];
-
 function validFileType(file) {
   return fileTypes.includes(file.type);
 }
@@ -388,7 +387,7 @@ function deletePhoto(id, img) {
         throw new Error("qqch n'a pas marché");
       }
       img.remove();
-      console.log("Photo supprimé avec succès");
+      alert("La photo va être supprimée"); 
     }
     catch(error) {
       console.error("un pb est survenu au cours de la supp de la photo:", error);
