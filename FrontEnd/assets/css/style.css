@@ -118,16 +118,10 @@ nav li {
 	font-size: 1.2em;
 }
 
-nav li:hover, .connexion-link a:active, a:hover {
+nav li:hover, .connexion-link a:active, a:hover, .login-page a {
 	color: #000;
 	font-weight: bolder;
 }
-
-.login-page a {
-	color: #000;
-	font-weight: bold;
-}
-
 
 .insta {
 	width: 25px;
@@ -136,7 +130,6 @@ nav li:hover, .connexion-link a:active, a:hover {
 
 .logo-instagram {
 	font-size: 0.8em;
-	color: #000;
 }
 
 .footer-li:hover {
@@ -288,7 +281,7 @@ footer nav ul {
 	margin-bottom: 50px;	
 }
 
-.filter:hover, #validate-btn:hover {
+.filter:hover, #validate-btn:hover, .filter.selected {
 	background-color: #1D6154;
 	color: #fff;
 }
@@ -307,11 +300,6 @@ footer nav ul {
 	padding-top: 12px;
 	min-width: 70px;
 	height: 25px;
-}
-
-.filter.selected {
-	background-color: #1D6154;
-	color: white;
 }
 
 /* MODIFICATIONS => ELEMENTS HIDDEN */
@@ -366,14 +354,13 @@ gap: 25px;
 }
 
 .modify-figure {
-	padding-left: 10%;/*55px;*/
+	padding-left: 10%;
 	padding-top: 20px;
 }
 
 .modify-article {
 	padding-bottom: 20px;
 } 
-
 
 /*******MODAL*******/
 .modal {
@@ -392,6 +379,7 @@ gap: 25px;
 .modal1 {
 	animation: fadeIn .9s both;
 }
+
 .modal-wrapper {
 	overflow: auto;
 	width: 630px;
@@ -399,11 +387,11 @@ gap: 25px;
 	max-height: calc(90vh - 20px);
 	background-color: #fff;
 	border-radius: 10px;	
-	animation: slideFromTop .5s both;
+	/* animation: slideFromTop .5s both; */
 	padding-bottom: 48px;
 }
 
-@keyframes fadeIn {
+/* @keyframes fadeIn {
 	from { opacity: 0; }
 	to { opacity: 1; }
 }
@@ -421,7 +409,7 @@ gap: 25px;
 @keyframes slideToBottom {
 	from { transform: translateY(0px);}
 	to { transform: translateY(50px);}
-}
+} */
 
 .title-modal, .js-delete-gallery{
 	text-align: center;

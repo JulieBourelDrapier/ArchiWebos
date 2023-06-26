@@ -388,6 +388,7 @@ function deletePhoto(id, img) {
       }
       img.remove();
       alert("La photo va être supprimée"); 
+      // location.reload();
     }
     catch(error) {
       console.error("un pb est survenu au cours de la supp de la photo:", error);
@@ -419,7 +420,7 @@ async function submitPhoto (e) {
     if (res.ok) {
       res.json().then(data => {
         console.log(data);
-        alert("Projet ajouté avec succès");
+        alert("Projet correctement ajouté à la galerie");
         location.reload();//recharrgement de la page
     })
     } else {
