@@ -176,7 +176,6 @@ async function createCategoriesOptions() {
 }
 
 async function createSecondModal (e) {
-  // e.stopPropagation();
   //récup les éléments existants 
   const secondModalAside     = document.createElement("aside");
   const secondModalDiv       = document.createElement("div");
@@ -422,13 +421,13 @@ async function submitPhoto (e) {
       res.json().then(data => {
         console.log(data);
         alert("Projet correctement ajouté à la galerie");
-        location.reload();//recharrgement de la page
     })
     } else {
      alert("Une erreur est survenue");
     }
   });
 }
+
   
 //************** MAIN CODE ***************
 showHiddenElements();
