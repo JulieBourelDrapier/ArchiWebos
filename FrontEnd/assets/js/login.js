@@ -1,4 +1,4 @@
-"use strict";
+
 
 //email: sophie.bluel@test.tld
 // vérification de l'authentification pour se connecter et accéder à la homepage
