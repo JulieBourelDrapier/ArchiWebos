@@ -183,7 +183,6 @@ async function createSecondModal (e) {
   const form                 = document.createElement("form");
   const applySelectionDiv    = document.createElement("div");
   const landscapeIcon        = document.createElement("i");
-  const secondModalSecondBtn = document.createElement("button");
   const addImageLabel        = document.createElement("label");
   const addImageInput        = document.createElement("input");
   const suggSpan             = document.createElement("span");
@@ -193,6 +192,7 @@ async function createSecondModal (e) {
   const categorySelect       = document.createElement("select");
   const borderDiv            = document.createElement("div");
   const submitBtn            = document.createElement("button");
+  const previewDiv           = document.createElement("div");
   //configurer
   secondModalAside.id               = "modal2";
   secondModalAside.classList.add    ("modal");
@@ -204,16 +204,16 @@ async function createSecondModal (e) {
   secondModalTitle.classList.add    ("title-modal");
   secondModalTitle.innerText        = "Ajout photo";
   //CONFIG DES ELEMENTS EN LIEN AVEC LE FORMULAIRE
-  form.classList.add                = "second-modal-form";
+  form.classList.add                ("second-modal-form");
   applySelectionDiv.classList.add   ("apply-selection-div");
   landscapeIcon.classList.add       ("fa-regular", "fa-image", "icon4");
-  secondModalSecondBtn.id           = "js-second-modal-add-photo";
-  secondModalSecondBtn.textContent  = "+ Ajouter photo";
   addImageInput.type                = "file";
   addImageInput.id                  = "image-input";
-  addImageInput.style.display       = "none";
-  addImageLabel.textContent         = "";
+  addImageInput.style.opacity       = "0";
+  addImageInput.accept              = ".jpg, .jpeg, .png";
+  addImageLabel.textContent         = "+ Ajouter photo";
   addImageLabel.htmlFor             = "image-input";
+  addImageLabel.id                  = "js-second-modal-add-photo";
   suggSpan.id                       = "suggestions-span";
   suggSpan.innerText                = "jpg, png : 4mo max";
   titleLabel.id                     = "title-label";
@@ -229,12 +229,13 @@ async function createSecondModal (e) {
   submitBtn.id                      = "validate-btn";
   submitBtn.type                    = "submit";
   submitBtn.textContent             = "Valider";
+  previewDiv.classList.add("preview")
   //placer dans le dom
   document.body.prepend(secondModalAside);
   secondModalAside.append(secondModalDiv);
   secondModalDiv.append(divNav, secondModalTitle, applySelectionDiv, form);
   divNav.append(leftArrow, secondModalFirstBtn);
-  applySelectionDiv.append(landscapeIcon, secondModalSecondBtn, addImageInput, addImageLabel, suggSpan);
+  applySelectionDiv.append(landscapeIcon, previewDiv, addImageInput, addImageLabel, suggSpan);
   const opts = await createCategoriesOptions();
   opts.forEach(option => {
     categorySelect.add(option);
@@ -242,20 +243,24 @@ async function createSecondModal (e) {
   form.append(applySelectionDiv, titleLabel, titleInput, categoryLabel, categorySelect, borderDiv, submitBtn);
 
 
-  leftArrow.addEventListener("click", createModal);
+  leftArrow.addEventListener("click", () => {
+    closeModal()
+    createModal()
+  });
   secondModalDiv.addEventListener("click", stopPropagation);
   window.addEventListener('click', clickOutsideModal, {capture: true});
   secondModalFirstBtn.addEventListener("click", closeModal);
-  secondModalSecondBtn.addEventListener("click", addPhoto);
-  
+  addImageInput.addEventListener("change", updateImageDisplay);
+  // submitBtn.addEventListener("click", submitPhoto);
+
   //form.addEventListener("submit", createSecondModal);
   submitBtn.addEventListener("click", (event) => {
     event.preventDefault();
-    if (titleInput.value === "" || categoryInput.value === "") {
-      alert("Veuillez remplir tous les champs");
+    if (titleInput.value === "" || categorySelect.value === "" || addImageInput.files.length === 0) {
+      alert("Veillez à remplir tous les champs s'il vous plait");
     }
     else
-    form.submit();
+      submitPhoto();
   });
 }
 
@@ -297,6 +302,68 @@ async function createModal (e) {
   modalSecondBtn.addEventListener("click", createSecondModal);
 }
 
+function updateImageDisplay(e) {
+  const preview = document.querySelector('.preview')
+  const input = document.querySelector('#image-input')
+  const landscapeIcon = document.querySelector(".fa-regular.fa-image.icon4")
+  while (preview.firstChild) {
+    preview.removeChild(preview.firstChild);
+  }
+
+  const curFiles = input.files;
+  if (curFiles.length === 0) {
+    const para = document.createElement("p");
+    para.textContent = "No files currently selected for upload";
+    landscapeIcon.style.display = 'default'
+    preview.appendChild(para);
+  } else {
+    landscapeIcon.style.display = 'none'
+    const list = document.createElement("ol");
+    preview.appendChild(list);
+
+    for (const file of curFiles) {
+      const listItem = document.createElement("li");
+      const para = document.createElement("p");
+      if (validFileType(file)) {
+        para.textContent = `File name ${file.name}, file size ${returnFileSize(
+          file.size
+        )}.`;
+        const image = document.createElement("img");
+        image.src = URL.createObjectURL(file);
+
+        listItem.appendChild(image);
+        listItem.appendChild(para);
+      } else {
+        para.textContent = `File name ${file.name}: Not a valid file type. Update your selection.`;
+        listItem.appendChild(para);
+      }
+
+      list.appendChild(listItem);
+    }
+  }
+}
+
+const fileTypes = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+];
+
+function validFileType(file) {
+  return fileTypes.includes(file.type);
+}
+
+function returnFileSize(number) {
+  if (number < 1024) {
+    return `${number} bytes`;
+  } else if (number >= 1024 && number < 1048576) {
+    return `${(number / 1024).toFixed(1)} KB`;
+  } else if (number >= 1048576) {
+    return `${(number / 1048576).toFixed(1)} MB`;
+  }
+}
+
+
 function clickOutsideModal(e) {
   console.log(e.target)
   if (!document.querySelector(".modal-wrapper.js-modal-stop")?.contains(e.target)) {
@@ -335,29 +402,32 @@ function deletePhoto(id, img) {
   }
 }
 
-function submitPhoto (e) { 
+async function submitPhoto (e) { 
   console.log("fonction ajout photo");
-  const img = document.getElementsByClassName("img");
-  const titleInput = document.getElementById("title");
-  const categoryInput = document.getElementById("category");
-  fetch("http://localhost:5678/api/post/works"),
+  const titleInput = document.getElementById("title-input");
+  const categoryInput = document.getElementById("category-select");
+  const fileField = document.getElementById("image-input");
+
+  const formData = new FormData();
+
+  formData.append("title", titleInput.value);
+  formData.append("category", categoryInput.value);
+  formData.append("image", fileField.files[0]);
+  fetch("http://localhost:5678/api/works",
   {
     method: "POST",
     headers: {
       accept: '*/*',
       "Authorization": `Bearer ${localStorage.getItem("token")}`
     },
-    body: JSON.stringify({
-      img: img[0].src,
-      title: titleInput.value,
-      category: categoryInput.value
-    })
-  }
+    body: formData
+  })
   .then(res => {
     if (res.ok) {
       res.json().then(data => {
         console.log(data);
-      })
+        alert("Projet ajouté avec succès");
+    })
     } else {
      alert("Une erreur est survenue");
     }
