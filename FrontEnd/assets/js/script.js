@@ -260,7 +260,6 @@ async function createSecondModal (e) {
   });
 }
 
-
 async function createModal (e) {
   const modalAside     = document.createElement("aside");
   const modalDiv       = document.createElement("div");
@@ -359,14 +358,13 @@ function returnFileSize(number) {
   }
 }
 
-
 function clickOutsideModal(e) {
   console.log(e.target)
   if (!document.querySelector(".modal-wrapper.js-modal-stop")?.contains(e.target)) {
     closeModal();
     window.removeEventListener('click', clickOutsideModal, {capture: true})
   }
-};
+}
 
 function stopPropagation (e) {
   console.log("stopPropagation");	
@@ -423,6 +421,7 @@ async function submitPhoto (e) {
       res.json().then(data => {
         console.log(data);
         alert("Projet ajouté avec succès");
+        location.reload();//recharrgement de la page
     })
     } else {
      alert("Une erreur est survenue");
