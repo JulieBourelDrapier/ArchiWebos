@@ -1,3 +1,5 @@
+"use strict";
+
 //*************** variables **************
 let result;//récupère la galerie
 
@@ -387,11 +389,10 @@ function deletePhoto(id, img) {
         throw new Error("qqch n'a pas marché");
       }
       img.remove();
-      alert("La photo va être supprimée"); 
-      // location.reload();
+      alert("Photo supprimmée avec succès"); 
     }
     catch(error) {
-      console.error("un pb est survenu au cours de la supp de la photo:", error);
+      console.error("un pb est survenu au cours de la suppression de la photo:", error);
     }
   }
 }

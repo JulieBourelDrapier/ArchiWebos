@@ -1,9 +1,15 @@
-//email: sophie.bluel@test.tld
-// vérification de l'authentification pour se connecter et accéder à la homepage
-//annonce des variables 
+"use strict";
+
+//*********** CONSTANTES **************
 const email = document.getElementById("email")
 const logBtn = document.getElementById("log-btn")
 
+//*********** FUNCTIONS **************
+/**
+ * Une description de la fonction entière.
+ *
+ * @param {type} nomParamètre - description du paramètre
+ */
 function authenticateUser(event) {
   event.preventDefault()
   console.log({
@@ -34,6 +40,7 @@ function authenticateUser(event) {
       alert("Erreur dans l’identifiant ou le mot de passe")
     }
   })
+  
 }
 
 // Eventlistener 
