@@ -401,7 +401,6 @@ async function submitPhoto (e) {
   const titleInput = document.getElementById("title-input");
   const categoryInput = document.getElementById("category-select");
   const fileField = document.getElementById("image-input");
-
   const formData = new FormData();
 
   formData.append("title", titleInput.value);
@@ -428,32 +427,19 @@ async function submitPhoto (e) {
   });
 }
 
+// ADD color of submit button
+function changeSubmitBtnColor() {
+  const fileField = document.getElementById('image-input');
+  const titleInput = document.getElementById('title-input');
+  const categoryInput = document.getElementById('category-select');
+  const submitBtn = document.getElementById('validate-btn');
 
-//ADD change of color submit btn
-// const addImageInput = document.getElementById('image-input');
-// const titleInput = document.getElementById('title-input');
-// const categorySelect = document.getElementById('category-select');
-// const submitBtn = document.getElementById('validate-btn');
-
-// [addImageInput, titleInput, categorySelect].forEach(input => {
-//   input.addEventListener('input', () => {
-//     if (addImageInput.value && titleInput.value && categorySelect.value) {
-//       submitBtn.style.backgroundColor = 'red';
-//     } else {
-//       submitBtn.style.backgroundColor = 'initial';
-//     }
-//   });
-// });
-// function changeColorOfValidateBtn() {
-//   console.log("changeColorOfValidateBtn");
-//   if (imageFile.files.length > 0 && title.value !==  "" && category.value !== "") {
-//     validateButton.disabled = false;
-//     validateButton.style.backgroundColor = 'green';
-//   } else {
-//     validateButton.disabled = true;
-//     validateButton.style.backgroundColor = 'initial';
-//   }
-// }
+  if (fileField.value && titleInput.value && categoryInput.value) {
+    submitBtn.style.backgroundColor = 'red';
+  } else {
+    submitBtn.style.backgroundColor = 'blue';
+  }
+}
 
 
   
@@ -461,6 +447,8 @@ async function submitPhoto (e) {
 showHiddenElements();
 
 FetchAndCreateGallery();
+
+changeSubmitBtnColor();
 
 
 //mettre ces éléments dans une fonction pour plus de clarté
