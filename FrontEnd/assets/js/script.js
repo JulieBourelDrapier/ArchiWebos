@@ -428,18 +428,33 @@ async function submitPhoto (e) {
 }
 
 // ADD color of submit button
-function changeSubmitBtnColor() {
-  const fileField = document.getElementById('image-input');
-  const titleInput = document.getElementById('title-input');
-  const categoryInput = document.getElementById('category-select');
-  const submitBtn = document.getElementById('validate-btn');
+const form = document.getElementById('form');
+const submitBtn = document.getElementById('validate-btn');
 
-  if (fileField.value && titleInput.value && categoryInput.value) {
-    submitBtn.style.backgroundColor = 'red';
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  // Check if all required fields are filled
+  const inputs = form.querySelectorAll('[required]');
+  let allFilled = true;
+  for (let i = 0; i < inputs.length; i++) {
+    if (inputs[i].value.trim() === '') {
+      allFilled = false;
+      break;
+    }
+  }
+
+  // If all required fields are filled, change the button color to green
+  if (allFilled) {
+    submitBtn.style.backgroundColor = 'green';
   } else {
     submitBtn.style.backgroundColor = 'blue';
   }
-}
+
+  // Submit the form
+  form.submit();
+});
+
 
 
   
@@ -447,8 +462,6 @@ function changeSubmitBtnColor() {
 showHiddenElements();
 
 FetchAndCreateGallery();
-
-changeSubmitBtnColor();
 
 
 //mettre ces éléments dans une fonction pour plus de clarté
