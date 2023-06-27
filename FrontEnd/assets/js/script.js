@@ -401,24 +401,7 @@ async function submitPhoto (e) {
   const titleInput = document.getElementById("title-input");
   const categoryInput = document.getElementById("category-select");
   const fileField = document.getElementById("image-input");
-  // const submitButton = document.getElementById("validate-btn");
 
-
-  // Add an event listener to each required input field that listens for changes in their values
-  // titleInput.addEventListener("input", checkFormValidity);
-  // categoryInput.addEventListener("change", checkFormValidity);
-  // fileField.addEventListener("change", checkFormValidity);
-
-  // function checkFormValidity() {
-  //   // Call the separated function and pass the required input fields and submit button as arguments
-  //   const isFormValid = isFormValid(titleInput.value, categoryInput.value, fileField.files[0]);
-  //   if (isFormValid) {
-  //     submitButton.style.backgroundColor = "green";
-  //   } else {
-  //     submitButton.style.backgroundColor = "";
-  //   }
-  // }
-  
   const formData = new FormData();
 
   formData.append("title", titleInput.value);
@@ -442,14 +425,36 @@ async function submitPhoto (e) {
     } else {
      alert("Une erreur est survenue");
     }
-  })
-  // .finally(() => {
-  //   // Remove the event listeners to avoid memory leaks
-  //   titleInput.removeEventListener("input", checkFormValidity);
-  //   categoryInput.removeEventListener("change", checkFormValidity);
-  //   fileField.removeEventListener("change", checkFormValidity);
-  // });
+  });
 }
+
+
+//ADD change of color submit btn
+// const addImageInput = document.getElementById('image-input');
+// const titleInput = document.getElementById('title-input');
+// const categorySelect = document.getElementById('category-select');
+// const submitBtn = document.getElementById('validate-btn');
+
+// [addImageInput, titleInput, categorySelect].forEach(input => {
+//   input.addEventListener('input', () => {
+//     if (addImageInput.value && titleInput.value && categorySelect.value) {
+//       submitBtn.style.backgroundColor = 'red';
+//     } else {
+//       submitBtn.style.backgroundColor = 'initial';
+//     }
+//   });
+// });
+// function changeColorOfValidateBtn() {
+//   console.log("changeColorOfValidateBtn");
+//   if (imageFile.files.length > 0 && title.value !==  "" && category.value !== "") {
+//     validateButton.disabled = false;
+//     validateButton.style.backgroundColor = 'green';
+//   } else {
+//     validateButton.disabled = true;
+//     validateButton.style.backgroundColor = 'initial';
+//   }
+// }
+
 
   
 //************** MAIN CODE ***************

@@ -284,7 +284,6 @@ footer nav ul {
 .filter:hover, .filter.selected {
 	background-color: #1D6154;
 	color: #fff;
-	/* #validate-btn:hover, */
 }
 
  .filter {
