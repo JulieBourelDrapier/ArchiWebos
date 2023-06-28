@@ -1,23 +1,15 @@
 "use strict";
 
-//*************** variables **************
-let result;//récupère la galerie
-
-//************** constantes ***************
-const connexionLink = document.querySelector(".connexion-link");
-const modalLink = document.getElementById("js-modal");
-const secondModalLink = document.getElementById("js-modal-add-photo");
+//************** ma constante ***************
 const fileTypes = [
   "image/jpeg",
   "image/jpg",
   "image/png",
 ];
 
-//************** addEventListener ********
-modalLink.addEventListener("click", createModal);
-
 //************* fonctions ****************
 function showHiddenElements() { 
+  const connexionLink = document.querySelector(".connexion-link");
   let hiddenElements = document.getElementsByClassName("hidden");
   const token        = localStorage.getItem("token");
   if (token) {
@@ -36,8 +28,8 @@ function logOut(event) {
   location.reload();
 }
 
-function filterImgEvent(e) {
-  generateAndCreateGallery("gallery", e.target.getAttribute('filterCategoryId'));
+async function filterImgEvent(e) {
+  generateAndCreateGallery("gallery", e.target.getAttribute('filterCategoryId'), await fetchWorks());
   document.querySelector("#filters .filterParent .filter.selected").classList.remove('selected');
   e.target.classList.add("selected");
 }
@@ -57,7 +49,7 @@ async function fetchWorks() {
   }
 }
 
-function generateAndCreateGallery(selector, categoryId = null) {
+function generateAndCreateGallery(selector, categoryId = null, result = null) {
   const galleryDiv = document.getElementsByClassName(selector)[0];
   galleryDiv.innerHTML = "";
   let data;
@@ -86,23 +78,10 @@ function generateAndCreateGallery(selector, categoryId = null) {
   }
 }
 
-async function FetchAndCreateGallery() {
-  result = await fetchWorks();
-  generateAndCreateGallery("gallery");
-}
-
-function generateAndCreateGalleryModal(selector, categoryId = null) {
-  const galleryDiv = document.getElementsByClassName(selector)[0];
+function generateAndCreateGalleryModal(data = null) {
+  const galleryDiv = document.getElementsByClassName('modal-gallery')[0];
   galleryDiv.innerHTML = "";
-  let data;
-  if(categoryId !== null) {
-    data = result.filter((img) => {
-      return Number.parseInt(categoryId) === img.categoryId;
-    })
-  }
-  else {
-    data = result;
-  }
+
   for (let i = 0; i < data.length; i++) {
     //générer les élements 
     const figure         = document.createElement('figure');
@@ -229,7 +208,7 @@ async function createSecondModal (e) {
   categorySelect.id                 = "category-select";
   categoryLabel.textContent         = "Catégorie";
   borderDiv.id                      = "border-div"; 
-  submitBtn.classList.add           = "submit-btn";
+  submitBtn.classList.add           ("submit-btn");
   submitBtn.id                      = "validate-btn";
   submitBtn.type                    = "submit";
   submitBtn.textContent             = "Valider";
@@ -255,6 +234,9 @@ async function createSecondModal (e) {
   window.addEventListener('click', clickOutsideModal, {capture: true});
   secondModalFirstBtn.addEventListener("click", closeModal);
   addImageInput.addEventListener("change", updateImageDisplay);
+  categorySelect.addEventListener('change', formValidation);
+  titleInput.addEventListener('change', formValidation);
+  addImageInput.addEventListener('change', formValidation);
   
   submitBtn.addEventListener("click", (event) => {
     event.preventDefault();
@@ -264,6 +246,20 @@ async function createSecondModal (e) {
     else
       submitPhoto();
   });
+}
+
+function formValidation(e) {
+  const titleInput = document.getElementById("title-input");
+  const categorySelect = document.getElementById("category-select");
+  const addImageInput = document.getElementById("image-input");
+  const submitBtn = document.getElementById("validate-btn");
+
+  if (titleInput.value === "" || categorySelect.value === "" || addImageInput.files.length === 0) {
+    submitBtn.classList.remove("validated")
+  }
+  else {
+    submitBtn.classList.add('validated')
+  }
 }
 
 async function createModal (e) {
@@ -294,7 +290,7 @@ async function createModal (e) {
   modalAside.append(modalDiv);
   modalDiv.append(modalFirstBtn, modalTitle, modalGallery, modalSecondBtn, modalDelete);
 
-  generateAndCreateGalleryModal("modal-gallery");
+  generateAndCreateGalleryModal(await fetchWorks());
   
   modalFirstBtn.addEventListener("click", closeModal);
   modalAside.addEventListener("click", stopPropagation);
@@ -388,7 +384,8 @@ function deletePhoto(id, img) {
         throw new Error("qqch n'a pas marché");
       }
       img.remove();
-      alert("Photo supprimmée avec succès"); 
+      generateAndCreateGallery("gallery", null, await fetchWorks())
+      alert("Photo supprimée avec succès"); 
     }
     catch(error) {
       console.error("un pb est survenu au cours de la suppression de la photo:", error);
@@ -397,7 +394,6 @@ function deletePhoto(id, img) {
 }
 
 async function submitPhoto (e) { 
-  console.log("fonction ajout photo");
   const titleInput = document.getElementById("title-input");
   const categoryInput = document.getElementById("category-select");
   const fileField = document.getElementById("image-input");
@@ -417,8 +413,10 @@ async function submitPhoto (e) {
   })
   .then(res => {
     if (res.ok) {
-      res.json().then(data => {
-        console.log(data);
+      res.json().then(async data => {
+        closeModal();
+        createModal();
+        generateAndCreateGallery("gallery", null, await fetchWorks())
         alert("Projet correctement ajouté à la galerie");
     })
     } else {
@@ -427,74 +425,54 @@ async function submitPhoto (e) {
   });
 }
 
-// ADD color of submit button *********NOT WORKING***********
-const form = document.getElementById('form');
-const submitBtn = document.getElementById('validate-btn');
-
-form.addEventListener('submit', (event) => {
-  event.preventDefault();
-
-  // Check if all required fields are filled
-  const inputs = form.querySelectorAll('[required]');
-  let allFilled = true;
-  for (let i = 0; i < inputs.length; i++) {
-    if (inputs[i].value.trim() === '') {
-      allFilled = false;
-      break;
-    }
-  }
-
-  // If all required fields are filled, change the button color to green
-  if (allFilled) {
-    submitBtn.style.backgroundColor = 'green';
-  } else {
-    submitBtn.style.backgroundColor = 'blue';
-  }
-
-  // Submit the form
-  form.submit();
-});
-
-
-
   
 //************** MAIN CODE ***************
-showHiddenElements();
 
-FetchAndCreateGallery();
+function initFilters() {
+  fetch("http://localhost:5678/api/categories/")
+  .then(res => {
+    if(res.ok){
+      const ulFilters = document.createElement('ul');
+      const liAll = document.createElement('li');
+      const filters = document.getElementById('filters');
+      //configuer 
+      liAll.innerText = "Tous";
+      liAll.addEventListener("click", filterImgEvent);
+      liAll.classList.add("filter", "selected");
+      ulFilters.classList.add("filterParent");
+      //placer
+      ulFilters.append(liAll);
+      //ajouter dans le DOM
+      filters.append(ulFilters);
+  
+      res.json().then(data => {
+        for (let i = 0; i < data.length; i++) {
+          const li = document.createElement('li');
+          li.innerText = data[i].name;
+          li.setAttribute('filterCategoryId', data[i].id);
+          li.addEventListener('click', filterImgEvent);
+          ulFilters.append(li);
+          li.classList.add("filter");
+        }
+      })
+    }else {
+      console.error("No data received");
+    }
+  })
+  .catch(error => {
+    console.error(error);
+  })
+}
 
+async function init() {
+  const modalLink = document.getElementById("js-modal");
 
-//mettre ces éléments dans une fonction pour plus de clarté
-fetch("http://localhost:5678/api/categories/")
-.then(res => {
-  if(res.ok){
-    const ulFilters = document.createElement('ul');
-    const liAll = document.createElement('li');
-    const filters = document.getElementById('filters');
-    //configuer 
-    liAll.innerText = "Tous";
-    liAll.addEventListener("click", filterImgEvent);
-    liAll.classList.add("filter", "selected");
-    ulFilters.classList.add("filterParent");
-    //placer
-    ulFilters.append(liAll);
-    //ajouter dans le DOM
-    filters.append(ulFilters);
+  //************** addEventListener ********
+  modalLink.addEventListener("click", createModal);
 
-    res.json().then(data => {
-      for (let i = 0; i < data.length; i++) {
-        const li = document.createElement('li');
-        li.innerText = data[i].name;
-        li.setAttribute('filterCategoryId', data[i].id);
-        li.addEventListener('click', filterImgEvent);
-        ulFilters.append(li);
-        li.classList.add("filter");
-      }
-    })
-  }else {
-    console.error("No data received");
-  }
-})
-.catch(error => {
-  console.error(error);
-})
+  generateAndCreateGallery("gallery", null, await fetchWorks())
+  showHiddenElements();
+  initFilters()
+}
+
+init()

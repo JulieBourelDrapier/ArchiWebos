@@ -1,3 +1,5 @@
+"use strict";
+
 //email: sophie.bluel@test.tld
 // vérification de l'authentification pour se connecter et accéder à la homepage
 
@@ -33,7 +35,6 @@ function authenticateUser(event) {
     .then(res => {
       if(res.ok){
         res.json().then(data => {
-          result = data
           localStorage.setItem("token", data.token) //(clé+valeur)
           location.href = "index.html"
         })
