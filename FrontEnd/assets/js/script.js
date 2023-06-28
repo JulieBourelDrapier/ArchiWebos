@@ -427,7 +427,7 @@ async function submitPhoto (e) {
   });
 }
 
-// ADD color of submit button
+// ADD color of submit button *********NOT WORKING***********
 const form = document.getElementById('form');
 const submitBtn = document.getElementById('validate-btn');
 
