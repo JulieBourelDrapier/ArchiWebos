@@ -165,8 +165,8 @@ async function createSecondModal (e) {
   const form                 = document.createElement("form");
   const applySelectionDiv    = document.createElement("div");
   const landscapeIcon        = document.createElement("i");
-  const addImageLabel        = document.createElement("label");
-  const addImageInput        = document.createElement("input");
+  const imgLabel             = document.createElement("label");
+  const imgInput        = document.createElement("input");
   const suggSpan             = document.createElement("span");
   const titleLabel           = document.createElement("label");
   const titleInput           = document.createElement("input");
@@ -189,13 +189,13 @@ async function createSecondModal (e) {
   form.classList.add("second-modal-form");
   applySelectionDiv.classList.add("apply-selection-div");
   landscapeIcon.classList.add("fa-regular", "fa-image", "icon4");
-  addImageInput.type = "file";
-  addImageInput.id = "image-input";
-  addImageInput.style.opacity = "0";
-  addImageInput.accept = ".jpg, .jpeg, .png";
-  addImageLabel.textContent = "+ Ajouter photo";
-  addImageLabel.htmlFor = "image-input";
-  addImageLabel.id = "js-second-modal-add-photo";
+  imgInput.type = "file";
+  imgInput.id = "image-input";
+  imgInput.style.opacity = "0";
+  imgInput.accept = ".jpg, .jpeg, .png";
+  imgLabel.textContent = "+ Ajouter photo";
+  imgLabel.htmlFor = "image-input";
+  imgLabel.id = "js-second-modal-add-photo";
   suggSpan.id = "suggestions-span";
   suggSpan.innerText = "jpg, png : 4mo max";
   titleLabel.id = "title-label";
@@ -217,7 +217,7 @@ async function createSecondModal (e) {
   secondModal.append(secondModalDiv);
   secondModalDiv.append(divNav, modalTitle, applySelectionDiv, form);
   divNav.append(leftArrow, closeBtn);
-  applySelectionDiv.append(landscapeIcon, previewDiv, addImageInput, addImageLabel, suggSpan);
+  applySelectionDiv.append(landscapeIcon, previewDiv, imgInput, imgLabel, suggSpan);
   const opts = await createCategoriesOptions();
   opts.forEach(option => {
     categorySelect.add(option);
@@ -232,14 +232,14 @@ async function createSecondModal (e) {
   secondModalDiv.addEventListener("click", stopPropagation);
   window.addEventListener('click', clickOutsideModal, {capture: true});
   closeBtn.addEventListener("click", closeModal);
-  addImageInput.addEventListener("change", updateImageDisplay);
+  imgInput.addEventListener("change", updateImageDisplay);
   categorySelect.addEventListener('change', formValidation);
   titleInput.addEventListener('change', formValidation);
-  addImageInput.addEventListener('change', formValidation);
+  imgInput.addEventListener('change', formValidation);
   
   submitBtn.addEventListener("click", (event) => {
     event.preventDefault();
-    if (titleInput.value === "" || categorySelect.value === "" || addImageInput.files.length === 0) {
+    if (titleInput.value === "" || categorySelect.value === "" || imgInput.files.length === 0) {
       alert("Tous les champs doivent être remplis");
     }
     else
@@ -250,10 +250,10 @@ async function createSecondModal (e) {
 function formValidation(e) {
   const titleInput     = document.getElementById("title-input");
   const categorySelect = document.getElementById("category-select");
-  const addImageInput  = document.getElementById("image-input");
+  const imgInput       = document.getElementById("image-input");
   const submitBtn      = document.getElementById("validate-btn");
 
-  if (titleInput.value === "" || categorySelect.value === "" || addImageInput.files.length === 0) {
+  if (titleInput.value === "" || categorySelect.value === "" || imgInput.files.length === 0) {
     submitBtn.classList.remove("validated")
   }
   else {
