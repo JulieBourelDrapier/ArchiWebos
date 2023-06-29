@@ -9,7 +9,7 @@ const fileTypes = [
 
 //************* functions ****************//
 function showHiddenElements() { 
-  const connexionLink = document.querySelector(".connexion-link");
+  const logBtn        = document.querySelector(".connexion-link");
   let hiddenElements  = document.getElementsByClassName("hidden");
   const token         = localStorage.getItem("token");
   if (token) {
@@ -18,7 +18,7 @@ function showHiddenElements() {
       document.querySelector(".connexion-link").textContent ="logout";
       document.getElementById("filters").setAttribute("style", "display:none");
     })
-    connexionLink.addEventListener("click", logOut);
+    logBtn.addEventListener("click", logOut);
   }
 }
 
@@ -262,13 +262,13 @@ function formValidation(e) {
 }
 
 async function createModal (e) {
-  const modal          = document.createElement("aside");
-  const modalDiv       = document.createElement("div");
-  const closeBtn       = document.createElement("button");
-  const modalTitle     = document.createElement("h3");  
-  const addBtn = document.createElement("button");
-  const modalDelete    = document.createElement("a");
-  const modalGallery   = document.createElement("div");
+  const modal        = document.createElement("aside");
+  const modalDiv     = document.createElement("div");
+  const closeBtn     = document.createElement("button");
+  const modalTitle   = document.createElement("h3");  
+  const addBtn       = document.createElement("button");
+  const modalDelete  = document.createElement("a");
+  const modalGallery = document.createElement("div");
  
   modal.id = "modal1";
   modal.classList.add("modal");
