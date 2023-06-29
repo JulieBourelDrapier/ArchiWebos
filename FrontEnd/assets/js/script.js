@@ -155,12 +155,12 @@ async function createCategoriesOptions() {
 }
 
 async function createSecondModal (e) {
-  const secondModal    = document.createElement("aside");
-  const modalDiv = document.createElement("div");
-  const divNav         = document.createElement("div");
-  const leftArrow      = document.createElement("i");
-  const closeBtn       = document.createElement("button");
-  const modalTitle     = document.createElement("h3"); 
+  const secondModal = document.createElement("aside");
+  const modalDiv    = document.createElement("div");
+  const divNav      = document.createElement("div");
+  const leftArrow   = document.createElement("i");
+  const closeBtn    = document.createElement("button");
+  const modalTitle  = document.createElement("h3"); 
  
   const form              = document.createElement("form");
   const applySelectionDiv = document.createElement("div");
@@ -267,7 +267,7 @@ async function createModal (e) {
   const closeBtn     = document.createElement("button");
   const modalTitle   = document.createElement("h3");  
   const addBtn       = document.createElement("button");
-  const modalDelete  = document.createElement("a");
+  const deleteBtn    = document.createElement("a");
   const modalGallery = document.createElement("div");
  
   modal.id = "modal1";
@@ -281,13 +281,13 @@ async function createModal (e) {
   addBtn.id = "js-modal-add-photo";
   addBtn.innerText = "Ajouter une photo";
   addBtn.addEventListener("click", addPhoto);
-  modalDelete.classList.add("js-delete-gallery");
-  modalDelete.innerText = "Supprimer la galerie";
-  modalDelete.href="#";
+  deleteBtn.classList.add("js-delete-gallery");
+  deleteBtn.innerText = "Supprimer la galerie";
+  deleteBtn.href="#";
   
   document.body.prepend(modal);
   modal.append(modalDiv);
-  modalDiv.append(closeBtn, modalTitle, modalGallery, addBtn, modalDelete);
+  modalDiv.append(closeBtn, modalTitle, modalGallery, addBtn, deleteBtn);
 
   createGalleryModal(await fetchWorks());
   
