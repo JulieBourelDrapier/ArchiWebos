@@ -162,19 +162,19 @@ async function createSecondModal (e) {
   const closeBtn       = document.createElement("button");
   const modalTitle     = document.createElement("h3"); 
  
-  const form                 = document.createElement("form");
-  const applySelectionDiv    = document.createElement("div");
-  const landscapeIcon        = document.createElement("i");
-  const imgLabel             = document.createElement("label");
-  const imgInput        = document.createElement("input");
-  const suggSpan             = document.createElement("span");
-  const titleLabel           = document.createElement("label");
-  const titleInput           = document.createElement("input");
-  const categoryLabel        = document.createElement("label");
-  const categorySelect       = document.createElement("select");
-  const borderDiv            = document.createElement("div");
-  const submitBtn            = document.createElement("button");
-  const previewDiv           = document.createElement("div");
+  const form              = document.createElement("form");
+  const applySelectionDiv = document.createElement("div");
+  const landscapeIcon     = document.createElement("i");
+  const imgLabel          = document.createElement("label");
+  const imgInput          = document.createElement("input");
+  const suggSpan          = document.createElement("span");
+  const titleLabel        = document.createElement("label");
+  const titleInput        = document.createElement("input");
+  const categoryLabel     = document.createElement("label");
+  const categorySelect    = document.createElement("select");
+  const borderDiv         = document.createElement("div");
+  const submitBtn         = document.createElement("button");
+  const previewDiv        = document.createElement("div");
   
   secondModal.id = "modal2";
   secondModal.classList.add("modal");
@@ -266,7 +266,7 @@ async function createModal (e) {
   const modalDiv       = document.createElement("div");
   const closeBtn       = document.createElement("button");
   const modalTitle     = document.createElement("h3");  
-  const modalSecondBtn = document.createElement("button");
+  const addBtn = document.createElement("button");
   const modalDelete    = document.createElement("a");
   const modalGallery   = document.createElement("div");
  
@@ -278,23 +278,23 @@ async function createModal (e) {
   modalTitle.classList.add("title-modal");
   modalTitle.innerText = "Galerie photo";
   modalGallery.classList.add("modal-gallery");
-  modalSecondBtn.id = "js-modal-add-photo";
-  modalSecondBtn.innerText = "Ajouter une photo";
-  modalSecondBtn.addEventListener("click", addPhoto);
+  addBtn.id = "js-modal-add-photo";
+  addBtn.innerText = "Ajouter une photo";
+  addBtn.addEventListener("click", addPhoto);
   modalDelete.classList.add("js-delete-gallery");
   modalDelete.innerText = "Supprimer la galerie";
   modalDelete.href="#";
   
   document.body.prepend(modal);
   modal.append(modalDiv);
-  modalDiv.append(closeBtn, modalTitle, modalGallery, modalSecondBtn, modalDelete);
+  modalDiv.append(closeBtn, modalTitle, modalGallery, addBtn, modalDelete);
 
   createGalleryModal(await fetchWorks());
   
   closeBtn.addEventListener("click", closeModal);
   modal.addEventListener("click", stopPropagation);
   window.addEventListener('click', clickOutsideModal, {capture: true});
-  modalSecondBtn.addEventListener("click", createSecondModal);
+  addBtn.addEventListener("click", createSecondModal);
 }
 
 function updateImageDisplay(e) {
