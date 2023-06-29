@@ -420,6 +420,7 @@ gap: 25px;
 	background-color: #fff;
 	font-size: 23px;
 	padding-bottom: 10px;
+	cursor: pointer;
 }
 
 .js-modal-close {
@@ -501,6 +502,7 @@ border-radius: 2px;
 	font-size: 1.2em;
 	text-align: center;
 	padding-top: 6px;
+	cursor: pointer;
 }
 
 .js-second-modal-close {

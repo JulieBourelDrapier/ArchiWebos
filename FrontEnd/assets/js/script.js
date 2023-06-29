@@ -1,13 +1,13 @@
 "use strict";
 
-//************** constantes ***************
+//************** constantes ***************//
 const fileTypes = [
   "image/jpeg",
   "image/jpg",
   "image/png",
 ];
 
-//************* functions ****************
+//************* functions ****************//
 function showHiddenElements() { 
   const connexionLink = document.querySelector(".connexion-link");
   let hiddenElements  = document.getElementsByClassName("hidden");
@@ -422,7 +422,6 @@ async function submitPhoto (e) {
   });
 }
 
-
 function initFilters() {
   fetch("http://localhost:5678/api/categories/")
   .then(res => {
@@ -469,6 +468,6 @@ async function init() {
   initFilters()
 }
 
-//************** main ***************
+//************** main ***************//
 
 init()

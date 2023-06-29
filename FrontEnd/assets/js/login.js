@@ -10,7 +10,6 @@ logBtn.addEventListener("click", authenticateUser)
 //*************** functions ***************//
 function authenticateUser(event) {
   event.preventDefault()
-  
   fetch("http://localhost:5678/api/users/login",
   {
     method: "POST",
@@ -26,7 +25,7 @@ function authenticateUser(event) {
     .then(res => {
       if(res.ok){
         res.json().then(data => {
-          localStorage.setItem("token", data.token) //(clé+valeur)
+          localStorage.setItem("token", data.token) 
           location.href = "index.html"
         })
     } else {
