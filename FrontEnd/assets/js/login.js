@@ -1,25 +1,16 @@
 "use strict";
 
-//email: sophie.bluel@test.tld
-// vérification de l'authentification pour se connecter et accéder à la homepage
-
-//*********** CONSTANTES **************
+//*********** constantes **************//
 const email = document.getElementById("email")
 const logBtn = document.getElementById("log-btn")
 
-//*********** FUNCTIONS **************
-/**
- * Une description de la fonction entière.
- *
- * @param {type} nomParamètre - description du paramètre
- */
+//************** addeventlistener **************//
+logBtn.addEventListener("click", authenticateUser)
+
+//*************** functions ***************//
 function authenticateUser(event) {
   event.preventDefault()
-  console.log({
-    email: document.getElementById("email").value ?? '',
-    password: document.getElementById("password").value ?? ''
-  })
-  //poster dynamiquement les identifiants via fetch
+  
   fetch("http://localhost:5678/api/users/login",
   {
     method: "POST",
@@ -42,9 +33,6 @@ function authenticateUser(event) {
       alert("Erreur dans l’identifiant ou le mot de passe")
     }
   })
-  
 }
 
-// Eventlistener 
-logBtn.addEventListener("click", authenticateUser)
 
