@@ -114,11 +114,11 @@ nav li {
 	color: #000;
 }
 
-.connexion-link {
+.log-btn {
 	font-size: 1.2em;
 }
 
-nav li:hover, .connexion-link a:active, a:hover, .login-page a {
+nav li:hover, .log-btn a:active, a:hover, .login-page a {
 	color: #000;
 	font-weight: bolder;
 }

@@ -9,13 +9,13 @@ const fileTypes = [
 
 //************* functions ****************//
 function showHiddenElements() { 
-  const logBtn        = document.querySelector(".connexion-link");
+  const logBtn        = document.querySelector(".log-btn");
   let hiddenElements  = document.getElementsByClassName("hidden");
   const token         = localStorage.getItem("token");
   if (token) {
     Array.from(hiddenElements).forEach((element) => {
       element.classList.remove("hidden");
-      document.querySelector(".connexion-link").textContent ="logout";
+      document.querySelector(".log-btn").textContent ="logout";
       document.getElementById("filters").setAttribute("style", "display:none");
     })
     logBtn.addEventListener("click", logOut);
