@@ -155,8 +155,7 @@ async function createCategoriesOptions() {
 }
 
 async function createSecondModal (e) {
-  
-  const secondModalAside     = document.createElement("aside");
+  const secondModal          = document.createElement("aside");
   const secondModalDiv       = document.createElement("div");
   const divNav               = document.createElement("div");
   const leftArrow            = document.createElement("i");
@@ -177,8 +176,8 @@ async function createSecondModal (e) {
   const submitBtn            = document.createElement("button");
   const previewDiv           = document.createElement("div");
   
-  secondModalAside.id = "modal2";
-  secondModalAside.classList.add("modal");
+  secondModal.id = "modal2";
+  secondModal.classList.add("modal");
   secondModalDiv.classList.add("modal-wrapper", "js-modal-stop");
   divNav.classList.add("div-nav");
   leftArrow.classList.add("fa-sharp", "fa-solid", "fa-arrow-left", "icon3");
@@ -214,8 +213,8 @@ async function createSecondModal (e) {
   submitBtn.textContent = "Valider";
   previewDiv.classList.add("preview")
   
-  document.body.prepend(secondModalAside);
-  secondModalAside.append(secondModalDiv);
+  document.body.prepend(secondModal);
+  secondModal.append(secondModalDiv);
   secondModalDiv.append(divNav, secondModalTitle, applySelectionDiv, form);
   divNav.append(leftArrow, secondModalFirstBtn);
   applySelectionDiv.append(landscapeIcon, previewDiv, addImageInput, addImageLabel, suggSpan);
@@ -263,7 +262,7 @@ function formValidation(e) {
 }
 
 async function createModal (e) {
-  const modalAside     = document.createElement("aside");
+  const modal     = document.createElement("aside");
   const modalDiv       = document.createElement("div");
   const modalFirstBtn  = document.createElement("button");
   const modalTitle     = document.createElement("h3");  
@@ -271,8 +270,8 @@ async function createModal (e) {
   const modalDelete    = document.createElement("a");
   const modalGallery   = document.createElement("div");
  
-  modalAside.id = "modal1";
-  modalAside.classList.add("modal");
+  modal.id = "modal1";
+  modal.classList.add("modal");
   modalDiv.classList.add("modal-wrapper", "js-modal-stop");
   modalFirstBtn.classList.add("js-modal-close");
   modalFirstBtn.innerText = "x";
@@ -286,14 +285,14 @@ async function createModal (e) {
   modalDelete.innerText = "Supprimer la galerie";
   modalDelete.href="#";
   
-  document.body.prepend(modalAside);
-  modalAside.append(modalDiv);
+  document.body.prepend(modal);
+  modal.append(modalDiv);
   modalDiv.append(modalFirstBtn, modalTitle, modalGallery, modalSecondBtn, modalDelete);
 
   createGalleryModal(await fetchWorks());
   
   modalFirstBtn.addEventListener("click", closeModal);
-  modalAside.addEventListener("click", stopPropagation);
+  modal.addEventListener("click", stopPropagation);
   window.addEventListener('click', clickOutsideModal, {capture: true});
   modalSecondBtn.addEventListener("click", createSecondModal);
 }
