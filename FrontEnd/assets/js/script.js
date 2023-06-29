@@ -458,9 +458,9 @@ function initFilters() {
 }
 
 async function init() {
-  const modalLink = document.getElementById("js-modal");
+  const modifyBtn = document.getElementById("js-modal");
 
-  modalLink.addEventListener("click", createModal);
+  modifyBtn.addEventListener("click", createModal);
 
   createGallery("gallery", null, await fetchWorks())
   showHiddenElements();
