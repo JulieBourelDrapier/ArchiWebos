@@ -155,12 +155,12 @@ async function createCategoriesOptions() {
 }
 
 async function createSecondModal (e) {
-  const secondModal          = document.createElement("aside");
-  const secondModalDiv       = document.createElement("div");
-  const divNav               = document.createElement("div");
-  const leftArrow            = document.createElement("i");
-  const closeBtn  = document.createElement("button");
-  const secondModalTitle     = document.createElement("h3"); 
+  const secondModal    = document.createElement("aside");
+  const secondModalDiv = document.createElement("div");
+  const divNav         = document.createElement("div");
+  const leftArrow      = document.createElement("i");
+  const closeBtn       = document.createElement("button");
+  const modalTitle     = document.createElement("h3"); 
  
   const form                 = document.createElement("form");
   const applySelectionDiv    = document.createElement("div");
@@ -183,8 +183,8 @@ async function createSecondModal (e) {
   leftArrow.classList.add("fa-sharp", "fa-solid", "fa-arrow-left", "icon3");
   closeBtn.classList.add("js-second-modal-close");
   closeBtn.innerText = "x";
-  secondModalTitle.classList.add("title-modal");
-  secondModalTitle.innerText = "Ajout photo";
+  modalTitle.classList.add("title-modal");
+  modalTitle.innerText = "Ajout photo";
   
   form.classList.add("second-modal-form");
   applySelectionDiv.classList.add("apply-selection-div");
@@ -215,7 +215,7 @@ async function createSecondModal (e) {
   
   document.body.prepend(secondModal);
   secondModal.append(secondModalDiv);
-  secondModalDiv.append(divNav, secondModalTitle, applySelectionDiv, form);
+  secondModalDiv.append(divNav, modalTitle, applySelectionDiv, form);
   divNav.append(leftArrow, closeBtn);
   applySelectionDiv.append(landscapeIcon, previewDiv, addImageInput, addImageLabel, suggSpan);
   const opts = await createCategoriesOptions();
