@@ -29,7 +29,7 @@ function logOut(event) {
 }
 
 async function filterImgEvent(e) {
-  generateAndCreateGallery("gallery", e.target.getAttribute('filterCategoryId'), await fetchWorks());
+  createGallery("gallery", e.target.getAttribute('filterCategoryId'), await fetchWorks());
   document.querySelector("#filters .filterParent .filter.selected").classList.remove('selected');
   e.target.classList.add("selected");
 }
@@ -49,7 +49,7 @@ async function fetchWorks() {
   }
 }
 
-function generateAndCreateGallery(selector, categoryId = null, result = null) {
+function createGallery(selector, categoryId = null, result = null) {
   const galleryDiv = document.getElementsByClassName(selector)[0];
   galleryDiv.innerHTML = "";
   let data;
@@ -78,7 +78,7 @@ function generateAndCreateGallery(selector, categoryId = null, result = null) {
   }
 }
 
-function generateAndCreateGalleryModal(data = null) {
+function createGalleryModal(data = null) {
   const galleryDiv = document.getElementsByClassName('modal-gallery')[0];
   galleryDiv.innerHTML = "";
 
@@ -290,7 +290,7 @@ async function createModal (e) {
   modalAside.append(modalDiv);
   modalDiv.append(modalFirstBtn, modalTitle, modalGallery, modalSecondBtn, modalDelete);
 
-  generateAndCreateGalleryModal(await fetchWorks());
+  createGalleryModal(await fetchWorks());
   
   modalFirstBtn.addEventListener("click", closeModal);
   modalAside.addEventListener("click", stopPropagation);
@@ -384,7 +384,7 @@ function deletePhoto(id, img) {
         throw new Error("qqch n'a pas marché");
       }
       img.remove();
-      generateAndCreateGallery("gallery", null, await fetchWorks())
+      createGallery("gallery", null, await fetchWorks())
       alert("Photo supprimée avec succès"); 
     }
     catch(error) {
@@ -416,7 +416,7 @@ async function submitPhoto (e) {
       res.json().then(async data => {
         closeModal();
         createModal();
-        generateAndCreateGallery("gallery", null, await fetchWorks())
+        createGallery("gallery", null, await fetchWorks())
         alert("Projet correctement ajouté à la galerie");
     })
     } else {
@@ -467,10 +467,9 @@ function initFilters() {
 async function init() {
   const modalLink = document.getElementById("js-modal");
 
-  //************** addEventListener ********
   modalLink.addEventListener("click", createModal);
 
-  generateAndCreateGallery("gallery", null, await fetchWorks())
+  createGallery("gallery", null, await fetchWorks())
   showHiddenElements();
   initFilters()
 }
