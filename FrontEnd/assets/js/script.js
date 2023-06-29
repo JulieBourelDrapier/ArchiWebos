@@ -159,7 +159,7 @@ async function createSecondModal (e) {
   const secondModalDiv       = document.createElement("div");
   const divNav               = document.createElement("div");
   const leftArrow            = document.createElement("i");
-  const secondModalFirstBtn  = document.createElement("button");
+  const closeBtn  = document.createElement("button");
   const secondModalTitle     = document.createElement("h3"); 
  
   const form                 = document.createElement("form");
@@ -181,8 +181,8 @@ async function createSecondModal (e) {
   secondModalDiv.classList.add("modal-wrapper", "js-modal-stop");
   divNav.classList.add("div-nav");
   leftArrow.classList.add("fa-sharp", "fa-solid", "fa-arrow-left", "icon3");
-  secondModalFirstBtn.classList.add("js-second-modal-close");
-  secondModalFirstBtn.innerText = "x";
+  closeBtn.classList.add("js-second-modal-close");
+  closeBtn.innerText = "x";
   secondModalTitle.classList.add("title-modal");
   secondModalTitle.innerText = "Ajout photo";
   
@@ -216,7 +216,7 @@ async function createSecondModal (e) {
   document.body.prepend(secondModal);
   secondModal.append(secondModalDiv);
   secondModalDiv.append(divNav, secondModalTitle, applySelectionDiv, form);
-  divNav.append(leftArrow, secondModalFirstBtn);
+  divNav.append(leftArrow, closeBtn);
   applySelectionDiv.append(landscapeIcon, previewDiv, addImageInput, addImageLabel, suggSpan);
   const opts = await createCategoriesOptions();
   opts.forEach(option => {
@@ -231,7 +231,7 @@ async function createSecondModal (e) {
 
   secondModalDiv.addEventListener("click", stopPropagation);
   window.addEventListener('click', clickOutsideModal, {capture: true});
-  secondModalFirstBtn.addEventListener("click", closeModal);
+  closeBtn.addEventListener("click", closeModal);
   addImageInput.addEventListener("change", updateImageDisplay);
   categorySelect.addEventListener('change', formValidation);
   titleInput.addEventListener('change', formValidation);
@@ -262,9 +262,9 @@ function formValidation(e) {
 }
 
 async function createModal (e) {
-  const modal     = document.createElement("aside");
+  const modal          = document.createElement("aside");
   const modalDiv       = document.createElement("div");
-  const modalFirstBtn  = document.createElement("button");
+  const closeBtn       = document.createElement("button");
   const modalTitle     = document.createElement("h3");  
   const modalSecondBtn = document.createElement("button");
   const modalDelete    = document.createElement("a");
@@ -273,8 +273,8 @@ async function createModal (e) {
   modal.id = "modal1";
   modal.classList.add("modal");
   modalDiv.classList.add("modal-wrapper", "js-modal-stop");
-  modalFirstBtn.classList.add("js-modal-close");
-  modalFirstBtn.innerText = "x";
+  closeBtn.classList.add("js-modal-close");
+  closeBtn.innerText = "x";
   modalTitle.classList.add("title-modal");
   modalTitle.innerText = "Galerie photo";
   modalGallery.classList.add("modal-gallery");
@@ -287,11 +287,11 @@ async function createModal (e) {
   
   document.body.prepend(modal);
   modal.append(modalDiv);
-  modalDiv.append(modalFirstBtn, modalTitle, modalGallery, modalSecondBtn, modalDelete);
+  modalDiv.append(closeBtn, modalTitle, modalGallery, modalSecondBtn, modalDelete);
 
   createGalleryModal(await fetchWorks());
   
-  modalFirstBtn.addEventListener("click", closeModal);
+  closeBtn.addEventListener("click", closeModal);
   modal.addEventListener("click", stopPropagation);
   window.addEventListener('click', clickOutsideModal, {capture: true});
   modalSecondBtn.addEventListener("click", createSecondModal);
