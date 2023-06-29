@@ -9,8 +9,8 @@ const fileTypes = [
 
 //************* functions ****************//
 function showHiddenElements() { 
-  const logBtn        = document.querySelector(".log-btn");
   let hiddenElements  = document.getElementsByClassName("hidden");
+  const logBtn        = document.querySelector(".log-btn");
   const token         = localStorage.getItem("token");
   if (token) {
     Array.from(hiddenElements).forEach((element) => {
@@ -88,39 +88,39 @@ function createGalleryModal(data = null) {
     const img            = document.createElement('img');
     const iconsContainer = document.createElement('div');
     const figcaption     = document.createElement('figcaption');
-    const iconVisible    = document.createElement('i');
-    const iconInvisible  = document.createElement('i');
+    const trashIcon      = document.createElement('i');
+    const ZoomIcon       = document.createElement('i');
    
     img.setAttribute('src', data[i].imageUrl);
     img.setAttribute('alt', data[i].title);
     figcaption.innerText = "éditer";
     iconsContainer.classList.add("icons-container");
-    iconVisible.classList.add("fa", "fa-trash-can","icons", "icon1");
-    iconInvisible.classList.add("fa-solid", "fa-arrows-up-down-left-right", "icons", "icon2");
+    trashIcon.classList.add("fa", "fa-trash-can","icons", "icon1");
+    ZoomIcon.classList.add("fa-solid", "fa-arrows-up-down-left-right", "icons", "icon2");
     
-    iconVisible.style.display   = "inline-block";
-    iconInvisible.style.display = "inline-block";
-    iconInvisible.style.opacity = "0";
+    trashIcon.style.display   = "inline-block";
+    ZoomIcon.style.display = "inline-block";
+    ZoomIcon.style.opacity = "0";
 
     figure.addEventListener('mouseenter', () => {
-    iconInvisible.style.opacity = "1";
+    ZoomIcon.style.opacity = "1";
     figure.style.transform      = "scale(1.2)";
     })
 
     figure.addEventListener('mouseleave', () => {
-    iconInvisible.style.opacity = "0";
+    ZoomIcon.style.opacity = "0";
     figure.style.transform      = "scale(1)";
     })
     
     figure.append(img);
     figure.append(figcaption);
     figure.append(iconsContainer);
-    iconsContainer.append(iconVisible);
-    iconsContainer.append(iconInvisible);
+    iconsContainer.append(trashIcon);
+    iconsContainer.append(ZoomIcon);
     
     galleryDiv.append(figure);
     
-    iconVisible.addEventListener("click", deletePhoto(data[i].id, figure));
+    trashIcon.addEventListener("click", deletePhoto(data[i].id, figure));
   }
 }
 
