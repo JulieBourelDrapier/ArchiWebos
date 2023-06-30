@@ -155,7 +155,7 @@ function createGalleryModal(data = null) {
 }
 
 /**
- * Ferme la modal.
+ * Ferme la modale.
  * @param {Event} e - L'événement qui a déclenché la fermeture du modal.
  */
 function closeModal (e) {
