@@ -128,13 +128,13 @@ function createGalleryModal(data = null) {
     trashIcon.classList.add("fa", "fa-trash-can","icons", "icon1");
     ZoomIcon.classList.add("fa-solid", "fa-arrows-up-down-left-right", "icons", "icon2");
     
-    trashIcon.style.display   = "inline-block";
-    ZoomIcon.style.display = "inline-block";
-    ZoomIcon.style.opacity = "0";
+    trashIcon.style.display = "inline-block";
+    ZoomIcon.style.display  = "inline-block";
+    ZoomIcon.style.opacity  = "0";
 
     figure.addEventListener('mouseenter', () => {
     ZoomIcon.style.opacity = "1";
-    figure.style.transform      = "scale(1.1)";
+    figure.style.transform = "scale(1.1)";
     })
 
     figure.addEventListener('mouseleave', () => {
@@ -155,7 +155,7 @@ function createGalleryModal(data = null) {
 }
 
 /**
- * Ferme la modal.
+ * Ferme la modale.
  * @param {Event} e - L'événement qui a déclenché la fermeture du modal.
  */
 function closeModal (e) {
@@ -462,11 +462,11 @@ function deletePhoto(id, img) {
   }
 }
 
-+/**
-+ * Permet d'ajouter une photo à la galerie.
-+ * @param {Event} e - L'objet d'événement provenant de l'écouteur d'événements.
-+ * @return {Promise<void>} Une promesse qui se résout lorsque la photo est soumise.
-+ */
+/**
+  * Permet d'ajouter une photo à la galerie.
+  * @param {Event} e - L'objet d'événement provenant de l'écouteur d'événements.
+  * @return {Promise<void>} Une promesse qui se résout lorsque la photo est soumise.
+  */
 async function submitPhoto (e) { 
   const titleInput = document.getElementById("title-input");
   const categoryInput = document.getElementById("category-select");
