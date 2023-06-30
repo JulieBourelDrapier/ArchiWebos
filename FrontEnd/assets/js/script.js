@@ -8,6 +8,13 @@ const fileTypes = [
 ];
 
 //************* functions ****************//
+
+/**
+ * Affiche les éléments qui possèdent la classe "hidden".
+ * Sélectionne l'élément avec la classe "log-btn" et récupère un token à partir du localStorage.
+ * Modifie le texte de l'élément "log-btn" en "logout" et masque l'élément avec l'ID "filters".
+ * Ajoute un eventListener sur "log-btn" qui déclenche la fonction logout.
+ */
 function showHiddenElements() { 
   let hiddenElements  = document.getElementsByClassName("hidden");
   const logBtn        = document.querySelector(".log-btn");
@@ -22,17 +29,30 @@ function showHiddenElements() {
   }
 }
 
+/**
+ * Déconnecte l'utilisateur en supprimant le token du localStorage et en rechargeant la page.
+ * @param {Event} event - L'objet d'événement représentant l'action de l'utilisateur.
+ */
 function logOut(event) {
   event.preventDefault();
   localStorage.removeItem("token");
   location.reload();
 }
 
+/**
+ * Filtre et affiche les images en fonction de l'événement donné.
+ * @param {Event} e - L'événement déclenchant le filtre.
+ */
 async function filterImgEvent(e) {
   createGallery("gallery", e.target.getAttribute('filterCategoryId'), await fetchWorks());
-  document.querySelector("#filters .filterParent .filter.selected").classList.remove('selected');
+  document.querySelector("#filters .filterParent .filter .selected").classList.remove('selected');
   e.target.classList.add("selected");
 }
+
+/**
+ * Récupère les travaux à partir de l'API.
+ * @return {Promise<Object>} Les travaux récupérés.
+ */
 
 async function fetchWorks() {
   try {
@@ -49,6 +69,12 @@ async function fetchWorks() {
   }
 }
 
+/**
+* Crée une galerie en fonction du sélecteur, de la catégorie et du résultat fournis.
+* @param {string} selector - Le sélecteur CSS du conteneur de la galerie.
+* @param {number|null} [categoryId=null] - L'ID de la catégorie pour filtrer la galerie. Par défaut, null.
+* @param {Array|null} [result=null] - Le tableau d'images pour peupler la galerie. Par défaut, null.
+*/
 function createGallery(selector, categoryId = null, result = null) {
   const galleryDiv = document.getElementsByClassName(selector)[0];
   galleryDiv.innerHTML = "";
@@ -78,6 +104,10 @@ function createGallery(selector, categoryId = null, result = null) {
   }
 }
 
+/**
+ * Crée une galerie modale avec les données fournies.
+ * @param {Array} data - Les données utilisées pour générer la galerie modale.
+ */
 function createGalleryModal(data = null) {
   const galleryDiv = document.getElementsByClassName('modal-gallery')[0];
   galleryDiv.innerHTML = "";
@@ -104,7 +134,7 @@ function createGalleryModal(data = null) {
 
     figure.addEventListener('mouseenter', () => {
     ZoomIcon.style.opacity = "1";
-    figure.style.transform      = "scale(1.2)";
+    figure.style.transform      = "scale(1.1)";
     })
 
     figure.addEventListener('mouseleave', () => {
@@ -124,16 +154,29 @@ function createGalleryModal(data = null) {
   }
 }
 
+/**
+ * Ferme la modal.
+ * @param {Event} e - L'événement qui a déclenché la fermeture du modal.
+ */
 function closeModal (e) {
   const modal = document.querySelector(".modal");
   modal.remove();
   document.removeEventListener("click", closeModal);
 }
 
-function addPhoto (e) {
+/**
+ * Supprime les éléments de la modal1.
+ * @param {Event} e - L'objet événement.
+ */
+function clearModal1 (e) {
   const modal = document.getElementById("modal1");
   modal.remove();
 }
+
+/**
+ * Crée des options pour les catégories.
+ * @return {Array} Un tableau d'options pour les catégories.
+ */
 
 async function createCategoriesOptions() {
   try {
@@ -154,6 +197,11 @@ async function createCategoriesOptions() {
   }
 }
 
+/**
+ * Crée une seconde modale et l'ajoute au corps du document.
+ * @param {Event} e - L'objet d'événement qui a déclenché la création de la deuxième modal.
+ * @return {Promise<void>} - Une promesse qui se résout lorsque la deuxième modal est créée et ajoutée.
+ */
 async function createSecondModal (e) {
   const secondModal = document.createElement("aside");
   const modalDiv    = document.createElement("div");
@@ -247,6 +295,10 @@ async function createSecondModal (e) {
   });
 }
 
+/**
+ * Valide le formulaire en vérifiant si le champ titre, la sélection de catégorie et le champ image sont remplis.
+ * @param {Event} e - L'objet événement.
+ */
 function formValidation(e) {
   const titleInput     = document.getElementById("title-input");
   const categorySelect = document.getElementById("category-select");
@@ -261,6 +313,11 @@ function formValidation(e) {
   }
 }
 
+/**
+ * Crée une fenêtre modale avec différents éléments et l'ajoute au corps du document.
+ * @param {Event} e - L'événement qui a déclenché la fonction.
+ * @return {Promise<void>} Une promesse qui se résout lorsque la fenêtre modale est créée.
+ */
 async function createModal (e) {
   const modal        = document.createElement("aside");
   const modalDiv     = document.createElement("div");
@@ -280,7 +337,7 @@ async function createModal (e) {
   modalGallery.classList.add("modal-gallery");
   addBtn.id = "js-modal-add-photo";
   addBtn.innerText = "Ajouter une photo";
-  addBtn.addEventListener("click", addPhoto);
+  addBtn.addEventListener("click", clearModal1);
   deleteBtn.classList.add("js-delete-gallery");
   deleteBtn.innerText = "Supprimer la galerie";
   deleteBtn.href="#";
@@ -297,6 +354,11 @@ async function createModal (e) {
   addBtn.addEventListener("click", createSecondModal);
 }
 
+
+/**
+ * Met à jour l'affichage de l'image en fonction des fichiers sélectionnés.
+ * @param {Event} e - L'objet de l'événement.
+ */
 function updateImageDisplay(e) {
   const preview       = document.querySelector('.preview')
   const input         = document.querySelector('#image-input')
@@ -343,6 +405,7 @@ function validFileType(file) {
   return fileTypes.includes(file.type);
 }
 
+
 function returnFileSize(number) {
   if (number < 1024) {
     return `${number} bytes`;
@@ -353,6 +416,10 @@ function returnFileSize(number) {
   }
 }
 
+/**
+ * Permet de fermer la modale en cliquant en dehors de celle-ci.
+ * @param {Event} e - L'objet d'événement de clic.
+ */
 function clickOutsideModal(e) {
   if (!document.querySelector(".modal-wrapper.js-modal-stop")?.contains(e.target)) {
     closeModal();
@@ -364,6 +431,12 @@ function stopPropagation (e) {
   e.stopPropagation();
 }
 
+/**
+* Permet de supprimer une photo.
+* @param {number} id - L'ID de la photo à supprimer.
+* @param {HTMLElement} img - L'élément d'image à supprimer du DOM.
+* @return {Promise<void>} Une promesse qui se résout lorsque la photo est supprimée.
+*/
 function deletePhoto(id, img) {
   return async (e) => {
     e.preventDefault();
@@ -377,7 +450,7 @@ function deletePhoto(id, img) {
         }
       });
       if (!response.ok) {
-        throw new Error("qqch n'a pas marché");
+        throw new Error("something went wrong");
       }
       img.remove();
       createGallery("gallery", null, await fetchWorks())
@@ -389,6 +462,11 @@ function deletePhoto(id, img) {
   }
 }
 
++/**
++ * Permet d'ajouter une photo à la galerie.
++ * @param {Event} e - L'objet d'événement provenant de l'écouteur d'événements.
++ * @return {Promise<void>} Une promesse qui se résout lorsque la photo est soumise.
++ */
 async function submitPhoto (e) { 
   const titleInput = document.getElementById("title-input");
   const categoryInput = document.getElementById("category-select");
@@ -420,7 +498,12 @@ async function submitPhoto (e) {
     }
   });
 }
-
+ 
+/**
+ * Initialise les filtres en récupérant les catégories depuis l'API et en créant les éléments de filtre.
+ * @param {type} paramName - description du paramètre
+ * @return {type} description de la valeur de retour
+ */
 function initFilters() {
   fetch("http://localhost:5678/api/categories/")
   .then(res => {
@@ -457,6 +540,10 @@ function initFilters() {
   })
 }
 
+/**
+ * Initialise l'application.
+ * @return {Promise<void>} Une promesse qui se résout lorsque l'initialisation est terminée.
+ */
 async function init() {
   const modifyBtn = document.getElementById("js-modal");
 
@@ -466,7 +553,5 @@ async function init() {
   showHiddenElements();
   initFilters()
 }
-
-//************** main ***************//
 
 init()

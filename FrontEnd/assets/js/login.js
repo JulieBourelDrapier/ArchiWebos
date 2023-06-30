@@ -4,10 +4,10 @@
 const email = document.getElementById("email")
 const logBtn = document.getElementById("log-btn")
 
-//************** addeventlistener **************//
+//*********** addeventlistener ***********//
 logBtn.addEventListener("click", authenticateUser)
 
-//*************** functions ***************//
+//*********** functions ***********//
 function authenticateUser(event) {
   event.preventDefault()
   fetch("http://localhost:5678/api/users/login",
